@@ -19,3 +19,10 @@ Fully-automated scripts for collecting AI-related papers
 * CIKM: 21-19
 
 # Usage
+```
+python paper_crawler.py --keyword {keyword}
+```
+
+# TODO
+* crawel abstract and translate it
+* add github action
