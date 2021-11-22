@@ -1,11 +1,13 @@
 import requests
 import re
 import os
+import argparse
 from bs4 import BeautifulSoup
 
-# default config
-keyword = 'few-shot' # the keyword you want to search
-
+# config
+parser = argparse.ArgumentParser()
+parser.add_argument("--keyword", default='few-shot', type=str)
+args = parser.parse_args()
 
 # crawer script
 res = {}
@@ -175,6 +177,7 @@ for url, name in zip(urls, names):
         pdb.set_trace()
       res[name].append(paper)
 
+keyword = args.keyword
 with open('all_papers.txt', 'w') as f1:
   with open(f'{keyword}_papers.txt', 'w') as f2:
     for conf, papers in res.items():
