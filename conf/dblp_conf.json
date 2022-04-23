@@ -1,0 +1,294 @@
+[
+    {
+        "name": "WWW2021",
+        "url": "https://dblp.org/db/conf/www/www2021.html"
+    },
+    {
+        "name": "WWW2020",
+        "url": "https://dblp.org/db/conf/www/www2020.html"
+    },
+    {
+        "name": "WWW2019",
+        "url": "https://dblp.org/db/conf/www/www2019.html"
+    },
+    {
+        "name": "ICLR2021",
+        "url": "https://dblp.org/db/conf/iclr/iclr2021.html"
+    },
+    {
+        "name": "ICLR2020",
+        "url": "https://dblp.org/db/conf/iclr/iclr2020.html"
+    },
+    {
+        "name": "ICLR2019",
+        "url": "https://dblp.org/db/conf/iclr/iclr2019.html"
+    },
+    {
+        "name": "ICML2021",
+        "url": "https://dblp.org/db/conf/icml/icml2021.html"
+    },
+    {
+        "name": "ICML2020",
+        "url": "https://dblp.org/db/conf/icml/icml2020.html"
+    },
+    {
+        "name": "ICML2019",
+        "url": "https://dblp.org/db/conf/icml/icml2019.html"
+    },
+    {
+        "name": "AAAI2021",
+        "url": "https://dblp.org/db/conf/aaai/aaai2021.html"
+    },
+    {
+        "name": "AAAI2020",
+        "url": "https://dblp.org/db/conf/aaai/aaai2020.html"
+    },
+    {
+        "name": "AAAI2019",
+        "url": "https://dblp.org/db/conf/aaai/aaai2019.html"
+    },
+    {
+        "name": "IJCAI2021",
+        "url": "https://dblp.org/db/conf/ijcai/ijcai2021.html"
+    },
+    {
+        "name": "IJCAI2020",
+        "url": "https://dblp.org/db/conf/ijcai/ijcai2020.html"
+    },
+    {
+        "name": "IJCAI2019",
+        "url": "https://dblp.org/db/conf/ijcai/ijcai2019.html"
+    },
+    {
+        "name": "CVPR2021",
+        "url": "https://dblp.org/db/conf/cvpr/cvpr2021.html"
+    },
+    {
+        "name": "CVPR2020",
+        "url": "https://dblp.org/db/conf/cvpr/cvpr2020.html"
+    },
+    {
+        "name": "CVPR2019",
+        "url": "https://dblp.org/db/conf/cvpr/cvpr2019.html"
+    },
+    {
+        "name": "ICCV2019",
+        "url": "https://dblp.org/db/conf/iccv/iccv2019.html"
+    },
+    {
+        "name": "MM2021",
+        "url": "https://dblp.org/db/conf/mm/mm2021.html"
+    },
+    {
+        "name": "MM2020",
+        "url": "https://dblp.org/db/conf/mm/mm2020.html"
+    },
+    {
+        "name": "MM2019",
+        "url": "https://dblp.org/db/conf/mm/mm2019.html"
+    },
+    {
+        "name": "KDD2021",
+        "url": "https://dblp.org/db/conf/kdd/kdd2021.html"
+    },
+    {
+        "name": "KDD2020",
+        "url": "https://dblp.org/db/conf/kdd/kdd2020.html"
+    },
+    {
+        "name": "KDD2019",
+        "url": "https://dblp.org/db/conf/kdd/kdd2019.html"
+    },
+    {
+        "name": "CIKM2021",
+        "url": "https://dblp.org/db/conf/cikm/cikm2021.html"
+    },
+    {
+        "name": "CIKM2020",
+        "url": "https://dblp.org/db/conf/cikm/cikm2020.html"
+    },
+    {
+        "name": "CIKM2019",
+        "url": "https://dblp.org/db/conf/cikm/cikm2019.html"
+    },
+    {
+        "name": "SIGIR2021",
+        "url": "https://dblp.org/db/conf/sigir/sigir2021.html"
+    },
+    {
+        "name": "SIGIR2020",
+        "url": "https://dblp.org/db/conf/sigir/sigir2020.html"
+    },
+    {
+        "name": "SIGIR2019",
+        "url": "https://dblp.org/db/conf/sigir/sigir2019.html"
+    },
+    {
+        "name": "WSDM2022",
+        "url": "https://dblp.org/db/conf/wsdm/wsdm2022.html"
+    },
+    {
+        "name": "WSDM2021",
+        "url": "https://dblp.org/db/conf/wsdm/wsdm2021.html"
+    },
+    {
+        "name": "WSDM2020",
+        "url": "https://dblp.org/db/conf/wsdm/wsdm2020.html"
+    },
+    {
+        "name": "WSDM2019",
+        "url": "https://dblp.org/db/conf/wsdm/wsdm2019.html"
+    },
+    {
+        "name": "ECIR2022",
+        "url": "https://dblp.org/db/conf/ecir/ecir2022-1.html"
+    },
+    {
+        "name": "ECIR2022",
+        "url": "https://dblp.org/db/conf/ecir/ecir2022-2.html"
+    },
+    {
+        "name": "ECIR2021",
+        "url": "https://dblp.org/db/conf/ecir/ecir2021-1.html"
+    },
+    {
+        "name": "ECIR2021",
+        "url": "https://dblp.org/db/conf/ecir/ecir2021-2.html"
+    },
+    {
+        "name": "ECIR2020",
+        "url": "https://dblp.org/db/conf/ecir/ecir2020-1.html"
+    },
+    {
+        "name": "ECIR2020",
+        "url": "https://dblp.org/db/conf/ecir/ecir2020-2.html"
+    },
+    {
+        "name": "ECIR2019",
+        "url": "https://dblp.org/db/conf/ecir/ecir2019-1.html"
+    },
+    {
+        "name": "ECIR2019",
+        "url": "https://dblp.org/db/conf/ecir/ecir2019-2.html"
+    },
+    {
+        "name": "ECCV2020",
+        "url": "https://dblp.org/db/conf/eccv/eccv2020-1.html"
+    },
+    {
+        "name": "ECCV2020",
+        "url": "https://dblp.org/db/conf/eccv/eccv2020-2.html"
+    },
+    {
+        "name": "ECCV2020",
+        "url": "https://dblp.org/db/conf/eccv/eccv2020-3.html"
+    },
+    {
+        "name": "ECCV2020",
+        "url": "https://dblp.org/db/conf/eccv/eccv2020-4.html"
+    },
+    {
+        "name": "ECCV2020",
+        "url": "https://dblp.org/db/conf/eccv/eccv2020-5.html"
+    },
+    {
+        "name": "ECCV2020",
+        "url": "https://dblp.org/db/conf/eccv/eccv2020-6.html"
+    },
+    {
+        "name": "ECCV2020",
+        "url": "https://dblp.org/db/conf/eccv/eccv2020-7.html"
+    },
+    {
+        "name": "ECCV2020",
+        "url": "https://dblp.org/db/conf/eccv/eccv2020-8.html"
+    },
+    {
+        "name": "ECCV2020",
+        "url": "https://dblp.org/db/conf/eccv/eccv2020-9.html"
+    },
+    {
+        "name": "ECCV2020",
+        "url": "https://dblp.org/db/conf/eccv/eccv2020-10.html"
+    },
+    {
+        "name": "ECCV2020",
+        "url": "https://dblp.org/db/conf/eccv/eccv2020-11.html"
+    },
+    {
+        "name": "ECCV2020",
+        "url": "https://dblp.org/db/conf/eccv/eccv2020-12.html"
+    },
+    {
+        "name": "ECCV2020",
+        "url": "https://dblp.org/db/conf/eccv/eccv2020-13.html"
+    },
+    {
+        "name": "ECCV2020",
+        "url": "https://dblp.org/db/conf/eccv/eccv2020-14.html"
+    },
+    {
+        "name": "ECCV2020",
+        "url": "https://dblp.org/db/conf/eccv/eccv2020-15.html"
+    },
+    {
+        "name": "ECCV2020",
+        "url": "https://dblp.org/db/conf/eccv/eccv2020-16.html"
+    },
+    {
+        "name": "ECCV2020",
+        "url": "https://dblp.org/db/conf/eccv/eccv2020-17.html"
+    },
+    {
+        "name": "ECCV2020",
+        "url": "https://dblp.org/db/conf/eccv/eccv2020-18.html"
+    },
+    {
+        "name": "ECCV2020",
+        "url": "https://dblp.org/db/conf/eccv/eccv2020-19.html"
+    },
+    {
+        "name": "ECCV2020",
+        "url": "https://dblp.org/db/conf/eccv/eccv2020-20.html"
+    },
+    {
+        "name": "ECCV2020",
+        "url": "https://dblp.org/db/conf/eccv/eccv2020-21.html"
+    },
+    {
+        "name": "ECCV2020",
+        "url": "https://dblp.org/db/conf/eccv/eccv2020-22.html"
+    },
+    {
+        "name": "ECCV2020",
+        "url": "https://dblp.org/db/conf/eccv/eccv2020-23.html"
+    },
+    {
+        "name": "ECCV2020",
+        "url": "https://dblp.org/db/conf/eccv/eccv2020-24.html"
+    },
+    {
+        "name": "ECCV2020",
+        "url": "https://dblp.org/db/conf/eccv/eccv2020-25.html"
+    },
+    {
+        "name": "ECCV2020",
+        "url": "https://dblp.org/db/conf/eccv/eccv2020-26.html"
+    },
+    {
+        "name": "ECCV2020",
+        "url": "https://dblp.org/db/conf/eccv/eccv2020-27.html"
+    },
+    {
+        "name": "ECCV2020",
+        "url": "https://dblp.org/db/conf/eccv/eccv2020-28.html"
+    },
+    {
+        "name": "ECCV2020",
+        "url": "https://dblp.org/db/conf/eccv/eccv2020-29.html"
+    },
+    {
+        "name": "ECCV2020",
+        "url": "https://dblp.org/db/conf/eccv/eccv2020-30.html"
+    }
+]
