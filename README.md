@@ -2,6 +2,21 @@
 Fully-automated scripts for collecting AI-related papers.
 Support fuzzy and exact search for paper titles.
 
+  ___  _____ _____                     _               
+ / _ \|_   _/  ___|                   | |              
+/ /_\ \ | | \ `--.  ___  __ _ _ __ ___| |__   ___ _ __ 
+|  _  | | |  `--. \/ _ \/ _` | '__/ __| '_ \ / _ \ '__|
+| | | |_| |_/\__/ /  __/ (_| | | | (__| | | |  __/ |   
+\_| |_/\___/\____/ \___|\__,_|_|  \___|_| |_|\___|_|  
+
+AI-Search-Engine V0.1
+
+Tips:
+- enter "q" into any input to exit the program.
+- enter "#" into any input to clear the screen.
+- enter "help" into any input to see the help.
+- enter nothing means search with default mode: exact.
+
 # Search Categories
 ``` 
 - [ACL 2019-2021] [EMNLP 2019-2021] [NAACL 2019-2021] [COLING 2020]
@@ -32,23 +47,8 @@ Search Commands:
 - Note that the list of confs should be separated by comma (e.g. "ACL,CVPR")
 ```
 
-# Showing Case
+# Example
 ```
-  ___  _____ _____                     _               
- / _ \|_   _/  ___|                   | |              
-/ /_\ \ | | \ `--.  ___  __ _ _ __ ___| |__   ___ _ __ 
-|  _  | | |  `--. \/ _ \/ _` | '__/ __| '_ \ / _ \ '__|
-| | | |_| |_/\__/ /  __/ (_| | | | (__| | | |  __/ |   
-\_| |_/\___/\____/ \___|\__,_|_|  \___|_| |_|\___|_|  
-
-AI-Search-Engine V0.1
-
-Tips:
-- enter "q" into any input to exit the program.
-- enter "#" into any input to clear the screen.
-- enter "help" into any input to see the help.
-- enter nothing means search with default mode: exact.
-
 [+] Initializing System...
 [+] Loading from cache...
 [+] Enter 'help' into any input for more information when first starting.
