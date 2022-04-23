@@ -44,8 +44,8 @@ Search Commands:
 AI-Search-Engine V0.1
 
 Tips:
-- enter "#" into any input to exit the program.
-- enter "##" into any input to clear the screen.
+- enter "q" into any input to exit the program.
+- enter "#" into any input to clear the screen.
 - enter "help" into any input to see the help.
 - enter nothing means search with default mode: exact.
 

@@ -92,7 +92,7 @@ def main():
         
         command = input('[+] Enter Save filename: ')
         if(special_input(command)): continue
-        if(command == ''): command = 'results.txt'
+        if(command == ''): command = f'{query}_{mode}_{threshold}_{confs}.txt'
         output_res(results, command)
 
 if __name__ == '__main__':
