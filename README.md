@@ -1,4 +1,4 @@
-# AI-Paper-collector
+# AI-Paper-collector :memo:
 Fully-automated scripts for collecting AI-related papers.
 Support fuzzy and exact search for paper titles.
 
@@ -18,7 +18,6 @@ Tips:
 - enter "help" into any input to see the help.
 - enter nothing means search with default mode: exact.
 ```
-
 ## Search Categories
 ``` 
 - [ACL 2019-2021] [EMNLP 2019-2021] [NAACL 2019-2021] [COLING 2020]
@@ -27,17 +26,14 @@ Tips:
 - [SIGIR 2019-2021] [KDD 2019-2021] [CIKM 2019-2021] [WSDM 2019-2022]
 - [WWW 2019-2021] [ECIR 2019-2022]
 ```
-
 ## Requirements
 ```shell
 pip install python-Levenshtein thefuzz beautifulsoup4 requests tqdm
 ```
-
 ## Usage
 ```shell
 python main.py
 ```
-
 ## Help information
 ```
 Search Commands:
@@ -48,7 +44,6 @@ Search Commands:
 - Note that the threshold is only for fuzzy search from 0 to 100 (default: 50)
 - Note that the list of confs should be separated by comma (e.g. "ACL,CVPR")
 ```
-
 ## Example
 ```
 [+] Initializing System...
