@@ -2,6 +2,7 @@
 Fully-automated scripts for collecting AI-related papers.
 Support fuzzy and exact search for paper titles.
 
+```
   ___  _____ _____                     _               
  / _ \|_   _/  ___|                   | |              
 / /_\ \ | | \ `--.  ___  __ _ _ __ ___| |__   ___ _ __ 
@@ -16,8 +17,9 @@ Tips:
 - enter "#" into any input to clear the screen.
 - enter "help" into any input to see the help.
 - enter nothing means search with default mode: exact.
+```
 
-# Search Categories
+## Search Categories
 ``` 
 - [ACL 2019-2021] [EMNLP 2019-2021] [NAACL 2019-2021] [COLING 2020]
 - [CVPR 2019-2021] [ECCV 2020] [ICCV2019] [ACMMM 2019-2021]
@@ -26,17 +28,17 @@ Tips:
 - [WWW 2019-2021] [ECIR 2019-2022]
 ```
 
-# Requirements
+## Requirements
 ```shell
 pip install python-Levenshtein thefuzz beautifulsoup4 requests tqdm
 ```
 
-# Usage
+## Usage
 ```shell
 python main.py
 ```
 
-# Help information
+## Help information
 ```
 Search Commands:
 - --mode <mode: fuzzy|exact> [optional: --threshold <num>] [optional: --conf <string/list(string)>]
@@ -47,7 +49,7 @@ Search Commands:
 - Note that the list of confs should be separated by comma (e.g. "ACL,CVPR")
 ```
 
-# Example
+## Example
 ```
 [+] Initializing System...
 [+] Loading from cache...
