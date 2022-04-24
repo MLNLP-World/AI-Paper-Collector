@@ -34,6 +34,7 @@ pip install python-Levenshtein thefuzz beautifulsoup4 requests tqdm
 ```shell
 python main.py
 ```
+
 ## Help information
 ```
 Search Commands:
@@ -62,3 +63,24 @@ Search Commands:
 [+] Writing results to output/results.txt
 [+] Writing results Done!
 ```
+
+## How to add new conferences from DBLP
+* clean the cache
+```shell
+rm -rf cache/cache.json
+```
+* add new conferences by modifying the `dblp_conf.json` file
+```python
+[
+    # add the name and dblp_url of the new conf
+    {
+        "name": "WWW2021",
+        "url": "https://dblp.org/db/conf/www/www2021.html"
+    },
+    ... 
+]
+```
+* run the script
+```shell
+python main.py
+···
