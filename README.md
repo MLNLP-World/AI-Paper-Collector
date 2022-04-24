@@ -69,7 +69,7 @@ Search Commands:
 ```shell
 rm -rf cache/cache.json
 ```
-* add new conferences by modifying the `dblp_conf.json` file
+* add new conferences by modifying the `conf/dblp_conf.json` file
 ```python
 [
     # add the name and dblp_url of the new conf
