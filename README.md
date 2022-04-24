@@ -83,4 +83,4 @@ rm -rf cache/cache.json
 * run the script
 ```shell
 python main.py
-···
+```
