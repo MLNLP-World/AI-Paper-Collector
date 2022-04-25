@@ -65,11 +65,13 @@ python main.py
 ## <img src="./pics/icon/notes.png" width="25" />Help information
 ```
 Search Commands:
-- --mode <mode: fuzzy|exact> [optional: --threshold <num>] [optional: --conf <string/list(string)>]
+- --mode <mode: fuzzy|exact> [optional: --threshold <num>] [optional: --limit <num>] [optional: --conf <string/list(string)>]
 - e.g. "--mode fuzzy --threshold 50" means fuzzy search with similarity >= 50 with all papers
+- e.g. "--mode fuzzy --limit 50" means fuzzy search with top-50 papers among all
 - e.g. "--mode exact --conf ACL" means exact search with all papers in ACL
 - e.g. "--mode exact --conf ACL,CVPR" means exact search with all papers in ACL and CVPR
-- Note that the threshold is only for fuzzy search from 0 to 100 (default: 50)
+- Note that the "threshold" is only for fuzzy search from 0 to 100 (default: 50)
+- Note that the "limit" is only for fuzzy search that only show top-N papers
 - Note that the list of confs should be separated by comma (e.g. "ACL,CVPR")
 ```
 ## <img src="./pics/icon/folders.png" width="25" />Example
