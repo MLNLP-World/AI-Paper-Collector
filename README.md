@@ -1,4 +1,30 @@
-# AI-Paper-collector :memo:
+<p align="center">
+<h1 align="center"> <img src="./pics/icon/ai.png" width="30" /> AI-Paper-Collector</h1>
+</p>
+<p align="center">
+  	<a href="https://img.shields.io/badge/version-v0.1.0-blue">
+      <img alt="version" src="https://img.shields.io/badge/version-v0.1.0-blue?color=FF8000?color=009922" />
+    </a>
+  <a >
+       <img alt="Status-building" src="https://img.shields.io/badge/Status-building-blue" />
+  	</a>
+  <a >
+       <img alt="PRs-Welcome" src="https://img.shields.io/badge/PRs-Welcome-red" />
+  	</a>
+   	<a href="https://github.com/MLNLP-World/AI-Paper-collector/stargazers">
+       <img alt="stars" src="https://img.shields.io/github/stars/MLNLP-World/AI-Paper-collector" />
+  	</a>
+  	<a href="https://github.com/MLNLP-World/AI-Paper-collector/network/members">
+       <img alt="FORK" src="https://img.shields.io/github/forks/MLNLP-World/AI-Paper-collector?color=FF8000" />
+  	</a>
+    <a href="https://github.com/MLNLP-World/AI-Paper-collector/issues">
+      <img alt="Issues" src="https://img.shields.io/github/issues/MLNLP-World/AI-Paper-collector?color=0088ff"/>
+    </a>
+    <br />
+</p>
+
+## <img src="./pics/icon/motivation.png" width="25" />Motivation
+
 Fully-automated scripts for collecting AI-related papers.
 Support fuzzy and exact search for paper titles.
 
@@ -18,7 +44,7 @@ Tips:
 - enter "help" into any input to see the help.
 - enter nothing means search with default mode: exact.
 ```
-## Search Categories
+## <img src="./pics/icon/intro.png" width="25" />Search Categories
 ``` 
 - [ACL 2019-2021] [EMNLP 2019-2021] [NAACL 2019-2021] [COLING 2020]
 - [CVPR 2019-2021] [ECCV 2020] [ICCV2019] [ACMMM 2019-2021]
@@ -26,16 +52,17 @@ Tips:
 - [SIGIR 2019-2021] [KDD 2019-2021] [CIKM 2019-2021] [WSDM 2019-2022]
 - [WWW 2019-2021] [ECIR 2019-2022]
 ```
-## Requirements
+## <img src="https://cdn.jsdelivr.net/gh/LightChen233/blog-img/resource.png" width="25" /> Installation
 ```shell
 pip install python-Levenshtein thefuzz beautifulsoup4 requests tqdm
 ```
-## Usage
+
+## <img src="https://cdn.jsdelivr.net/gh/LightChen233/blog-img/catalogue.png" width="27" /> Usage(v0.1.0)
 ```shell
 python main.py
 ```
 
-## Help information
+## <img src="./pics/icon/notes.png" width="25" />Help information
 ```
 Search Commands:
 - --mode <mode: fuzzy|exact> [optional: --threshold <num>] [optional: --conf <string/list(string)>]
@@ -45,7 +72,7 @@ Search Commands:
 - Note that the threshold is only for fuzzy search from 0 to 100 (default: 50)
 - Note that the list of confs should be separated by comma (e.g. "ACL,CVPR")
 ```
-## Example
+## <img src="./pics/icon/folders.png" width="25" />Example
 
 Only 3 steps shown as follows.
 
@@ -71,7 +98,7 @@ Only 3 steps shown as follows.
 [+] Writing results Done!
 ```
 
-## How to add new conferences from DBLP
+## <img src="https://cdn.jsdelivr.net/gh/LightChen233/blog-img/folders.png" width="25" /> How to add new conferences from DBLP
 * clean the cache
 ```shell
 rm -rf cache/cache.json
@@ -91,3 +118,11 @@ rm -rf cache/cache.json
 ```shell
 python main.py
 ```
+
+## <img src="./pics/icon/organizer.png" width="25" />Organizers
+<a href="https://github.com/Doragd"> <img src="pics/profile/Gordon.png"  width="80" >  </a> 
+
+## <img src="./pics/icon/heart.png" width="25" />Contributors
+Thanks to the contributors:
+<a href="https://github.com/Doragd"> <img src="pics/profile/Gordon.png"  width="80" >  </a> 
+<a href="https://github.com/yhshu">  <img src="pics/profile/yiheng.png"  width="80" /></a> 
