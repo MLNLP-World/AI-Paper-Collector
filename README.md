@@ -46,6 +46,13 @@ Search Commands:
 - Note that the list of confs should be separated by comma (e.g. "ACL,CVPR")
 ```
 ## Example
+
+Only 3 steps shown as follows.
+
+1. keyword query
+2. options (search mode and conference source)
+3. output path (enter save filename)
+
 ```
 [+] Initializing System...
 [+] Loading from cache...
