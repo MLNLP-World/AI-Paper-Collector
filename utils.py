@@ -33,9 +33,23 @@ def parse_args(command):
 
     return mode, threshold, conf
 
+def check_filename(filename):
+    if os.path.dirname(filename) == '':
+        filename = os.path.join('output', filename)
+    if not os.path.exists(os.path.dirname(filename)):
+        os.makedirs(os.path.dirname(filename))
+    return filename
+
+
 def output_res(results, filename):
-    print('[+] Writing results to {}'.format(os.path.join('output', filename)))
-    with open(os.path.join('output', filename), 'w') as f:
-        for item in results:
-            f.write(f'【{item[0]}】{item[1]}' + '\n\n')
-    print('[+] Writing results Done!')
+    try:
+        filename = check_filename(filename)
+        print('[+] Writing results to {}'.format(os.path.join('output', filename)))
+        with open(filename, 'w') as f:
+            for item in results:
+                f.write(f'【{item[0]}】{item[1]}' + '\n\n')
+        print('[+] Writing results Done!')
+        return True
+    except:
+        print('[-] Writing results Failed!')
+        return False
