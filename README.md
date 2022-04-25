@@ -36,7 +36,7 @@ Support fuzzy and exact search for paper titles.
 - [CVPR 2019-2021] [ECCV 2020] [ICCV2019] [ACMMM 2019-2021]
 - [ICLR 2019-2021] [ICML 2019-2021] [AAAI 2019-2021] [IJCAI 2019-2021]
 - [SIGIR 2019-2021] [KDD 2019-2021] [CIKM 2019-2021] [WSDM 2019-2022]
-- [WWW 2019-2021] [ECIR 2019-2022]
+- [WWW 2019-2021] [ECIR 2019-2022] [NIPS 2019-2021] [ICASSP 2019-2021]
 ```
 ## <img src="https://cdn.jsdelivr.net/gh/LightChen233/blog-img/resource.png" width="25" /> Installation
 ```shell
@@ -57,10 +57,11 @@ For command-line usage, you can use the following commands:
 # -l, --limit: the limit num of the fuzzy search result, default is None
 # -c, --conf: the list of the conferences needs to search, default is all
 # -o, --output: the output file name, default is None
+# -f, --force: force to update the cache file incrementally
 python cli_main.py --query QUERY \
     [--mode {fuzzy,exact}] \
     [--threshold THRESHOLD] [--limit LIMIT] [--conf CONF] \
-    [--output OUTPUT]
+    [--output OUTPUT] [--force]
 ```
 E.g.
 ```shell
@@ -108,10 +109,7 @@ Only 3 steps shown as follows.
 ```
 
 ## <img src="https://cdn.jsdelivr.net/gh/LightChen233/blog-img/folders.png" width="25" /> How to add new conferences from DBLP
-* clean the cache
-```shell
-rm -rf cache/cache.json
-```
+
 * add new conferences by modifying the `conf/dblp_conf.json` file
 ```python
 [
@@ -125,7 +123,8 @@ rm -rf cache/cache.json
 ```
 * run the script
 ```shell
-python main.py
+# force to update the cache file incrementally
+python cli_main.py --query '' --force
 ```
 
 ## <img src="./pics/icon/organizer.png" width="25" />Organizers
