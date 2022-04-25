@@ -1,3 +1,4 @@
+import heapq
 from thefuzz import process
 
 def build_index(res):
@@ -14,11 +15,14 @@ def build_index(res):
 def check_conf(conf, input_confs):
     return any(input_conf.lower() in conf.lower() for input_conf in input_confs)
 
-def fuzzy_search(indexes, candidates, query, threshold=None, confs=None):
+def fuzzy_search(indexes, candidates, query, threshold=None, confs=None, limit=None):
     if threshold is None:
         threshold = 50
     sl = process.extractWithoutOrder(query, candidates, score_cutoff=threshold)
-    results = sorted(sl, key=lambda i: i[1], reverse=True)
+    if limit is None:
+        results = sorted(sl, key=lambda i: i[1], reverse=True)
+    else:
+        results = heapq.nlargest(limit, sl, key=lambda i: i[1])
     results = [item[2] for item in results if item[1] >= threshold]
     results = [indexes[idx] for idx in results]
     if confs is not None:

@@ -32,11 +32,13 @@ Search Categories:
 - [WWW 2019-2021] [ECIR 2019-2022]
 
 Search Commands:
-- --mode <mode: fuzzy|exact> [optional: --threshold <num>] [optional: --conf <string/list(string)>]
+- --mode <mode: fuzzy|exact> [optional: --threshold <num>] [optional: --limit <num>] [optional: --conf <string/list(string)>]
 - e.g. "--mode fuzzy --threshold 50" means fuzzy search with similarity >= 50 with all papers
+- e.g. "--mode fuzzy --limit 50" means fuzzy search with top-50 papers among all
 - e.g. "--mode exact --conf ACL" means exact search with all papers in ACL
 - e.g. "--mode exact --conf ACL,CVPR" means exact search with all papers in ACL and CVPR
-- Note that the threshold is only for fuzzy search from 0 to 100 (default: 50)
+- Note that the "threshold" is only for fuzzy search from 0 to 100 (default: 50)
+- Note that the "limit" is only for fuzzy search that only show top-N papers
 - Note that the list of confs should be separated by comma (e.g. "ACL,CVPR")
 
 """
@@ -56,9 +58,9 @@ def special_input(input_str):
         return True
     return False
 
-def exec_search(query, mode, threshold, confs):
+def exec_search(query, mode, threshold, confs, limit):
     if mode == 'fuzzy':
-        results = fuzzy_search(indexes, candidates, query, threshold, confs)
+        results = fuzzy_search(indexes, candidates, query, threshold, confs, limit)
     elif mode == 'exact':
         results = exact_search(indexes, query, confs)
     return results
@@ -81,9 +83,11 @@ def main():
         command = input('[+] Enter Search Commands: ')
         if(special_input(command)): continue
         if(command == ''): command = '--mode exact'
-        mode, threshold, confs = parse_args(command)
+        mode, threshold, confs, limit = parse_args(command)
         if(mode == False): continue
-        results = exec_search(query, mode, threshold, confs)
+        results = exec_search(query, mode, threshold, confs, limit)
+        
+        if len(results) == 0: print('[-] No results found.'); continue
 
         print('[+] Search Results:')
         print('[=] Only show Top-5, Please Save results to see all.')
