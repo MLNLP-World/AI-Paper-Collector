@@ -1,120 +1,56 @@
-import os
-import warnings
-from crawler import do_crawl
-from utils import parse_args, output_res
-from searcher import build_index, fuzzy_search, exact_search
-warnings.filterwarnings("ignore")
-
-open_flag = """
-  ___  _____ _____                     _               
- / _ \|_   _/  ___|                   | |              
-/ /_\ \ | | \ `--.  ___  __ _ _ __ ___| |__   ___ _ __ 
-|  _  | | |  `--. \/ _ \/ _` | '__/ __| '_ \ / _ \ '__|
-| | | |_| |_/\__/ /  __/ (_| | | | (__| | | |  __/ |   
-\_| |_/\___/\____/ \___|\__,_|_|  \___|_| |_|\___|_|  
-
-AI-Search-Engine V0.1
-
-Tips:
-- enter "q" into any input to exit the program.
-- enter "#" into any input to clear the screen.
-- enter "help" into any input to see the help.
-- enter nothing means search with default mode: exact.
-"""
-
-help_flag = """
-
-Search Categories: 
-- [ACL 2019-2021] [EMNLP 2019-2021] [NAACL 2019-2021] [COLING 2020]
-- [CVPR 2019-2021] [ECCV 2020] [ICCV2019] [ACMMM 2019-2021]
-- [ICLR 2019-2021] [ICML 2019-2021] [AAAI 2019-2021] [IJCAI 2019-2021]
-- [SIGIR 2019-2021] [KDD 2019-2021] [CIKM 2019-2021] [WSDM 2019-2022]
-- [WWW 2019-2021] [ECIR 2019-2022]
-
-Search Commands:
-- --mode <mode: fuzzy|exact> [optional: --threshold <num>] [optional: --limit <num>] [optional: --conf <string/list(string)>]
-- e.g. "--mode fuzzy --threshold 50" means fuzzy search with similarity >= 50 with all papers
-- e.g. "--mode fuzzy --limit 50" means fuzzy search with top-50 papers among all
-- e.g. "--mode exact --conf ACL" means exact search with all papers in ACL
-- e.g. "--mode exact --conf ACL,CVPR" means exact search with all papers in ACL and CVPR
-- Note that the "threshold" is only for fuzzy search from 0 to 100 (default: 50)
-- Note that the "limit" is only for fuzzy search that only show top-N papers
-- Note that the list of confs should be separated by comma (e.g. "ACL,CVPR")
-
-"""
+from constant import init
+from searcher import exec_search
+from utils import show_res, output_res, special_input
 
 
-indexes, candidates = None, None
-
-def special_input(input_str):
-    if input_str == 'q':
-        exit('[+] Good bye!')
-    elif input_str == '#':
-        os.system('clear')
-        print(open_flag)
-        return True
-    elif input_str == 'help':
-        print(help_flag)
-        return True
-    return False
-
-def exec_search(query, mode, threshold, confs, limit):
-    if mode == 'fuzzy':
-        results = fuzzy_search(indexes, candidates, query, threshold, confs, limit)
-    elif mode == 'exact':
-        results = exact_search(indexes, query, confs)
-    return results
-
-def init():
-    global indexes, candidates
-    print(open_flag)
-    print("[+] Initializing System...")
-    cache_file = 'cache/cache.json'
-    res = do_crawl(cache_file)
-    indexes, candidates = build_index(res)
-    print("[+] Enter 'help' into any input for more information when first starting.")
 
 def main():
 
+    indexes, candidates = init()
+
     while(1):
+        mode, threshold, confs, limit = None, None, None, None
+
         query = input('[+] Enter your query: ')
         if(special_input(query) or query == ''): continue
 
-        command = input('[+] Enter Search Commands: ')
-        if(special_input(command)): continue
-        if(command == ''): command = '--mode exact'
-        mode, threshold, confs, limit = parse_args(command)
-        if(mode == False): continue
-        results = exec_search(query, mode, threshold, confs, limit)
-        
-        if len(results) == 0: print('[-] No results found.'); continue
+        print("\n[+] Select search mode:\n\t[1] Exact\n\t[2] Fuzzy")
+        select_mode = input('[+] Enter a number between 1 to 2: ')
+        if(special_input(select_mode, mode='select_mode')): continue
+        if select_mode == '': select_mode = '1'
+        mode = 'exact' if select_mode == '1' else 'fuzzy'
 
-        print('[+] Search Results:')
-        print('[=] Only show Top-5, Please Save results to see all.')
-        for i in range(min(5, len(results))):
-            print(f'[{i+1}] [{results[i][0]}] {results[i][1]}')
+        if mode == 'fuzzy':
+
+            threshold = input('\n[+] Enter threshold between 0 and 100 (default: 50): ')
+            if(special_input(threshold, mode='threshold')): continue
+            if threshold == '': threshold = None
+            else: threshold = int(threshold)
+            
+            limit = input('\n[+] Enter limit >= 0 (default: None): ')
+            if(special_input(limit, mode='limit')): continue
+            if limit == '': limit = None
+            else: limit = int(limit)
+
+        print('\n[+] Enter the list of confs separated by comma\n\tE.g. "ACL,CVPR" or "AAAI" or enter nothing for all confs')
+        confs = input('[+] Enter your list of conferences (default: All Confs): ')
+        if(special_input(confs)): continue
+        if confs == '': confs = None
+        else: confs = confs.split(',')
+
+
+        results = exec_search(indexes, candidates, query, mode, threshold, confs, limit)
+        if len(results) == 0: print('[-] No results found.\n'); continue
+        show_res(results)
         
-        command = input('[+] Enter Save filename: ')
-        if(special_input(command)): continue
-        if(command == ''): command = f'{query}_{mode}_{threshold}_{confs}.txt'
-        output_res(results, command)
+
+        filename = input('\n[+] Enter Save filename: ')
+        if(special_input(filename)): continue
+        if(filename == ''):
+            filename = f'{mode}_{threshold}_{"_".join(confs) if confs else None}_{query}.txt'
+        output_res(results, filename)
+
 
 if __name__ == '__main__':
-    init()
     main()
-
-
-        
- 
-
-
-
-
-
-
-
-
-
-
-
 

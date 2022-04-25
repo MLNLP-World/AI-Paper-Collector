@@ -36,13 +36,14 @@ Support fuzzy and exact search for paper titles.
 | | | |_| |_/\__/ /  __/ (_| | | | (__| | | |  __/ |   
 \_| |_/\___/\____/ \___|\__,_|_|  \___|_| |_|\___|_|  
 
-AI-Search-Engine V0.1
+AI-Paper-Collector V0.1
 
 Tips:
 - enter "q" into any input to exit the program.
 - enter "#" into any input to clear the screen.
-- enter "help" into any input to see the help.
-- enter nothing means search with default mode: exact.
+- enter "h" into any input to see the help information.
+- enter nothing means search with default settings.
+
 ```
 ## <img src="./pics/icon/intro.png" width="25" />Search Categories
 ``` 
@@ -58,36 +59,56 @@ pip install python-Levenshtein thefuzz beautifulsoup4 requests tqdm
 ```
 
 ## <img src="https://cdn.jsdelivr.net/gh/LightChen233/blog-img/catalogue.png" width="27" /> Usage(v0.1.0)
+We provide two usage modes, the first is interactive and the second is command-line.
+The interactive mode is recommended for the first time users.
 ```shell
 python main.py
 ```
+For command-line usage, you can use the following commands:
+```shell
+# -q, --query: the input query
+# -m, --mode: the search mode: fuzzy or exact, default is exact
+# -t, --threshold: the threshold for the fuzzy search, default is 50
+# -l, --limit: the limit num of the fuzzy search result, default is None
+# -c, --conf: the list of the conferences needs to search, default is all
+# -o, --output: the output file name, default is None
+python cli_main.py --query QUERY \
+    [--mode {fuzzy,exact}] \
+    [--threshold THRESHOLD] [--limit LIMIT] [--conf CONF] \
+    [--output OUTPUT]
+```
+E.g.
+```shell
+python cli_main.py -q few-shot -m fuzzy -l 10 -t 10 -c AAAI,ACL -o results.txt
+```
 
-## <img src="./pics/icon/notes.png" width="25" />Help information
-```
-Search Commands:
-- --mode <mode: fuzzy|exact> [optional: --threshold <num>] [optional: --limit <num>] [optional: --conf <string/list(string)>]
-- e.g. "--mode fuzzy --threshold 50" means fuzzy search with similarity >= 50 with all papers
-- e.g. "--mode fuzzy --limit 50" means fuzzy search with top-50 papers among all
-- e.g. "--mode exact --conf ACL" means exact search with all papers in ACL
-- e.g. "--mode exact --conf ACL,CVPR" means exact search with all papers in ACL and CVPR
-- Note that the "threshold" is only for fuzzy search from 0 to 100 (default: 50)
-- Note that the "limit" is only for fuzzy search that only show top-N papers
-- Note that the list of confs should be separated by comma (e.g. "ACL,CVPR")
-```
+
+
+
+
 ## <img src="./pics/icon/folders.png" width="25" />Example
 
 Only 3 steps shown as follows.
 
-1. keyword query
-2. options (search mode and conference source)
+1. enter the keyword query
+2. options (select search mode and conference source interactively)
 3. output path (enter save filename)
 
 ```
 [+] Initializing System...
 [+] Loading from cache...
-[+] Enter 'help' into any input for more information when first starting.
-[+] Enter your query: few-shot 
-[+] Enter Search Commands: --mode fuzzy --conf SIGIR,WSDM,CIKM
+[+] Enter your query: few-shot
+
+[+] Select search mode:
+	[1] Exact
+	[2] Fuzzy
+[+] Enter a number between 1 to 2: 2
+[+] Enter threshold between 0 and 100 (default: 50): 
+[+] Enter limit >= 0 (default: None): 
+[+] Enter the list of confs separated by comma
+	E.g. "ACL,CVPR" or "AAAI" or enter nothing for all confs
+[+] Enter your list of conferences (default: All Confs): SIGIR,WSDM,CIKM 
+
 [+] Search Results:
 [=] Only show Top-5, Please Save results to see all.
 [1] [CIKM2021] REFORM: Error-Aware Few-Shot Knowledge Graph Completion.
@@ -95,8 +116,9 @@ Only 3 steps shown as follows.
 [3] [CIKM2021] Multi-objective Few-shot Learning for Fair Classification.
 [4] [CIKM2020] Graph Few-shot Learning with Attribute Matching.
 [5] [CIKM2020] Few-shot Insider Threat Detection.
+
 [+] Enter Save filename: 
-[+] Writing results to output/results.txt
+[+] Writing results to output/fuzzy_None_SIGIR_WSDM_CIKM_few-shot.txt
 [+] Writing results Done!
 ```
 
