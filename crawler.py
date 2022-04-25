@@ -5,6 +5,15 @@ import requests
 from tqdm import tqdm
 from bs4 import BeautifulSoup
 
+def search_from_nips(url, name, res):
+    r = requests.get(url)
+    soup = BeautifulSoup(r.text, 'html.parser')
+    if name not in res:
+        res[name] = []
+    for paper_item in soup.find(class_='col').ul.find_all('a'):
+        res[name].append(paper_item.string)
+    return res
+
 def search_from_acl(url, tag, name, res):
     r = requests.get(url)
     soup = BeautifulSoup(r.text, 'html.parser')
@@ -37,26 +46,43 @@ def search_from_dblp(url, name, res):
     return res
 
 
-def crawl():
+def crawl(cache_file=None):
     res = {}
 
     acl_conf = json.load(open('conf/acl_conf.json', 'r'))
     dblp_conf = json.load(open('conf/dblp_conf.json', 'r'))
+    nips_conf = json.load(open('conf/nips_conf.json', 'r'))
+
+    cache_conf = []
+    if cache_file is not None:
+        # incremental update
+        cache_res = json.load(open(cache_file, 'r'))
+        cache_conf = [name for name in cache_res.keys()]
     
     for conf in tqdm(acl_conf, desc="[+] Crawling ACL", dynamic_ncols=True):
         url, tag, name = conf['url'], conf['tag'], conf['name']
+        if name in cache_conf:
+            continue
         res = search_from_acl(url, tag, name, res)
 
     for conf in tqdm(dblp_conf, desc="[+] Crawling DBLP", dynamic_ncols=True):
         url, name = conf['url'], conf['name']
+        if name in cache_conf:
+            continue
         res = search_from_dblp(url, name, res)
+
+    for conf in tqdm(nips_conf, desc="[+] Crawling NeurIPS", dynamic_ncols=True):
+        url, name = conf['url'], conf['name']
+        if name in cache_conf:
+            continue
+        res = search_from_nips(url, name, res)
 
     return res
 
-def do_crawl(cache_file=None):
-    if cache_file is None or not os.path.exists(cache_file):
-        print(f'[+] Crawling papers when no cache...')
-        res = crawl()
+def do_crawl(cache_file=None, force=False):
+    if force or cache_file is None or not os.path.exists(cache_file):
+        print(f'[+] Crawling papers...')
+        res = crawl(cache_file)
         with open(cache_file, 'w') as f:
             json.dump(res, f)
     else:

@@ -13,6 +13,8 @@ def set_args():
     parser.add_argument('--conf', '-c', type=str, default=None, help='conferences to search')
     parser.add_argument("--output", "-o", type=str, default=None, help="output file")
 
+    parser.add_argument('--force', '-f', action='store_true', help='force to update the cache file incrementally')
+
     args = parser.parse_args()
 
     if args.conf:
@@ -26,7 +28,7 @@ def set_args():
 def main():
     args = set_args()
 
-    indexes, candidates = init()
+    indexes, candidates = init(args.force)
 
     results = exec_search(
         indexes, 
