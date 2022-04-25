@@ -1,6 +1,43 @@
 import os
-import json
 import getopt
+from constant import open_flag, tip_flag, category_flag
+
+def special_input(input_str, mode=None):
+    if input_str == 'q':
+        exit('[+] Good bye!')
+    elif input_str == '#':
+        os.system('clear')
+        print(open_flag)
+        print(tip_flag)
+        return True
+    elif input_str == 'h':
+        print(category_flag)
+        return True
+    elif mode == 'select_mode':
+        if not input_str in ['1', '2', '']:
+            print('[-] Invalid input.\n')
+            return True
+    elif mode == 'threshold':
+        if input_str == '': 
+            return False
+        if not input_str.isdigit():
+            print('[-] Invalid input.\n')
+            return True
+        input_str = int(input_str)
+        if input_str < 0 or input_str > 100:
+            print('[-] Invalid input.\n')
+            return True
+    elif mode == 'limit':
+        if input_str == '': 
+            return False
+        if not input_str.isdigit():
+            print('[-] Invalid input.\n')
+            return True
+        input_str = int(input_str)
+        if input_str < 0:
+            print('[-] Invalid input.\n')
+            return True         
+    return False
 
 
 def parse_args(command):
@@ -40,6 +77,7 @@ def parse_args(command):
 
     return mode, threshold, conf, limit
 
+
 def check_filename(filename):
     if os.path.dirname(filename) == '':
         filename = os.path.join('output', filename)
@@ -51,12 +89,18 @@ def check_filename(filename):
 def output_res(results, filename):
     try:
         filename = check_filename(filename)
-        print('[+] Writing results to {}'.format(filename))
+        print('\n[+] Writing results to {}'.format(filename))
         with open(filename, 'w') as f:
             for item in results:
                 f.write(f'【{item[0]}】{item[1]}' + '\n\n')
-        print('[+] Writing results Done!')
+        print('[+] Writing results Done!\n')
         return True
     except:
-        print('[-] Writing results Failed!')
+        print('\n[-] Writing results Failed!\n')
         return False
+
+def show_res(results):
+    print('\n[+] Search Results:')
+    print('[=] Only show Top-5, Please Save results to see all.\n')
+    for i in range(min(5, len(results))):
+        print(f'[{i+1}] [{results[i][0]}] {results[i][1]}')
