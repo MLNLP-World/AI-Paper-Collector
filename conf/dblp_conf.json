@@ -302,5 +302,17 @@
     {
         "name": "ECCV2020",
         "url": "https://dblp.org/db/conf/eccv/eccv2020-30.html"
+    },
+    {
+        "name": "ASE2021",
+        "url": "https://dblp.org/db/conf/kbse/ase2021.html"
+    },
+    {
+        "name": "ASE2020",
+        "url": "https://dblp.org/db/conf/kbse/ase2020.html"
+    },
+    {
+        "name": "ASE2019",
+        "url": "https://dblp.org/db/conf/kbse/ase2019.html"
     }
 ]
