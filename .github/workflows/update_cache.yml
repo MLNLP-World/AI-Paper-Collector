@@ -37,4 +37,5 @@ jobs:
         run: pip install -r requirements.txt
         
       - name: Update the cache file from the issue
-        run: python update_cache.py --issue ${{ github.event.issue.body }}
+        run: |
+          python update_cache.py --issue ${{ toJson(github.event.issue.body) }}
