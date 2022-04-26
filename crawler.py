@@ -60,18 +60,21 @@ def crawl(cache_file=None):
         cache_conf = [name for name in cache_res.keys()]
     
     for conf in tqdm(acl_conf, desc="[+] Crawling ACL", dynamic_ncols=True):
+        assert conf.get('name') and conf.get('url') and conf.get('tag')
         url, tag, name = conf['url'], conf['tag'], conf['name']
         if name in cache_conf:
             continue
         res = search_from_acl(url, tag, name, res)
 
     for conf in tqdm(dblp_conf, desc="[+] Crawling DBLP", dynamic_ncols=True):
+        assert conf.get('name') and conf.get('url')
         url, name = conf['url'], conf['name']
         if name in cache_conf:
             continue
         res = search_from_dblp(url, name, res)
 
     for conf in tqdm(nips_conf, desc="[+] Crawling NeurIPS", dynamic_ncols=True):
+        assert conf.get('name') and conf.get('url')
         url, name = conf['url'], conf['name']
         if name in cache_conf:
             continue
@@ -90,4 +93,7 @@ def do_crawl(cache_file=None, force=False):
         with open(cache_file, 'r') as f:
             res = json.load(f)
     return res
+
+if __name__ == '__main__':
+    do_crawl(cache_file='cache/cache.json', force=True)
     

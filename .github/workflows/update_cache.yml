@@ -1,0 +1,40 @@
+name: update_cache
+
+env:
+  PYTHON_VERSION: '3.8'               # set this to the Python version to use
+
+on:
+  issues:
+    types:
+      - labeled
+
+jobs:
+  update-conf-list:
+    if: github.event.label.name == 'request to update cache'
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python version
+        uses: actions/setup-python@v3
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      - name: Create and start virtual environment
+        run: |
+          python -m venv venv
+          source venv/bin/activate
+      
+      - name: Set up dependency caching for faster installs
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+        
+      - name: Update the cache file from the issue
+        run: python update_cache.py --issue github.event.issue.title

@@ -40,7 +40,7 @@ Support fuzzy and exact search for paper titles.
 ```
 ## <img src="https://cdn.jsdelivr.net/gh/LightChen233/blog-img/resource.png" width="25" /> Installation
 ```shell
-pip install python-Levenshtein thefuzz beautifulsoup4 requests tqdm
+pip install -r requirements.txt
 ```
 
 ## <img src="https://cdn.jsdelivr.net/gh/LightChen233/blog-img/catalogue.png" width="27" /> Usage(v0.1.0)
