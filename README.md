@@ -110,6 +110,12 @@ Only 3 steps shown as follows.
 
 ## <img src="https://cdn.jsdelivr.net/gh/LightChen233/blog-img/folders.png" width="25" /> How to add new conferences from DBLP
 
+### Automatically Updating via an issue-triggered workflow
+If anyone wants to add a new list of conferences. please raise an issue following the format of this one.
+We will check and label it, then the workflow will run automatically.
+[issue format](https://github.com/MLNLP-World/AI-Paper-Collector/issues/10)
+
+### For users who clone the project to use
 * add new conferences by modifying the `conf/dblp_conf.json` file
 ```python
 [
