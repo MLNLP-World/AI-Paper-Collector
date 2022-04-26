@@ -10,7 +10,7 @@ on:
 
 jobs:
   update-conf-list:
-    if: github.event.label.name == 'request to update cache'
+    if: github.event.label.name == 'require to update cache'
     runs-on: ubuntu-latest
     permissions:
       issues: write
@@ -37,4 +37,4 @@ jobs:
         run: pip install -r requirements.txt
         
       - name: Update the cache file from the issue
-        run: python update_cache.py --issue github.event.issue.title
+        run: python update_cache.py --issue ${{ github.event.issue.body }}
