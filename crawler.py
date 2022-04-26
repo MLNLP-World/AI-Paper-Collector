@@ -90,4 +90,7 @@ def do_crawl(cache_file=None, force=False):
         with open(cache_file, 'r') as f:
             res = json.load(f)
     return res
+
+if __name__ == '__main__':
+    do_crawl(cache_file='cache/cache.json', force=True)
     
