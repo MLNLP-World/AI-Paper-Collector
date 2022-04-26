@@ -12,6 +12,7 @@ def set_args():
 
 def parse_issue(issue):
     try:
+        issue = issue.replace('\\n', '').replace('\\r', '')
         info = ast.literal_eval(issue)
         assert isinstance(info, list)
         assert len(info) > 0 and info[0].get('url') and info[0].get('name') and info[0].get('source')
