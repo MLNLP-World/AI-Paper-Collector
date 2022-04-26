@@ -2,6 +2,7 @@ name: update_cache
 
 env:
   PYTHON_VERSION: '3.8'               # set this to the Python version to use
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 on:
   issues:
@@ -14,6 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       issues: write
+      contents: write
     steps:
       - uses: actions/checkout@v3
       - name: Set up Python version
@@ -39,3 +41,23 @@ jobs:
       - name: Update the cache file from the issue
         run: |
           python update_cache.py --issue ${{ toJson(github.event.issue.body) }}
+          
+      - name: Commit files
+        id: commit
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "github-actions"
+          git add --all
+          if [-z "$(git status --porcelain)"]; then
+             echo "::set-output name=push::false"
+          else
+             git commit -m "update cache" -a
+             echo "::set-output name=push::true"
+          fi
+        shell: bash
+        
+      - name: Push changes
+        if: steps.commit.outputs.push == 'true'
+        uses: ad-m/github-push-action@master
+        with:
+           github_token: ${{ secrets.GITHUB_TOKEN }}
