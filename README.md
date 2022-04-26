@@ -21,7 +21,7 @@
       <img alt="Issues" src="https://img.shields.io/github/issues/MLNLP-World/AI-Paper-collector?color=0088ff"/>
     </a>
     <a href="https://colab.research.google.com/github/Doragd/AI-Paper-collector-Dev/blob/main/AI_Paper_Collector_Colab.ipynb" target="_parent">
-      <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+      <img src="pics/icon/colab-badge.svg" alt="Open In Colab"/>
     </a>
     <br />
 </p>
