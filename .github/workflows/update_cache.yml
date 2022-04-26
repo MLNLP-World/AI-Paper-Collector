@@ -10,7 +10,7 @@ on:
 
 jobs:
   update-conf-list:
-    if: github.event.label.name == 'request to update cache'
+    if: github.event.label.name == 'require to update cache'
     runs-on: ubuntu-latest
     permissions:
       issues: write
