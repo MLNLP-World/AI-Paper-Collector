@@ -314,5 +314,17 @@
     {
         "name": "ASE2019",
         "url": "https://dblp.org/db/conf/kbse/ase2019.html"
+    },
+    {
+        "name": "ISWC2021",
+        "url": "https://dblp.org/db/conf/semweb/iswc2021.html"
+    },
+    {
+        "name": "ISWC2020",
+        "url": "https://dblp.org/db/conf/semweb/iswc2020.html"
+    },
+    {
+        "name": "ISWC2019",
+        "url": "https://dblp.org/db/conf/semweb/iswc2019.html"
     }
 ]
