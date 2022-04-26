@@ -54,6 +54,7 @@ def crawl(cache_file=None):
     nips_conf = json.load(open('conf/nips_conf.json', 'r'))
 
     cache_conf = []
+    cache_res = {}
     if cache_file is not None:
         # incremental update
         cache_res = json.load(open(cache_file, 'r'))
@@ -79,7 +80,8 @@ def crawl(cache_file=None):
         if name in cache_conf:
             continue
         res = search_from_nips(url, name, res)
-
+        
+    res.update(cache_res)
     return res
 
 def do_crawl(cache_file=None, force=False):
