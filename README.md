@@ -111,7 +111,7 @@ For command-line usage, you can use the following commands:
 # -t, --threshold: the threshold for the fuzzy search, default is 50
 # -l, --limit:     the limit num of the fuzzy search result, default is None
 # -c, --conf:      the list of the conferences needs to search, default is all
-# -o, --output:    the output file name, default is None
+# -o, --output:    the output file name, default is [mode]_[threshold]_[confs]_[query].txt
 # -f, --force:     force to update the cache file incrementally
 python cli_main.py --query QUERY \
     [--mode {fuzzy,exact}] \
