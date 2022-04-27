@@ -44,6 +44,8 @@ Support fuzzy and exact search for paper titles.
 ```
 ## <img src="https://cdn.jsdelivr.net/gh/LightChen233/blog-img/resource.png" width="25" /> Installation
 ```shell
+git clone https://github.com/MLNLP-World/AI-Paper-Collector.git
+cd AI-Paper-Collector
 pip install -r requirements.txt
 ```
 
