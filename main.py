@@ -44,7 +44,7 @@ def main():
         show_res(results)
         
 
-        filename = input('\n[+] Enter Save filename: ')
+        filename = input(f'\n[+] Enter Saving filename (default: [mode]_[threshold]_[confs]_[query].txt): ')
         if(special_input(filename)): continue
         if(filename == ''):
             filename = f'{mode}_{threshold}_{"_".join(confs) if confs else None}_{query}.txt'
