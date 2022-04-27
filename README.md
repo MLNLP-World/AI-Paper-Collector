@@ -150,10 +150,13 @@ python cli_main.py --query '' --force
 ```
 
 ## <img src="./pics/icon/organizer.png" width="25" />Organizers
-<a href="https://github.com/Doragd"> <img src="pics/profile/Gordon.png"  width="80" >  </a> 
+
+<a href="https://github.com/doragd"><img src="https://github.com/doragd.png?size=60"></a> 
 
 ## <img src="./pics/icon/heart.png" width="25" />Contributors
 Thanks to the contributors:
 
-<a href="https://github.com/Doragd"> <img src="pics/profile/Gordon.png"  width="80" >  </a> 
-<a href="https://github.com/yhshu">  <img src="pics/profile/yiheng.png"  width="80" /></a> 
+<a href="https://github.com/doragd"><img src="https://github.com/doragd.png?size=60"></a> 
+<a href="https://github.com/yhshu"><img src="https://github.com/yhshu.png?size=60"></a> 
+<a href="https://github.com/wanghaisheng"><img src="https://github.com/wanghaisheng.png?size=60"></a> 
+<a href="https://github.com/xcfcode"><img src="https://github.com/xcfcode.png?size=60"></a>
