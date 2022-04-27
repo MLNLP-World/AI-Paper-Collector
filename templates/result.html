@@ -1,14 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Title</title>
-</head>
+{% extends "base.html" %}
+{% block title %}Search Result{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        {% include "search.html" %}
+    </div>
+</div>
 
-<body>
-    {% for result in results %}
-        <div class="result">
-            <p>{{ result }}</p>
-        </div>
-    {% endfor %}
-</body>
-</html>
+<script src="static/js/vendor/jquery-1.11.2.min.js"></script>
+<script src="static/js/vendor/bootstrap.min.js"></script>
+<script src="static/js/main.js"></script>
+{% for result in results %}
+<div class="result">
+    <p>{{ result }}</p>
+</div>
+{% endfor %}
+{% endblock %}
