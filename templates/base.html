@@ -1,0 +1,19 @@
+<html lang="en">
+<head>
+{% block head %}
+    <title>{% block title %}{% endblock %} - AI Paper Collector</title>
+{% endblock %}
+</head>
+<body>
+    <div id="content">
+    {% block content %}
+    {% endblock %}
+    </div>
+    
+    {% block footer %}
+        <div id="footer">
+            <p>&copy; {{ current_year }}</p>
+        </div>
+    {% endblock %}
+</body>
+</html>
