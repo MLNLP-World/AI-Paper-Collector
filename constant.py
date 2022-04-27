@@ -36,13 +36,15 @@ Search Categories:
 """
 
 
-def init(force=False):
+def init(force=False, show_prompt=True):
     # force=True: force to update the cache file incrementally
-    print(open_flag)
-    print(tip_flag)
-    print("[+] Initializing System...")
+    # show_prompt=True: show the prompt flag
+
+    if show_prompt:
+        print(open_flag)
+        print(tip_flag)
+        print("[+] Initializing System...")
     cache_file = 'cache/cache.json'
     res = do_crawl(cache_file, force)
     indexes, candidates = build_index(res)
     return indexes, candidates
-

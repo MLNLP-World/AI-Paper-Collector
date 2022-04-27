@@ -1,4 +1,3 @@
-from unittest import result
 from flask import Flask, render_template, request, make_response
 from flask_bootstrap import Bootstrap
 import os
@@ -9,11 +8,10 @@ from searcher import exec_search
 cn = pytz.timezone('Asia/Shanghai')
 
 app = Flask(__name__)
-bootstrap = Bootstrap(app)
+boo = Bootstrap(app)
 
 template_folder = 'templates'
 app.config['TEMPLATES_AUTO_RELOAD'] = True
-app.config['UPLOAD_FOLDER'] = 'static/images'
 
 base_dir = os.path.dirname(os.path.abspath(__file__))
 
