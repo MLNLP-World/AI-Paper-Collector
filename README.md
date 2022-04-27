@@ -53,40 +53,27 @@ pip install -r requirements.txt
 ```
 
 ## <img src="https://cdn.jsdelivr.net/gh/LightChen233/blog-img/catalogue.png" width="27" /> Usage(v0.1.0)
+
 We provide two usage modes, the first is **interactive** (`main.py`)and the second is **command-line** (`cli_main.py`).
 The interactive mode is recommended for the first time users.
+
+### <img src="https://cdn.jsdelivr.net/gh/LightChen233/blog-img/notes.png" width="23" /> Interactive Usage with Example
+
+To start the interactive, type:
 ```shell
 python main.py
 ```
-For command-line usage, you can use the following commands:
-```shell
-# -q, --query: the input query
-# -m, --mode: the search mode: fuzzy or exact, default is exact
-# -t, --threshold: the threshold for the fuzzy search, default is 50
-# -l, --limit: the limit num of the fuzzy search result, default is None
-# -c, --conf: the list of the conferences needs to search, default is all
-# -o, --output: the output file name, default is None
-# -f, --force: force to update the cache file incrementally
-python cli_main.py --query QUERY \
-    [--mode {fuzzy,exact}] \
-    [--threshold THRESHOLD] [--limit LIMIT] [--conf CONF] \
-    [--output OUTPUT] [--force]
-```
+
+Serveral steps to interactively search paper.
+
+1. the keyword query
+2. search mode (exact or fuzzy)
+3. (fuzzy) threshold
+4. the limit of results
+5. a list of conferences, separated by comma
+6. the file path of the output (top-5 for command preview, all results in this file)
+
 E.g.
-```shell
-python cli_main.py -q few-shot -m fuzzy -l 10 -t 10 -c AAAI,ACL -o results.txt
-```
-
-
-
-## <img src="./pics/icon/folders.png" width="25" />Example
-
-Only 3 steps shown as follows.
-
-1. enter the keyword query
-2. options (select search mode and conference source interactively)
-3. output path (enter save filename)
-
 ```
 [+] Initializing System...
 [+] Loading from cache...
@@ -114,6 +101,28 @@ Only 3 steps shown as follows.
 [+] Writing results to output/fuzzy_None_SIGIR_WSDM_CIKM_few-shot.txt
 [+] Writing results Done!
 ```
+
+### <img src="https://cdn.jsdelivr.net/gh/LightChen233/blog-img/notes.png" width="23" /> Command-line Usage
+
+For command-line usage, you can use the following commands:
+```shell
+# -q, --query:     the input query, and the content with multiple words should be wrapped in quotation marks
+# -m, --mode:      the search mode: fuzzy or exact, default is exact
+# -t, --threshold: the threshold for the fuzzy search, default is 50
+# -l, --limit:     the limit num of the fuzzy search result, default is None
+# -c, --conf:      the list of the conferences needs to search, default is all
+# -o, --output:    the output file name, default is None
+# -f, --force:     force to update the cache file incrementally
+python cli_main.py --query QUERY \
+    [--mode {fuzzy,exact}] \
+    [--threshold THRESHOLD] [--limit LIMIT] [--conf CONF] \
+    [--output OUTPUT] [--force]
+```
+E.g.
+```shell
+python cli_main.py -q 'few shot' -m fuzzy -l 10 -t 10 -c AAAI,ACL -o results.txt
+```
+
 
 ## <img src="https://cdn.jsdelivr.net/gh/LightChen233/blog-img/folders.png" width="25" /> How to add new conferences from DBLP
 
