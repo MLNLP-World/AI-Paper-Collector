@@ -43,6 +43,9 @@ Support fuzzy and exact search for paper titles.
 - [ASE 2019-2021] [ISWC 2019-2021]
 ```
 ## <img src="https://cdn.jsdelivr.net/gh/LightChen233/blog-img/resource.png" width="25" /> Installation
+
+Current installation is to clone this repo.
+
 ```shell
 git clone https://github.com/MLNLP-World/AI-Paper-Collector.git
 cd AI-Paper-Collector
@@ -50,7 +53,7 @@ pip install -r requirements.txt
 ```
 
 ## <img src="https://cdn.jsdelivr.net/gh/LightChen233/blog-img/catalogue.png" width="27" /> Usage(v0.1.0)
-We provide two usage modes, the first is interactive and the second is command-line.
+We provide two usage modes, the first is **interactive** (`main.py`)and the second is **command-line** (`cli_main.py`).
 The interactive mode is recommended for the first time users.
 ```shell
 python main.py
@@ -73,8 +76,6 @@ E.g.
 ```shell
 python cli_main.py -q few-shot -m fuzzy -l 10 -t 10 -c AAAI,ACL -o results.txt
 ```
-
-
 
 
 
