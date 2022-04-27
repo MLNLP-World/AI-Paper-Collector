@@ -120,7 +120,7 @@ python cli_main.py --query QUERY \
 ```
 E.g.
 ```shell
-python cli_main.py -q 'few shot' -m fuzzy -l 10 -t 10 -c AAAI,ACL -o results.txt
+python cli_main.py -q "few shot" -m fuzzy -l 10 -t 10 -c AAAI,ACL -o results.txt
 ```
 
 
