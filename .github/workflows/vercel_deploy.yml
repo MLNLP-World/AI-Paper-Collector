@@ -1,12 +1,12 @@
-name: deploy website
+name: deploy website preview
 on:
   push:
-    branches: [main]
-    paths-ignore: ["**/README.md"]
+    branches:
+      - main
   pull_request:
-    branches: [main]
-    types: [opened, synchronize]
-    paths-ignore: ["**/README.md"]
+    branches:
+      - main
+  pull_request_target:
 
 jobs:
   deploy:
@@ -24,6 +24,7 @@ jobs:
           vercel-org-id: ${{ secrets.ORG_ID }} # Required
           vercel-project-id: ${{ secrets.PROJECT_ID }} # Required
           working-directory: ./
+          github-comment: false
 
       - name: set up production
         uses: amondnet/vercel-action@v20
@@ -36,4 +37,8 @@ jobs:
           vercel-project-id: ${{ secrets.PROJECT_ID }}
           working-directory: ./
           vercel-args: "--prod" # Optional
+          github-comment: false
 
+      - name: preview-url
+        run: |
+          echo ${{ steps.vercel-action.outputs.preview-url }}
