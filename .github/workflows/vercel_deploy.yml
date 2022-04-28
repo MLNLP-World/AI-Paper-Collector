@@ -1,10 +1,12 @@
 name: deploy website
 on:
   push:
-    branches:
-      - main
-  pull_request_target:
-    types: [labeled]
+    branches: [main]
+    paths-ignore: ["**/README.md"]
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize]
+    paths-ignore: ["**/README.md"]
 
 jobs:
   deploy:
