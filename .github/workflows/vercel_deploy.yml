@@ -14,11 +14,26 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - uses: amondnet/vercel-action@v20 # deploy
+      - name: set up pr preview
+        uses: amondnet/vercel-action@v20 # deploy
+        id: vercel-action-staging
+        if: github.event_name == 'pull_request'
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }} # Required
           github-token: ${{ secrets.GITHUB_TOKEN }} # Optional
-          vercel-args: "--prod" # Optional
           vercel-org-id: ${{ secrets.ORG_ID }} # Required
           vercel-project-id: ${{ secrets.PROJECT_ID }} # Required
           working-directory: ./
+
+      - name: set up production
+        uses: amondnet/vercel-action@v20
+        id: vercel-action-production
+        if: github.event_name == 'push'
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.ORG_ID }}
+          vercel-project-id: ${{ secrets.PROJECT_ID }}
+          working-directory: ./
+          vercel-args: "--prod" # Optional
+
