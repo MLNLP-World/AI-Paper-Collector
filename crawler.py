@@ -1,3 +1,4 @@
+import logging
 import re
 import os
 import json
@@ -11,23 +12,42 @@ def search_from_nips(url, name, res):
     if name not in res:
         res[name] = []
     for paper_item in soup.find(class_='col').ul.find_all('a'):
-        res[name].append(paper_item.string)
+        res[name].append({
+                          "paper_name": paper_item.string,
+                          'paper_url': "https://papers.nips.cc"+paper_item["href"]
+                          })
     return res
 
 def search_from_acl(url, tag, name, res):
     r = requests.get(url)
+    # print("DEBUG INFO: search" ,url)
     soup = BeautifulSoup(r.text, 'html.parser')
     if name not in res:
         res[name] = []
-    for cls in soup.find_all('strong'):
+    for tp in soup.find_all('p',class_="d-sm-flex align-items-stretch"):
+        span_list=tp.find_all('span')
+        a_list=span_list[0].find_all('a')
+        paper_pdf_str=a_list[0]['href']
+        # paper_code = a_list[-1]
+        # if(paper_code['title'] is not None and paper_code['title']=='Code'):
+        #     paper_code_str=paper_code['href']
+        # else:
+        #     paper_code_str=None
+        cls=tp.find('strong')
+        # print('DEBUG INFO: '+str(tp.find_all('strong')[0]))
         for paper_item in cls.find_all(href=re.compile(tag), class_="align-middle"):
             items = [item.string if item.string else item for item in paper_item.contents]
             try:
                 paper = "".join([item for item in items if isinstance(item, str)])
+                paper_url='https://aclanthology.org'+paper_item['href']
             except:
                 import pdb
                 pdb.set_trace()
-            res[name].append(paper)
+            res[name].append({"paper_name":paper,
+                              'paper_url': paper_url,
+                              "paper_pdf": paper_pdf_str,
+                              })
+    #         "paper_code": paper_code_str
     return res
 
 def search_from_dblp(url, name, res):
@@ -35,14 +55,19 @@ def search_from_dblp(url, name, res):
     soup = BeautifulSoup(r.text, 'html.parser')
     if name not in res:
         res[name] = []
-    for paper_item in soup.find_all(class_='title', itemprop="name"):
-        items = [item.string if item.string else item for item in paper_item.contents]
+
+    for paper_item in soup.find_all("li", class_='inproceedings'):
+        paper_url=paper_item.find("li", class_="drop-down").div.a['href']
+        paper_name=paper_item.find(class_='title', itemprop="name")
+        items = [item.string if item.string else item for item in paper_name.contents]
         try:
             paper = "".join([item for item in items if isinstance(item, str)])
         except:
             import pdb
             pdb.set_trace()
-        res[name].append(paper)
+        res[name].append({"paper_name":paper,
+                          'paper_url':paper_url
+                          })
     return res
 
 
@@ -87,7 +112,7 @@ def crawl(cache_file=None):
 def do_crawl(cache_file=None, force=False):
     if force or cache_file is None or not os.path.exists(cache_file):
         print(f'[+] Crawling papers...')
-        res = crawl(cache_file)
+        res = crawl(None if cache_file is None or not os.path.exists(cache_file) else cache_file)
         with open(cache_file, 'w') as f:
             json.dump(res, f)
     else:
