@@ -5,6 +5,19 @@ import requests
 from tqdm import tqdm
 from bs4 import BeautifulSoup
 
+def search_from_iclr(url, name, res):
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36',
+    }
+    r = requests.get(url, headers=headers)
+    data = r.json()
+    if name not in res:
+        res[name] = []
+    for item in data['notes']:
+        paper_title = item['content']['title']
+        res[name].append(paper_title)
+    return res
+
 def search_from_nips(url, name, res):
     r = requests.get(url)
     soup = BeautifulSoup(r.text, 'html.parser')
@@ -52,10 +65,11 @@ def crawl(cache_file=None):
     acl_conf = json.load(open('conf/acl_conf.json', 'r'))
     dblp_conf = json.load(open('conf/dblp_conf.json', 'r'))
     nips_conf = json.load(open('conf/nips_conf.json', 'r'))
+    iclr_conf = json.load(open('conf/iclr_conf.json', 'r'))
 
     cache_conf = []
     cache_res = {}
-    if cache_file is not None:
+    if cache_file is not None and os.path.exists(cache_file):
         # incremental update
         cache_res = json.load(open(cache_file, 'r'))
         cache_conf = [name for name in cache_res.keys()]
@@ -80,6 +94,13 @@ def crawl(cache_file=None):
         if name in cache_conf:
             continue
         res = search_from_nips(url, name, res)
+
+    for conf in tqdm(iclr_conf, desc="[+] Crawling ICLR", dynamic_ncols=True):
+        assert conf.get('name') and conf.get('url')
+        url, name = conf['url'], conf['name']
+        if name in cache_conf:
+            continue
+        res = search_from_iclr(url, name, res)
         
     res.update(cache_res)
     return res
