@@ -20,21 +20,11 @@ def search_from_nips(url, name, res):
 
 def search_from_acl(url, tag, name, res):
     r = requests.get(url)
-    # print("DEBUG INFO: search" ,url)
     soup = BeautifulSoup(r.text, 'html.parser')
     if name not in res:
         res[name] = []
     for tp in soup.find_all('p',class_="d-sm-flex align-items-stretch"):
-        span_list=tp.find_all('span')
-        a_list=span_list[0].find_all('a')
-        paper_pdf_str=a_list[0]['href']
-        # paper_code = a_list[-1]
-        # if(paper_code['title'] is not None and paper_code['title']=='Code'):
-        #     paper_code_str=paper_code['href']
-        # else:
-        #     paper_code_str=None
         cls=tp.find('strong')
-        # print('DEBUG INFO: '+str(tp.find_all('strong')[0]))
         for paper_item in cls.find_all(href=re.compile(tag), class_="align-middle"):
             items = [item.string if item.string else item for item in paper_item.contents]
             try:
@@ -45,9 +35,7 @@ def search_from_acl(url, tag, name, res):
                 pdb.set_trace()
             res[name].append({"paper_name":paper,
                               'paper_url': paper_url,
-                              # "paper_pdf": paper_pdf_str,
                               })
-    #         "paper_code": paper_code_str
     return res
 
 def search_from_dblp(url, name, res):
