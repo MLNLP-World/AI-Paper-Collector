@@ -92,7 +92,7 @@ def output_res(results, filename):
         print('\n[+] Writing results to {}'.format(filename))
         with open(filename, 'w',encoding='utf-8') as f:
             for item in results:
-                f.write(f'【{item[0]}】{item[1]}' + '\n\n')
+                f.write(f'【{item[0]}】\t{item[1]}' + '\n\n')
         print('[+] Writing results Done!\n')
         return True
     except:

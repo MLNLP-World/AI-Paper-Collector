@@ -5,11 +5,11 @@
     },
     {
         "name": "ICASSP2020",
-        "url": "https://dblp.org/db/conf/icassp/icassp2021.html"
+        "url": "https://dblp.org/db/conf/icassp/icassp2020.html"
     },
     {
         "name": "ICASSP2019",
-        "url": "https://dblp.org/db/conf/icassp/icassp2021.html"
+        "url": "https://dblp.org/db/conf/icassp/icassp2019.html"
     },
     {
         "name": "WWW2021",
@@ -302,18 +302,6 @@
     {
         "name": "ECCV2020",
         "url": "https://dblp.org/db/conf/eccv/eccv2020-30.html"
-    },
-    {
-        "name": "ASE2021",
-        "url": "https://dblp.org/db/conf/kbse/ase2021.html"
-    },
-    {
-        "name": "ASE2020",
-        "url": "https://dblp.org/db/conf/kbse/ase2020.html"
-    },
-    {
-        "name": "ASE2019",
-        "url": "https://dblp.org/db/conf/kbse/ase2019.html"
     },
     {
         "name": "ISWC2021",
