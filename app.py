@@ -36,9 +36,9 @@ def result():
     if query is None:
         return render_template('index.html', confs=support_confs)
 
-    mode = request.args.get('mode') or 'fuzzy'
+    mode = request.args.get('mode') or 'exact'
     if mode not in ['fuzzy', 'exact']:
-        mode = 'fuzzy'
+        mode = 'exact'
 
     limit = request.args.get('limit') or None
     if limit is None or (type(limit) is str and limit.isdigit() is False):
@@ -63,7 +63,7 @@ def result():
     )
 
     results = exec_search(indexes, candidates, query, mode, threshold, confs, limit)
-    return render_template('result.html', results=results)
+    return render_template('result.html', results=results, confs=support_confs)
 
 
 if __name__ == '__main__':
