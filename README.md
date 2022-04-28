@@ -149,7 +149,7 @@ We will check and label it, then the workflow will run automatically.
 # force to update the cache file incrementally
 python cli_main.py --query '' --force
 ```
-## Disclaimer
+## <img src="https://cdn.jsdelivr.net/gh/LightChen233/blog-img/disclaimer2.png" width="25" /> Disclaimer
 Since the tool is in the development stage, we can not guarantee that the papers found will meet your needs. I hope for your understanding. In addition, all the results come from [DBLP](https://dblp.org/), [ACL](https://aclanthology.org/), [NIPS](https://papers.nips.cc/), [OpenReview](https://openreview.net/), if this violates your copyright, you can contact us at any time, we will delete it as soon as possible, thank you:)
 
 ## <img src="./pics/icon/organizer.png" width="25" />Organizers
