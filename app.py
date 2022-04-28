@@ -11,6 +11,9 @@ app = Flask(__name__)
 boo = Bootstrap(app)
 
 template_folder = 'templates'
+# Templates Acknowledge: https://github.com/ronaldosvieira/simple-search-template
+# LICENCE: MIT
+
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 
 base_dir = os.path.dirname(os.path.abspath(__file__))

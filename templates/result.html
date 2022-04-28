@@ -1,18 +1,57 @@
 {% extends "base.html" %}
 {% block title %}Search Result{% endblock %}
 {% block content %}
-<div class="container">
-    <div class="row">
-        {% include "search.html" %}
+<div style="margin-top: 40px;">
+    <div class="container">
+        <div class="row">
+            {% include "search.html" %}
+        </div>
     </div>
-</div>
+    <div class="container">
+        <div class="list-group">
+            {% for result in results %}
+            <div class="panel panel-default list-group-item">
+                <div class="panel-body">
+                    <div class="media">
+                        <!-- <div class="media-left">
+                            <a href="#">
+                                <img class="media-object" src="" alt="...">
+                            </a>
+                        </div> -->
+                        <div class="media-body">
+                            <h4 class="media-heading">{{ result[1] }}</h4>
+                            <p class="media-item">{{ result[0] }}, {{ result[2] }}</p>
+                            <p class="media-item"><a>[link]</a> <a>[code]</a> <a>[project]</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            
 
-<script src="static/js/vendor/jquery-1.11.2.min.js"></script>
-<script src="static/js/vendor/bootstrap.min.js"></script>
-<script src="static/js/main.js"></script>
-{% for result in results %}
-<div class="result">
-    <p>{{ result }}</p>
-</div>
-{% endfor %}
-{% endblock %}
+            <div class="panel panel-default list-group-item">
+                <div class="panel-body">
+                    <div class="media">
+                        <div class="media-left">
+                            <a href="#">
+                                <img class="media-object" src="http://placehold.it/90x120" alt="...">
+                            </a>
+                        </div>
+                        <div class="media-body">
+                            <h4 class="media-heading">Saindo da Jaula</h4>
+                            Eita porra!, tá saindo da jaula o monstro! Sai filho da puta! É 13 porra! Sabe o que é isso
+                            daí? Trapézio descendente é o nome disso aí. Vamo monstro! É esse que a gente quer, é ele
+                            que nóis vamo buscar.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+
+        </div>
+
+        <script src="static/js/vendor/jquery-1.11.2.min.js"></script>
+        <script src="static/js/vendor/bootstrap.min.js"></script>
+        <script src="static/js/main.js"></script>
+    </div>
+    {% endblock %}

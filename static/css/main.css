@@ -23,3 +23,12 @@ label[for=search-query] {font-size: 4em;}
 
 .clearfix {clear: both;}
 .debug {border: 1px solid red;}
+
+.panel-body {
+    padding: 0px;
+    margin: 0px;
+}
+
+.media-item {
+    margin: 0px;
+}
