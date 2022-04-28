@@ -1,3 +1,5 @@
+import functools
+import re
 from thefuzz import process
 
 def build_index(res):
@@ -48,10 +50,20 @@ def exact_search(indexes, query, confs=None):
         results = [item for item in results if check_conf(item[0], confs)]
     return results
 
+def sort_results(results):
+    def cmp_by_year(x, y):
+        x_year = re.search(r'\d{4}', x[0]).group()
+        y_year = re.search(r'\d{4}', y[0]).group()
+        if x_year < y_year: return 1
+        elif x_year > y_year: return -1
+        else: return 0
+    return sorted(results, key=functools.cmp_to_key(cmp_by_year))
+
 def exec_search(indexes, candidates, query, mode, threshold, confs, limit):
     if mode == 'fuzzy':
         results = fuzzy_search(indexes, candidates, query, threshold, confs, limit)
     elif mode == 'exact':
         results = exact_search(indexes, query, confs)
+    results = sort_results(results)
     return results
 
