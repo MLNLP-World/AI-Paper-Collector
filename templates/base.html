@@ -1,0 +1,14 @@
+{% extends "bootstrap/base.html" %}
+{% block head %}
+    <link rel="stylesheet" href="static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="static/css/main.css">
+
+
+    <title>{% block title %}{% endblock %} - AI Paper Collector</title>
+{% endblock %}
+{% block footer %}
+    <div id="footer">
+        <p>&copy; {{ current_year }}</p>
+    </div>
+{% endblock %}
