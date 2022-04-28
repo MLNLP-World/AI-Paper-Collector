@@ -45,7 +45,7 @@ def search_from_acl(url, tag, name, res):
                 pdb.set_trace()
             res[name].append({"paper_name":paper,
                               'paper_url': paper_url,
-                              "paper_pdf": paper_pdf_str,
+                              # "paper_pdf": paper_pdf_str,
                               })
     #         "paper_code": paper_code_str
     return res
