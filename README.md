@@ -41,6 +41,7 @@ Support fuzzy and exact search for paper titles.
 - [SIGIR 2019-2021] [KDD 2019-2021] [CIKM 2019-2021] [WSDM 2019-2022]
 - [WWW 2019-2021] [ECIR 2019-2022] [NIPS 2019-2021] [ICASSP 2019-2021]
 - [ISWC 2019-2021] [MLSys 2020-2022] [JMLR 2019-2022] [VLDB 2019-2021]
+- [COLT 2019-2021] [AISTATS 2019-2021]
 ```
 ## <img src="https://cdn.jsdelivr.net/gh/LightChen233/blog-img/resource.png" width="25" /> Installation
 
