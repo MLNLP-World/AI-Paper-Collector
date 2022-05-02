@@ -342,5 +342,29 @@
     {
         "name": "VLDB2021",
         "url": "https://dblp.org/db/journals/pvldb/pvldb15.html"
+    },
+    {
+        "name": "COLT2021",
+        "url": "https://dblp.org/db/conf/colt/colt2021.html"
+    },
+    {
+        "name": "COLT2020",
+        "url": "https://dblp.org/db/conf/colt/colt2020.html"
+    },
+    {
+        "name": "COLT2019",
+        "url": "https://dblp.org/db/conf/colt/colt2019.html"
+    },
+    {
+        "name": "AISTATS2021",
+        "url": "https://dblp.org/db/conf/aistats/aistats2021.html"
+    },
+    {
+        "name": "AISTATS2020",
+        "url": "https://dblp.org/db/conf/aistats/aistats2020.html"
+    },
+    {
+        "name": "AISTATS2019",
+        "url": "https://dblp.org/db/conf/aistats/aistats2019.html"
     }
 ]
