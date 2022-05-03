@@ -75,14 +75,13 @@ def search(query, confs, year, limit=None):
     results = {}
     for conf in confs:
         conf_results = {}
-        for year in range(int(year), datetime.datetime.now(cn).year + 1):
-            if str(year) not in cache_data[conf].keys():
+        for conf_year in cache_data[conf].keys():
+            if year is not None and int(conf_year) < year:
                 continue
-            if year not in conf_results.keys():
-                conf_results[year] = []
-            for paper in cache_data[conf][str(year)]:
+            conf_results[conf_year] = []
+            for paper in cache_data[conf][conf_year]:
                 if query in paper['title_format']:
-                    conf_results[year].append(paper['title'])
+                    conf_results[conf_year].append(paper['title'])
         results[conf.upper()] = conf_results
     return results
 
@@ -133,9 +132,9 @@ def result():
         confs = [x.upper() for x in confs]
         confs = [x for x in confs if x in support_confs]
 
-    # print(query, confs, year)
+    print(query, confs, year)
     results = search(query, confs, year, None)
-    # print(results)
+    print(results)
     return render_template('result.html',
                            confs=support_confs,
                            last_query=last_query,
