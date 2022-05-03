@@ -22,32 +22,27 @@ app.config['TEMPLATES_AUTO_RELOAD'] = True
 
 base_dir = os.path.dirname(os.path.abspath(__file__))
 
-db_conn = None
-db_path = os.path.join(base_dir, 'cache', 'data.db')
-
 cache_json = os.path.join(base_dir, 'cache', 'cache.json')
+cache_data = {}
 support_confs = []
 
 
-def init_db():
-    if os.path.exists(db_path):
-        os.remove(db_path)
-        print('Remove old database')
-    global db_conn
-    db_conn = sqlite3.connect(db_path, check_same_thread=False)
-    cur = db_conn.cursor()
-    cur.execute(
-        'create table papers (conf text, year integer, title text, title_format text, url text, primary key(conf, year, title))'
-    )
-    db_conn.commit()
-    cur.close()
+def add_item(item: dict):
+    # print(item)
+    if item['conf'] not in cache_data.keys():
+        cache_data[item['conf']] = {}
+    if item['year'] not in cache_data[item['conf']].keys():
+        cache_data[item['conf']][item['year']] = []
+    cache_data[item['conf']][item['year']].append({
+        'title': item['title'],
+        'title_format': item['title_format']
+    })
 
 
-def json2db():
+def load_data():
     with open(cache_json, 'r') as f:
         data = json.load(f)
 
-    cur = db_conn.cursor()
     for conf in data:
         year = re.search(r'\d{4}', conf).group()
         # cut by year
@@ -57,18 +52,19 @@ def json2db():
 
         for paper in data[conf]:
             # print(conf_name, year, paper)
-            cur.execute(
-                'insert or ignore into papers values (?, ?, ?, ?, ?)',
-                (conf_name, int(year), paper, re.sub('-', ' ', re.sub(r'\s+', ' ', paper)), ''))
-        db_conn.commit()
-    cur.close()
+            add_item({
+                'conf': conf_name.upper(),
+                'year': year,
+                'title': paper,
+                'title_format': re.sub('-', ' ', re.sub('\s+', ' ', paper)).lower()
+            })
 
     support_confs.sort()
 
 
 def prepare():
-    init_db()
-    json2db()
+    load_data()
+    # print(cache_data)
 
 
 prepare()
@@ -76,18 +72,18 @@ prepare()
 
 def search(query, confs, year, limit=None):
     # search in database
-    cur = db_conn.cursor()
     results = {}
     for conf in confs:
         conf_results = {}
-        for row in cur.execute(
-                'select year, title from papers where conf=? and year>=? and title_format like ? order by year desc',
-            (conf, year, '%' + query + '%')):
+        for year in range(int(year), datetime.datetime.now(cn).year + 1):
+            if str(year) not in cache_data[conf].keys():
+                continue
             if year not in conf_results.keys():
-                conf_results[row[0]] = []
-            conf_results[row[0]].append(row[1])
+                conf_results[year] = []
+            for paper in cache_data[conf][str(year)]:
+                if query in paper['title_format']:
+                    conf_results[year].append(paper['title'])
         results[conf.upper()] = conf_results
-    cur.close()
     return results
 
 
@@ -105,6 +101,8 @@ def result():
         return render_template('index.html',
                                confs=support_confs,
                                year_now=datetime.datetime.now(cn).year)
+    else:
+        query = query.strip().lower()
 
     # mode = request.form.get('mode') or 'exact'
     # if mode not in ['fuzzy', 'exact']:
@@ -126,7 +124,7 @@ def result():
     if year is not None:
         year = int(year)
     else:
-        year = 0
+        year = 2000
 
     confs = request.form.getlist('confs') or None
     if confs is not None:
@@ -140,7 +138,6 @@ def result():
                            results=results,
                            confs=support_confs,
                            year_now=datetime.datetime.now(cn).year)
-
 
 
 if __name__ == '__main__':
