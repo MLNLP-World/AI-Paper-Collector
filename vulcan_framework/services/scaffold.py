@@ -47,14 +47,14 @@ class AIPaperCollector:
 
     @staticmethod
     def query(
-            content: str,
-            mode: Optional[str] = "exact",
-            threshold: Optional[int] = 50,
-            limit: Optional[int] = None,
-            conf: Optional[str] = None,
-            output: Optional[str] = None,
-            force: Optional[bool] = False,
-            **kwargs,
+        content: str,
+        mode: Optional[str] = "exact",
+        threshold: Optional[int] = 50,
+        limit: Optional[int] = None,
+        conf: Optional[str] = None,
+        output: Optional[str] = None,
+        force: Optional[bool] = False,
+        **kwargs,
     ):
         """
         Query to search for.

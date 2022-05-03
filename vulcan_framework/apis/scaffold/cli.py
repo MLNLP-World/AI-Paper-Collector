@@ -10,13 +10,13 @@ from services.settings import logger
 
 @logger.catch()
 def query(
-        content: str,
-        mode: Optional[str] = "exact",
-        threshold: Optional[int] = 50,
-        limit: Optional[int] = None,
-        conf: Optional[str] = None,
-        output: Optional[str] = None,
-        force: Optional[bool] = False,
+    content: str,
+    mode: Optional[str] = "exact",
+    threshold: Optional[int] = 50,
+    limit: Optional[int] = None,
+    conf: Optional[str] = None,
+    output: Optional[str] = None,
+    force: Optional[bool] = False,
 ):
     # except: ModuleNotFoundError
     from constant import init
