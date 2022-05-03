@@ -71,6 +71,9 @@ def prepare():
     json2db()
 
 
+prepare()
+
+
 def search(query, confs, year, limit=None):
     # search in database
     cur = db_conn.cursor()
@@ -140,5 +143,4 @@ def result():
 
 
 if __name__ == '__main__':
-    prepare()
     app.run(debug=True, host='0.0.0.0', port=5000, use_reloader=False)
