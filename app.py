@@ -102,6 +102,7 @@ def result():
                                confs=support_confs,
                                year_now=datetime.datetime.now(cn).year)
     else:
+        last_query = query
         query = query.strip().lower()
         query = re.sub('-', ' ', re.sub('\s+', ' ', query))
 
@@ -136,9 +137,10 @@ def result():
     results = search(query, confs, year, None)
     # print(results)
     return render_template('result.html',
-                           results=results,
                            confs=support_confs,
-                           year_now=datetime.datetime.now(cn).year)
+                           last_query=last_query,
+                           year_now=datetime.datetime.now(cn).year,
+                           json_data=json.dumps(results))
 
 
 if __name__ == '__main__':
