@@ -115,7 +115,7 @@
                                     </div>
 
                                     <div class="col-xs-8">
-                                        <div class="row">
+                                        <div class="row" id="conf-list">
                                             {% for conf in confs %}
                                             <fieldset class="col-xs-12 col-sm-6">
                                                 <input type="checkbox" name="confs" value="{{ conf }}"
@@ -124,6 +124,10 @@
                                             </fieldset>
                                             {% endfor %}
                                         </div>
+
+                                        <button type="button" class="btn btn-link" id="conf-select-all">all</button>
+                                        <button type="button" class="btn btn-link" id="conf-select-none">none</button>
+                                        <button type="button" class="btn btn-link" id="conf-invert">invert</button>
                                     </div>
                                 </div>
 

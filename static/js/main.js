@@ -48,3 +48,17 @@ $('#research-button').click(function() {
 		update_result(data);
 	}
 });
+
+$('#conf-select-all').click(function() {
+	$('input[name="confs"]').prop('checked', true);
+});
+
+$('#conf-select-none').click(function() {
+	$('input[name="confs"]').prop('checked', false);
+});
+
+$('#conf-invert').click(function() {
+	$('input[name="confs"]').each(function() {
+		$(this).prop('checked', !$(this).prop('checked'));
+	});
+});
