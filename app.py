@@ -103,6 +103,7 @@ def result():
                                year_now=datetime.datetime.now(cn).year)
     else:
         query = query.strip().lower()
+        query = re.sub('-', ' ', re.sub('\s+', ' ', query))
 
     # mode = request.form.get('mode') or 'exact'
     # if mode not in ['fuzzy', 'exact']:
