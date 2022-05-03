@@ -40,7 +40,8 @@ Support fuzzy and exact search for paper titles.
 - [ICLR 2019-2022] [ICML 2019-2021] [AAAI 2019-2021] [IJCAI 2019-2021]
 - [SIGIR 2019-2021] [KDD 2019-2021] [CIKM 2019-2021] [WSDM 2019-2022]
 - [WWW 2019-2021] [ECIR 2019-2022] [NIPS 2019-2021] [ICASSP 2019-2021]
-- [ISWC 2019-2021] [MLSys 2020-2022]
+- [ISWC 2019-2021] [MLSys 2020-2022] [JMLR 2019-2022] [VLDB 2019-2021]
+- [COLT 2019-2021] [AISTATS 2019-2021]
 ```
 ## <img src="https://cdn.jsdelivr.net/gh/LightChen233/blog-img/resource.png" width="25" /> Installation
 
@@ -149,7 +150,7 @@ We will check and label it, then the workflow will run automatically.
 # force to update the cache file incrementally
 python cli_main.py --query '' --force
 ```
-## Disclaimer
+## <img src="https://cdn.jsdelivr.net/gh/LightChen233/blog-img/disclaimer2.png" width="25" /> Disclaimer
 Since the tool is in the development stage, we can not guarantee that the papers found will meet your needs. I hope for your understanding. In addition, all the results come from [DBLP](https://dblp.org/), [ACL](https://aclanthology.org/), [NIPS](https://papers.nips.cc/), [OpenReview](https://openreview.net/), if this violates your copyright, you can contact us at any time, we will delete it as soon as possible, thank you:)
 
 ## <img src="./pics/icon/organizer.png" width="25" />Organizers
