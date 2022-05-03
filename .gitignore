@@ -133,3 +133,8 @@ dmypy.json
 
 .idea
 output/*
+vulcan_framework/database/cookies
+vulcan_framework/database/logs
+vulcan_framework/database/temp_cache
+vulcan_framework/model
+tests/
