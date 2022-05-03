@@ -9,7 +9,9 @@
     </div>
     <div class="container">
         <div class="list-group">
-            {% for result in results %}
+            {% for conf in results.keys() %}
+            {% for year in results[conf] %}
+            {% for paper in results[conf][year] %}
             <div class="panel panel-default list-group-item">
                 <div class="panel-body">
                     <div class="media">
@@ -19,14 +21,16 @@
                             </a>
                         </div> -->
                         <div class="media-body">
-                            <h4 class="media-heading">{{ result[1] }}</h4>
-                            <p class="media-item">{{ result[0] }}, {{ result[2] }}</p>
-                            <p class="media-item"><a>[link]</a> <a>[code]</a> <a>[project]</a></p>
+                            <h4 class="media-heading">{{ paper }}</h4>
+                            <p class="media-item">{{ conf }}{{ year }}</p>
+                            <!-- <p class="media-item"><a>[link]</a> <a>[code]</a> <a>[project]</a></p> -->
                         </div>
                     </div>
                 </div>
             </div>
-            {% endfor %}          
+            {% endfor %} 
+            {% endfor %} 
+            {% endfor %} 
 
         </div>
 
