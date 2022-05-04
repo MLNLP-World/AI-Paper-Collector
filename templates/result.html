@@ -22,7 +22,12 @@
             console.log(data);
 
             var tab_html = '<ul class="nav nav-tabs" role="tablist">';
-            var tab_content_html = '<div class="tab-content">';
+            tab_html += '<li role="presentation"><a href="#all" aria-controls="all" role="tab" data-toggle="tab">All</a></li>';
+            var tab_content_html = '';
+            var all_html = '<div role="tabpanel" class="tab-pane tab-body" id="all">';
+            all_html += '<div class="list-group">';
+
+            var count = 0;
 
             for (var conf in data[0]) {
                 var flag = false;
@@ -32,16 +37,21 @@
                     for (var i in data[0][conf][year]) {
                         var title = data[0][conf][year][i];
                         flag = true;
-                        conf_html += '<div class="panel panel-default list-group-item">';
-                        conf_html += '<div class="panel-body">';
-                        conf_html += '<div class="media">';
-                        conf_html += '<div class="media-body">';
-                        conf_html += '<h4 class="media-heading">' + title + '</h4>';
-                        conf_html += '<p class="media-item">' + conf + year + '</p>';
-                        conf_html += '</div>';
-                        conf_html += '</div>';
-                        conf_html += '</div>';
-                        conf_html += '</div>';
+                        var item_html = '';
+                        item_html += '<div class="panel panel-default list-group-item">';
+                        item_html += '<div class="panel-body">';
+                        item_html += '<div class="media">';
+                        item_html += '<div class="media-body">';
+                        item_html += '<h4 class="media-heading">' + title + '</h4>';
+                        item_html += '<p class="media-item">' + conf + year + '</p>';
+                        item_html += '</div>';
+                        item_html += '</div>';
+                        item_html += '</div>';
+                        item_html += '</div>';
+
+                        all_html += item_html;
+                        conf_html += item_html;
+                        count++;
 
                     }
                 }
@@ -52,13 +62,24 @@
                     tab_content_html += conf_html;
                 }
             }
-            
-            tab_content_html += '</div>';
+
+            all_html += '</div>';
+            all_html += '</div>';
+            tab_content_html = '<div class="tab-content">' + all_html + tab_content_html + '</div>';
 
             tab_html += '</ul>';
             // console.log(tab_html);
             // console.log(tab_content_html);
-            $('#result-list-group').html(tab_html + tab_content_html);
+            
+            var prompt_html = '';
+            if (count == 0) {
+                prompt_html = '<div class="alert alert-warning text-center" role="alert">No result found.</div>';
+            }
+            else {
+                prompt_html = '<div class="alert alert-success text-center" role="alert">' + count + ' result(s) found.</div>';
+            }
+
+            $('#result-list-group').html(prompt_html + tab_html + tab_content_html);
             $('#result-list-group .tab-body').first().addClass('active');
             $('#result-list-group .nav-tabs li').first().addClass('active');
         }
