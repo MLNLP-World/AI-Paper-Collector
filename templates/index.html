@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<div class="container fill">
+    <div class="row vertical-center">
+        {% include "search.html" %}
+    </div>
+</div>
+
+<script src="static/js/vendor/jquery-1.11.2.min.js"></script>
+<script src="static/js/vendor/bootstrap.min.js"></script>
+<script src="static/js/main.js"></script>
+{% endblock %}
