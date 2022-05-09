@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-# Time       : 2022/4/30 14:58
-# Description: 应用接口层
 from typing import Optional
 
 from apis.scaffold import cli
