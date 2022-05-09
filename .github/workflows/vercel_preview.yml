@@ -3,10 +3,12 @@ on:
   pull_request:
     branches:
       - main
-  pull_request_target:
+    types:
+      - labeled
 
 jobs:
   deploy:
+    if: github.event.label.name == 'approve to run'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
