@@ -1,0 +1,27 @@
+name: deploy website preview
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: set up production
+        uses: amondnet/vercel-action@v20
+        id: vercel-action-prod
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.ORG_ID }}
+          vercel-project-id: ${{ secrets.PROJECT_ID }}
+          working-directory: ./
+          vercel-args: "--prod" # Optional
+          github-comment: false
+
+      - name: preview-url
+        run: |
+          echo ${{ steps.vercel-action-prod.outputs.preview-url }}
