@@ -1,7 +1,5 @@
 import warnings
 
-from unicodedata import category
-
 from crawler import do_crawl
 from searcher import build_index
 
