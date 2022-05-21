@@ -134,3 +134,4 @@ dmypy.json
 .idea
 output/*
 *.db
+test/
