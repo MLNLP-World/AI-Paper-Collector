@@ -58,5 +58,15 @@
         "name": "NAACL2019",
         "tag": "^/N19-*",
         "url": "https://aclanthology.org/events/naacl-2019/"
+    },
+    {
+        "name": "ACL2022",
+        "url": "https://aclanthology.org/events/acl-2022/",
+        "tag": "^/2022.acl*"
+    },
+    {
+        "name": "ACL2022 findings",
+        "url": "https://aclanthology.org/volumes/2022.findings-acl/",
+        "tag": "^/2022.findings*"
     }
 ]
