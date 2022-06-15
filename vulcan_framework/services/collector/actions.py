@@ -1,0 +1,2 @@
+ActionNIPSCrawler = {}
+__entropy__ = []
