@@ -77,7 +77,7 @@ def search_from_dblp(url, name, res):
     return res
 
 
-def crawl(cache_file=None):
+def crawl(cache_file=None, force=False):
     res = {}
 
     acl_conf = json.load(open("conf/acl_conf.json", "r"))
@@ -87,7 +87,7 @@ def crawl(cache_file=None):
 
     cache_conf = []
     cache_res = {}
-    if cache_file is not None and os.path.exists(cache_file):
+    if not force and cache_file is not None and os.path.exists(cache_file):
         # incremental update
         cache_res = json.load(open(cache_file, "r"))
         cache_conf = [name for name in cache_res.keys()]
