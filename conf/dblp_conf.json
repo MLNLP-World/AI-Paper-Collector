@@ -374,5 +374,9 @@
     {
         "name": "Interspeech2019",
         "url": "https://dblp.org/db/conf/interspeech/interspeech2019.html"
+    },
+    {
+        "name": "WWW2022",
+        "url": "https://dblp.org/db/conf/www/www2022.html"
     }
 ]
