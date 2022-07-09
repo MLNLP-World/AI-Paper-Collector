@@ -37,6 +37,14 @@
       <button type="submit" class="btn btn-primary">Search</button>
       {% if last_query %}
       <a id="research-button" class="btn btn-info">Search in Results</a>
+      {% else %}
+      <a
+        id="github-button"
+        class="btn btn-info"
+        href="https://github.com/MLNLP-World/AI-Paper-Collector"
+        target="_blank"
+        >GitHub</a
+      >
       {% endif %}
     </div>
 
@@ -54,7 +62,11 @@
       <p class="text-center">
         You can get more precise results by using advanced setting.
       </p>
+      <p class="text-center">
+        If this project is helpful to you, please give us a ⭐star!
+      </p>
     </div>
+
     {% endif %}
 
     <div class="form-group advanced-search-panel">
