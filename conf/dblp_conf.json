@@ -378,5 +378,13 @@
     {
         "name": "WWW2022",
         "url": "https://dblp.org/db/conf/www/www2022.html"
+    },
+    {
+        "name": "SIGIR2022",
+        "url": "https://dblp.org/db/conf/sigir/sigir2022.html"
+    },
+    {
+        "name": "ICASSP2022",
+        "url": "https://dblp.org/db/conf/icassp/icassp2022.html"
     }
 ]
