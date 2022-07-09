@@ -72,20 +72,30 @@ def prepare():
 prepare()
 
 
-def search(query, confs, year, limit=None):
+def search(query, confs, year, sp_year=None, limit=None):
     # search in database
+    result_count = 0
     results = {}
     for conf in confs:
         conf_results = {}
         if conf not in cache_data.keys():
             continue
         for conf_year in cache_data[conf].keys():
-            if year is not None and int(conf_year) < year:
+            if sp_year is not None and int(conf_year) != sp_year:
+                continue
+            if sp_year is None and year is not None and int(conf_year) < year:
                 continue
             conf_results[conf_year] = []
             for paper in cache_data[conf][conf_year]:
                 if query in paper["title_format"]:
                     conf_results[conf_year].append({"title": paper["title"], "url": paper["url"]})
+                    result_count += 1
+                    if limit is not None and result_count >= limit:
+                        break
+            if limit is not None and result_count >= limit:
+                break
+        if limit is not None and result_count >= limit:
+            break
         results[conf.upper()] = conf_results
     return results
 
@@ -127,13 +137,18 @@ def result():
     else:
         year = 2000
 
+    sp_year = request.form.get("sp_year") or request.args.get("sp_year") or None
+    if sp_year is not None:
+        sp_year = int(sp_year)
+
     confs = request.form.getlist("confs") or request.args.getlist("confs") or None
     if confs is not None:
         confs = [x.upper() for x in confs]
         confs = [x for x in confs if x in support_confs]
 
-    print(query, confs, year)
-    results = search(query, confs, year, None)
+    print("sp_year:", sp_year)
+    print(query, confs, year, sp_year)
+    results = search(query, confs, year, sp_year=sp_year, limit=5000)
     print(results)
     return render_template(
         "result.html",
@@ -145,4 +160,5 @@ def result():
 
 
 if __name__ == "__main__":
-    app.run(debug=True, host="0.0.0.0", port=5000, use_reloader=False)
+    app.run(debug=True, host="0.0.0.0", port=5000, use_reloader=True)
+    # app.run(debug=False, host="0.0.0.0", port=5000, use_reloader=False)
