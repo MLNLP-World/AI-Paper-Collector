@@ -45,7 +45,7 @@ def fuzzy_search(indexes, candidates, query, threshold=None, confs=None, limit=N
 def exact_search(indexes, query, confs=None):
     results = []
     query = query.lower()
-    results = [item for item in indexes if query in item[1].lower()]
+    results = [item for item in indexes if query in item[1]['paper_name'].lower()]
     if confs is not None:
         results = [item for item in results if check_conf(item[0], confs)]
     return results
