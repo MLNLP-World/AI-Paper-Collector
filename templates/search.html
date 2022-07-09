@@ -1,40 +1,67 @@
 {% block search %}
 
-<div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-    <form action="/r" method="post">
-        <div class="form-group text-center">
-            <label for="search-query"><a href="/" class="text-info" style="color:#333">AI-Paper-Search</a></label>
-            {% if last_query %}
-            <input type="text" class="form-control" id="query" name="query" value="{{ last_query }}"
-                placeholder="Input your keywords">
-            {% else %}
-            <input type="text" class="form-control" id="query" name="query" placeholder="Input your keywords">
-            {% endif %}
-        </div>
+<div
+  class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3"
+>
+  <form action="/r" method="get">
+    <div class="form-group text-center">
+      <label for="search-query"
+        ><a href="/" class="text-info" style="color: #333"
+          >AI-Paper-Search</a
+        ></label
+      >
+      {% if last_query %}
+      <input
+        type="text"
+        class="form-control"
+        id="query"
+        name="query"
+        value="{{ last_query }}"
+        placeholder="Input your keywords"
+      />
+      {% else %}
+      <input
+        type="text"
+        class="form-control"
+        id="query"
+        name="query"
+        placeholder="Input your keywords"
+      />
+      {% endif %}
+    </div>
 
-        <div class="form-group text-center">
-            <a id="advanced-search-button" class="btn btn-default">Advanced setting</a>
-            <button type="submit" class="btn btn-primary">Search</button>
-            {% if last_query %}
-            <a id="research-button" class="btn btn-info">Search in Results</a>
-            {% endif %}
-        </div>
+    <div class="form-group text-center">
+      <a id="advanced-search-button" class="btn btn-default"
+        >Advanced setting</a
+      >
+      <button type="submit" class="btn btn-primary">Search</button>
+      {% if last_query %}
+      <a id="research-button" class="btn btn-info">Search in Results</a>
+      {% endif %}
+    </div>
 
-        {% if not last_query %}
-        <div class="alert alert-info alert-dismissible" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-                    aria-hidden="true">&times;</span></button>
-            <strong>Tips!</strong>
-            <p class="text-center">You can get more precise results by using advanced setting.</p>
-        </div>
-        {% endif %}
+    {% if not last_query %}
+    <div class="alert alert-info alert-dismissible" role="alert">
+      <button
+        type="button"
+        class="close"
+        data-dismiss="alert"
+        aria-label="Close"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <strong>Tips!</strong>
+      <p class="text-center">
+        You can get more precise results by using advanced setting.
+      </p>
+    </div>
+    {% endif %}
 
-        <div class="form-group advanced-search-panel">
-            <div class="panel panel-default">
-                <ul class="list-group">
-
-                    <!-- add options here -->
-                    <!-- <li class="list-group-item">
+    <div class="form-group advanced-search-panel">
+      <div class="panel panel-default">
+        <ul class="list-group">
+          <!-- add options here -->
+          <!-- <li class="list-group-item">
                         <div class="form-group">
                             <div class="col-xs-4">
                                 <label for="mode">Mode</label>
@@ -55,7 +82,7 @@
                         <div class="clearfix"></div>
                     </li> -->
 
-                    <!-- <li class="list-group-item">
+          <!-- <li class="list-group-item">
                         <div class="form-group">
                             <div class="col-xs-4">
                                 <label for="limit">Limit</label>
@@ -78,28 +105,32 @@
                         </div>
                     </li> -->
 
-                    <li class="list-group-item">
-                        <div class="form-group">
-                            <div class="col-xs-4">
-                                <label for="year">Years</label>
-                            </div>
+          <li class="list-group-item">
+            <div class="form-group">
+              <div class="col-xs-4">
+                <label for="year">Years</label>
+              </div>
 
-                            <div class="col-xs-8">
-                                <div class="row">
-                                    <select class="form-control" id="year" name="year">
-                                        <option value="{{ year_now }}">Since {{ year_now }} </option>
-                                        <option value="{{ year_now - 3 }}">Since {{ year_now - 3 }} </option>
-                                        <option value="{{ year_now - 5 }}">Since {{ year_now - 5 }} </option>
-                                        <option value="" selected>All</option>
-                                    </select>
-                                </div>
-                            </div>
+              <div class="col-xs-8">
+                <div class="row">
+                  <select class="form-control" id="year" name="year">
+                    <option value="{{ year_now }}">Since {{ year_now }}</option>
+                    <option value="{{ year_now - 3 }}">
+                      Since {{ year_now - 3 }}
+                    </option>
+                    <option value="{{ year_now - 5 }}">
+                      Since {{ year_now - 5 }}
+                    </option>
+                    <option value="" selected>All</option>
+                  </select>
+                </div>
+              </div>
 
-                            <div class="clearfix"></div>
-                        </div>
-                    </li>
+              <div class="clearfix"></div>
+            </div>
+          </li>
 
-                    <!-- <li class="list-group-item">
+          <!-- <li class="list-group-item">
                         <div class="form-group">
                             <div class="col-xs-4">
                                 <label for="threshold">Threshold</label>
@@ -117,38 +148,51 @@
                         </div>
                     </li> -->
 
-                    <li class="list-group-item">
-                        <div class="form-group">
-                            <div class="col-xs-4">
-                                <label for="confs">Confs</label>
-                            </div>
+          <li class="list-group-item">
+            <div class="form-group">
+              <div class="col-xs-4">
+                <label for="confs">Confs</label>
+              </div>
 
-                            <div class="col-xs-8">
-                                <div class="row" id="conf-list">
-                                    {% for conf in confs %}
-                                    <fieldset class="col-xs-12 col-sm-6">
-                                        <input type="checkbox" name="confs" value="{{ conf }}" autocomplete="off"
-                                            checked>
-                                        {{ conf }}
-                                    </fieldset>
-                                    {% endfor %}
-                                </div>
+              <div class="col-xs-8">
+                <div class="row" id="conf-list">
+                  {% for conf in confs %}
+                  <fieldset class="col-xs-12 col-sm-6">
+                    <input
+                      type="checkbox"
+                      name="confs"
+                      value="{{ conf }}"
+                      autocomplete="off"
+                      checked
+                    />
+                    {{ conf }}
+                  </fieldset>
+                  {% endfor %}
+                </div>
 
-                                <button type="button" class="btn btn-link" id="conf-select-all">all</button>
-                                <button type="button" class="btn btn-link" id="conf-select-none">none</button>
-                                <button type="button" class="btn btn-link" id="conf-invert">invert</button>
-                            </div>
-                        </div>
-
-                        <div class="clearfix"></div>
-                    </li>
-                    <!-- end of options -->
-                </ul>
-
+                <button type="button" class="btn btn-link" id="conf-select-all">
+                  all
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-link"
+                  id="conf-select-none"
+                >
+                  none
+                </button>
+                <button type="button" class="btn btn-link" id="conf-invert">
+                  invert
+                </button>
+              </div>
             </div>
-        </div>
-    </form>
 
+            <div class="clearfix"></div>
+          </li>
+          <!-- end of options -->
+        </ul>
+      </div>
+    </div>
+  </form>
 </div>
 
 {% endblock %}
