@@ -386,5 +386,9 @@
     {
         "name": "VLDB2021",
         "url": "https://dblp.org/db/journals/pvldb/pvldb15.html"
+    },
+    {
+        "name": "ICML2022",
+        "url": "https://dblp.org/db/conf/icml/icml2022.html"
     }
 ]
