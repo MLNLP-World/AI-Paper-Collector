@@ -36,7 +36,7 @@ def add_list(args):
     info = parse_issue(args.issue)
     re_info = {}
     for item in info:
-        assert item.get("source") in ["nips", "acl", "dblp", "iclr"]
+        assert item.get("source") in ["nips", "acl", "dblp", "iclr", "thecvf"]
         source = item.get("source")
         if source not in re_info:
             re_info[source] = []
