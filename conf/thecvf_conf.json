@@ -1,2 +1,10 @@
 [
+    {
+        "name": "CVPR2022",
+        "url": "https://openaccess.thecvf.com/CVPR2022?day=all"
+    },
+    {
+        "name": "ICCV2021",
+        "url": "https://openaccess.thecvf.com/ICCV2021?day=all"
+    }
 ]
