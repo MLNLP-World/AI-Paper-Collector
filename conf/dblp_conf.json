@@ -350,5 +350,45 @@
     {
         "name": "ICML2022",
         "url": "https://dblp.org/db/conf/icml/icml2022.html"
+    },
+    {
+        "name": "ISWC2021",
+        "url": "https://dblp.org/db/conf/semweb/iswc2021.html"
+    },
+    {
+        "name": "ISWC2020",
+        "url": "https://dblp.org/db/conf/semweb/iswc2020.html"
+    },
+    {
+        "name": "ISWC2019",
+        "url": "https://dblp.org/db/conf/semweb/iswc2019.html"
+    },
+    {
+        "name": "JMLR2022",
+        "url": "https://dblp.org/db/journals/jmlr/jmlr22.html"
+    },
+    {
+        "name": "JMLR2021",
+        "url": "https://dblp.org/db/journals/jmlr/jmlr21.html"
+    },
+    {
+        "name": "JMLR2020",
+        "url": "https://dblp.org/db/journals/jmlr/jmlr20.html"
+    },
+    {
+        "name": "JMLR2019",
+        "url": "https://dblp.org/db/journals/jmlr/jmlr19.html"
+    },
+    {
+        "name": "VLDB2019",
+        "url": "https://dblp.org/db/journals/pvldb/pvldb13.html"
+    },
+    {
+        "name": "VLDB2020",
+        "url": "https://dblp.org/db/journals/pvldb/pvldb14.html"
+    },
+    {
+        "name": "VLDB2021",
+        "url": "https://dblp.org/db/journals/pvldb/pvldb15.html"
     }
 ]
