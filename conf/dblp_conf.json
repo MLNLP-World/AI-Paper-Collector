@@ -390,5 +390,17 @@
     {
         "name": "ICML2022",
         "url": "https://dblp.org/db/conf/icml/icml2022.html"
+    },
+    {
+        "name": "ICME2021",
+        "url": "https://dblp.org/db/conf/icmcs/icme2021.html"
+    },
+    {
+        "name": "ICME2020",
+        "url": "https://dblp.org/db/conf/icmcs/icme2020.html"
+    },
+    {
+        "name": "ICME2019",
+        "url": "https://dblp.org/db/conf/icmcs/icme2019.html"
     }
 ]
