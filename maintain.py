@@ -13,6 +13,7 @@ acl_conf_path = os.path.join(os.path.dirname(__file__), "conf", "acl_conf.json")
 dblp_conf_path = os.path.join(os.path.dirname(__file__), "conf", "dblp_conf.json")
 nips_conf_path = os.path.join(os.path.dirname(__file__), "conf", "nips_conf.json")
 iclr_conf_path = os.path.join(os.path.dirname(__file__), "conf", "iclr_conf.json")
+thecvf_conf_path = os.path.join(os.path.dirname(__file__), "conf", "thecvf_conf.json")
 
 
 def generate_new_readme(src: str, content: str, start_comment: str, end_comment: str) -> str:
@@ -39,7 +40,7 @@ def update_readme():
         src = f.read()
 
     confs_list = {}
-    for files in [acl_conf_path, dblp_conf_path, nips_conf_path, iclr_conf_path]:
+    for files in [acl_conf_path, dblp_conf_path, nips_conf_path, iclr_conf_path, thecvf_conf_path]:
         with open(files, "r") as f:
             for conf in json.load(f):
                 # print(conf)
