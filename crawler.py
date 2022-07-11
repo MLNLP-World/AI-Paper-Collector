@@ -63,7 +63,7 @@ def search_from_dblp(url, name, res):
     if name not in res:
         res[name] = []
 
-    for paper_item in soup.find_all("li", class_="inproceedings"):
+    for paper_item in soup.find_all("li", class_="entry"):
         paper_url = paper_item.find("li", class_="drop-down").div.a["href"]
         paper_name = paper_item.find(class_="title", itemprop="name")
         items = [item.string if item.string else item for item in paper_name.contents]
