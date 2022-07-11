@@ -76,6 +76,17 @@ def search_from_dblp(url, name, res):
         res[name].append({"paper_name": paper, "paper_url": paper_url})
     return res
 
+def search_from_thecvf(url, name, res):
+    r = requests.get(url)
+    soup = BeautifulSoup(r.text, "html.parser")
+    if name not in res:
+        res[name] = []
+    for paper_item in soup.find_all("dt", class_="ptitle"):
+        paper_url = "https://openaccess.thecvf.com" + paper_item.a['href']
+        paper = paper_item.a.string
+        res[name].append({"paper_name": paper, "paper_url": paper_url})
+    return res
+
 
 def crawl(cache_file=None, force=False):
     res = {}
@@ -84,6 +95,7 @@ def crawl(cache_file=None, force=False):
     dblp_conf = json.load(open("conf/dblp_conf.json", "r"))
     nips_conf = json.load(open("conf/nips_conf.json", "r"))
     iclr_conf = json.load(open("conf/iclr_conf.json", "r"))
+    thecvf_conf = json.load(open("conf/thecvf_conf.json", "r"))
 
     cache_conf = []
     cache_res = {}
@@ -119,6 +131,13 @@ def crawl(cache_file=None, force=False):
         if name in cache_conf:
             continue
         res = search_from_iclr(url, name, res)
+        
+    for conf in tqdm(thecvf_conf, desc="[+] Crawling openacess.thecvf", dynamic_ncols=True):
+        assert conf.get("name") and conf.get("url")
+        url, name = conf["url"], conf["name"]
+        if name in cache_conf:
+            continue
+        res = search_from_thecvf(url, name, res)
 
     res.update(cache_res)
     return res
