@@ -402,5 +402,9 @@
     {
         "name": "ICME2019",
         "url": "https://dblp.org/db/conf/icmcs/icme2019.html"
+    },
+    {
+        "name": "AAAI2022",
+        "url": "https://dblp.org/db/conf/aaai/aaai2022.html"
     }
 ]
