@@ -418,5 +418,89 @@
     {
         "name": "Interspeech2021",
         "url": "https://dblp.org/db/conf/interspeech/interspeech2021.html"
+    },
+    {
+        "name": "TIP2022",
+        "url": "https://dblp.org/db/journals/tip/tip31.html"
+    },
+    {
+        "name": "TIP2021",
+        "url": "https://dblp.org/db/journals/tip/tip30.html"
+    },
+    {
+        "name": "TIP2020",
+        "url": "https://dblp.org/db/journals/tip/tip29.html"
+    },
+    {
+        "name": "TPAMI2022",
+        "url": "https://dblp.org/db/journals/pami/pami44.html"
+    },
+    {
+        "name": "TPAMI2021",
+        "url": "https://dblp.org/db/journals/pami/pami43.html"
+    },
+    {
+        "name": "TPAMI2020",
+        "url": "https://dblp.org/db/journals/pami/pami42.html"
+    },
+    {
+        "name": "RecSys2021",
+        "url": "https://dblp.org/db/conf/recsys/recsys2021.html"
+    },
+    {
+        "name": "RecSys2020",
+        "url": "https://dblp.org/db/conf/recsys/recsys2020.html"
+    },
+    {
+        "name": "RecSys2019",
+        "url": "https://dblp.org/db/conf/recsys/recsys2019.html"
+    },
+    {
+        "name": "TKDE2022",
+        "url": "https://dblp.org/db/journals/tkde/tkde34.html"
+    },
+    {
+        "name": "TKDE2021",
+        "url": "https://dblp.org/db/journals/tkde/tkde33.html"
+    },
+    {
+        "name": "TKDE2020",
+        "url": "https://dblp.org/db/journals/tkde/tkde32.html"
+    },
+    {
+        "name": "TOIS2022",
+        "url": "https://dblp.org/db/journals/tois/tois40.html"
+    },
+    {
+        "name": "TOIS2021",
+        "url": "https://dblp.org/db/journals/tois/tois39.html"
+    },
+    {
+        "name": "TOIS2020",
+        "url": "https://dblp.org/db/journals/tois/tois38.html"
+    },
+    {
+        "name": "ICDM2021",
+        "url": "https://dblp.org/db/conf/icdm/icdm2021.html"
+    },
+    {
+        "name": "ICDM2020",
+        "url": "https://dblp.org/db/conf/icdm/icdm2020.html"
+    },
+    {
+        "name": "ICDM2019",
+        "url": "https://dblp.org/db/conf/icdm/icdm2019.html"
+    },
+    {
+        "name": "TASLP2022",
+        "url": "https://dblp.org/db/journals/taslp/taslp30.html"
+    },
+    {
+        "name": "TASLP2021",
+        "url": "https://dblp.org/db/journals/taslp/taslp29.html"
+    },
+    {
+        "name": "TASLP2020",
+        "url": "https://dblp.org/db/journals/taslp/taslp28.html"
     }
 ]
