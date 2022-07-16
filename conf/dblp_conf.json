@@ -502,5 +502,17 @@
     {
         "name": "TASLP2020",
         "url": "https://dblp.org/db/journals/taslp/taslp28.html"
+    },
+    {
+        "name": "BMVC2021",
+        "url": "https://dblp.org/db/conf/bmvc/bmvc2021.html"
+    },
+    {
+        "name": "BMVC2020",
+        "url": "https://dblp.org/db/conf/bmvc/bmvc2020.html"
+    },
+    {
+        "name": "BMVC2019",
+        "url": "https://dblp.org/db/conf/bmvc/bmvc2019.html"
     }
 ]
