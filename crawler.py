@@ -35,11 +35,16 @@ def search_from_nips(url, name, res):
     url_prefix = "https://" + url[8:].split("/")[0]
     for paper_item in soup.find(class_="col").ul.find_all("li"):
         paper_url = url_prefix + paper_item.a["href"]
+        if paper_item.i.string is not None:
+            paper_author = [author.strip() for author in paper_item.i.string.split(',')]
+        else:
+            paper_author = []
+
         res[name].append(
             {
                 "paper_name": paper_item.a.string, 
                 "paper_url": paper_url,
-                "paper_authors": [author.strip() for author in paper_item.i.string.split(',')],
+                "paper_authors": paper_author,
                 "paper_abstract": "",
             }
         )
@@ -145,13 +150,6 @@ def crawl(cache_file=None, force=False):
             continue
         res = search_from_acl(url, tag, name, res)
 
-    for conf in tqdm(dblp_conf, desc="[+] Crawling DBLP", dynamic_ncols=True):
-        assert conf.get("name") and conf.get("url")
-        url, name = conf["url"], conf["name"]
-        if name in cache_conf:
-            continue
-        res = search_from_dblp(url, name, res)
-
     for conf in tqdm(nips_conf, desc="[+] Crawling NeurIPS", dynamic_ncols=True):
         assert conf.get("name") and conf.get("url")
         url, name = conf["url"], conf["name"]
@@ -172,6 +170,13 @@ def crawl(cache_file=None, force=False):
         if name in cache_conf:
             continue
         res = search_from_thecvf(url, name, res)
+        
+    for conf in tqdm(dblp_conf, desc="[+] Crawling DBLP", dynamic_ncols=True):
+        assert conf.get("name") and conf.get("url")
+        url, name = conf["url"], conf["name"]
+        if name in cache_conf:
+            continue
+        res = search_from_dblp(url, name, res)
 
     res.update(cache_res)
     return res
