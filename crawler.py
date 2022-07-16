@@ -17,7 +17,12 @@ def search_from_iclr(url, name, res):
         res[name] = []
     for item in data["notes"]:
         res[name].append(
-            {"paper_name": item["content"]["title"], "paper_url": "https://openreview.net" + item["content"]["pdf"]}
+            {
+                "paper_name": item["content"]["title"], 
+                "paper_url": "https://openreview.net" + item["content"]["pdf"],
+                "paper_authors": item["content"]["authors"],
+                "paper_abstract": item['content']['abstract'],
+            }
         )
     return res
 
@@ -28,8 +33,16 @@ def search_from_nips(url, name, res):
     if name not in res:
         res[name] = []
     url_prefix = "https://" + url[8:].split("/")[0]
-    for paper_item in soup.find(class_="col").ul.find_all("a"):
-        res[name].append({"paper_name": paper_item.string, "paper_url": url_prefix + paper_item["href"]})
+    for paper_item in soup.find(class_="col").ul.find_all("li"):
+        paper_url = url_prefix + paper_item.a["href"]
+        res[name].append(
+            {
+                "paper_name": paper_item.a.string, 
+                "paper_url": paper_url,
+                "paper_authors": [author.strip() for author in paper_item.i.string.split(',')],
+                "paper_abstract": "",
+            }
+        )
     return res
 
 
@@ -42,17 +55,16 @@ def search_from_acl(url, tag, name, res):
         cls = tp.find("strong")
         for paper_item in cls.find_all(href=re.compile(tag), class_="align-middle"):
             items = [item.string if item.string else item for item in paper_item.contents]
-            try:
-                paper = "".join([item for item in items if isinstance(item, str)])
-                paper_url = "https://aclanthology.org" + paper_item["href"]
-            except:
-                import pdb
 
-                pdb.set_trace()
+            paper = "".join([item for item in items if isinstance(item, str)])
+            paper_url = "https://aclanthology.org" + paper_item["href"]
+
             res[name].append(
                 {
                     "paper_name": paper,
                     "paper_url": paper_url,
+                    "paper_authors": [author.string for author in tp.find_all('a', href=re.compile("people/"))],
+                    "paper_abstract": tp.next_sibling.string if tp.next_sibling.string is not None else "",
                 }
             )
     return res
@@ -67,14 +79,18 @@ def search_from_dblp(url, name, res):
     for paper_item in soup.find_all("li", class_="entry"):
         paper_url = paper_item.find("li", class_="drop-down").div.a["href"]
         paper_name = paper_item.find(class_="title", itemprop="name")
+        paper_authors = [
+            re.sub('\d', '', author['title']).strip() for author in paper_item.find_all(class_=None, itemprop="name")]
         items = [item.string if item.string else item for item in paper_name.contents]
-        try:
-            paper = "".join([item for item in items if isinstance(item, str)])
-        except:
-            import pdb
-
-            pdb.set_trace()
-        res[name].append({"paper_name": paper, "paper_url": paper_url})
+        paper = "".join([item for item in items if isinstance(item, str)])
+        res[name].append(
+            {
+                "paper_name": paper, 
+                "paper_url": paper_url,
+                "paper_authors": paper_authors,
+                "paper_abstract": "",
+            }
+        )
     return res
 
 
@@ -83,10 +99,19 @@ def search_from_thecvf(url, name, res):
     soup = BeautifulSoup(r.text, "html.parser")
     if name not in res:
         res[name] = []
+        
     for paper_item in soup.find_all("dt", class_="ptitle"):
         paper_url = "https://openaccess.thecvf.com" + paper_item.a["href"]
         paper = paper_item.a.string
-        res[name].append({"paper_name": paper, "paper_url": paper_url})
+        paper_authors = [author.string for author in paper_item.next_sibling.next_sibling.find_all('a', href='#')]
+        res[name].append(
+            {
+                "paper_name": paper, 
+                "paper_url": paper_url,
+                "paper_authors": paper_authors,
+                "paper_abstract": "",
+            }
+        )
     return res
 
 
