@@ -58,13 +58,17 @@ def search_from_acl(url, tag, name, res):
 
             paper = "".join([item for item in items if isinstance(item, str)])
             paper_url = "https://aclanthology.org" + paper_item["href"]
-
+            if tp.next_sibling is not None and tp.next_sibling.string is not None:
+                paper_abstract = tp.next_sibling.string
+            else:
+                paper_abstract = ""
+            
             res[name].append(
                 {
                     "paper_name": paper,
                     "paper_url": paper_url,
                     "paper_authors": [author.string for author in tp.find_all('a', href=re.compile("people/"))],
-                    "paper_abstract": tp.next_sibling.string if tp.next_sibling.string is not None else "",
+                    "paper_abstract": paper_abstract,
                 }
             )
     return res
