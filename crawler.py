@@ -83,8 +83,11 @@ def search_from_dblp(url, name, res):
     for paper_item in soup.find_all("li", class_="entry"):
         paper_url = paper_item.find("li", class_="drop-down").div.a["href"]
         paper_name = paper_item.find(class_="title", itemprop="name")
+
         paper_authors = [
-            re.sub('\d', '', author['title']).strip() for author in paper_item.find_all(class_=None, itemprop="name")]
+            re.sub("\d", "", author["title"]).strip()
+            for author in paper_item.find_all(class_=None, itemprop="name") if author.has_attr("title")]
+
         items = [item.string if item.string else item for item in paper_name.contents]
         paper = "".join([item for item in items if isinstance(item, str)])
         res[name].append(
