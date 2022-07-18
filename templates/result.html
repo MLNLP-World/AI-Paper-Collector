@@ -4,10 +4,8 @@ content %}
   <div class="container">
     <div class="row">{% include "search.html" %}</div>
   </div>
-  <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
-  <!-- <script src="static/js/vendor/jquery-1.11.2.min.js"></script> -->
-  <script src="static/js/vendor/bootstrap.min.js"></script>
-  <script src="static/js/main.js"></script>
+
+  <script src="/static/js/main.js"></script>
   <script>
     var data = eval('[' + {{ json_data| tojson }} +']');
     // console.log(data);
@@ -15,8 +13,9 @@ content %}
         update_result(data);
     });
   </script>
+
   <div class="container">
     <div class="list-group" id="result-list-group"></div>
   </div>
-  {% endblock %}
 </div>
+{% endblock %}

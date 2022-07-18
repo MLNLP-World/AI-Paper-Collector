@@ -42,6 +42,26 @@ function update_result(data) {
       for (var i in data[0][conf][year]) {
         var title = data[0][conf][year][i]["title"];
         var url = data[0][conf][year][i]["url"];
+        var authors = data[0][conf][year][i]["authors"];
+        var abstract = data[0][conf][year][i]["abstract"];
+        if (abstract == null || abstract == "") {
+          abstract = "No abstract available";
+        }
+
+        var author_html = "";
+        for (var j in authors) {
+          author_html += '<li class="author-item">' + authors[j] + "</li>";
+        }
+        author_html = '<ul class="authors">' + author_html + "</ul>";
+
+        var abstract_button = `
+        <a class="abstract" href="#abs-${i}-${conf}${year}" data-toggle="collapse" data-target="#abs-${i}-${conf}${year}" aria-expanded="false" aria-controls="abs-${i}-${conf}${year}">abstract</a>`;
+
+        var abstract_item = `
+        <div id="abs-${i}-${conf}${year}" class="collapse">
+        <div class="abstract-item">${abstract}</div>
+        </div>`;
+
         flag = true;
         var item_html = "";
         item_html += '<div class="panel panel-default list-group-item">';
@@ -51,7 +71,10 @@ function update_result(data) {
         item_html += '<a href="' + url + '" target="_blank">';
         item_html += '<h4 class="media-heading">' + title + "</h4>";
         item_html += "</a>";
-        item_html += '<p class="media-item">' + conf + year + "</p>";
+        item_html += abstract_button;
+        item_html += author_html;
+        item_html += abstract_item;
+        item_html += '<p class="media-item"><span class="label label-success">' + conf + year + "</span></p>";
         item_html += "</div>";
         item_html += "</div>";
         item_html += "</div>";

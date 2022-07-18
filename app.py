@@ -19,6 +19,8 @@ template_folder = "templates"
 # LICENCE: MIT
 
 app.config["TEMPLATES_AUTO_RELOAD"] = True
+app.config["CACHE_TYPE"] = "null"
+app.config['BOOTSTRAP_SERVE_LOCAL'] = True
 
 base_dir = os.path.dirname(os.path.abspath(__file__))
 
@@ -34,7 +36,13 @@ def add_item(item: dict):
     if item["year"] not in cache_data[item["conf"]].keys():
         cache_data[item["conf"]][item["year"]] = []
     cache_data[item["conf"]][item["year"]].append(
-        {"title": item["title"], "title_format": item["title_format"], "url": item["url"]}
+        {
+            "title": item["title"], 
+            "title_format": item["title_format"],
+            "url": item["url"],
+            "authors": item["authors"],
+            "abstract": item["abstract"],
+        }
     )
 
 
@@ -58,6 +66,8 @@ def load_data():
                     "title": paper["paper_name"],
                     "title_format": re.sub("-", " ", re.sub("\s+", " ", paper["paper_name"])).lower(),
                     "url": paper["paper_url"],
+                    "authors": paper["paper_authors"],
+                    "abstract": paper["paper_abstract"],
                 }
             )
 
@@ -88,7 +98,12 @@ def search(query, confs, year, sp_year=None, limit=None):
             conf_results[conf_year] = []
             for paper in cache_data[conf][conf_year]:
                 if query in paper["title_format"]:
-                    conf_results[conf_year].append({"title": paper["title"], "url": paper["url"]})
+                    conf_results[conf_year].append({
+                        "title": paper["title"], 
+                        "url": paper["url"],
+                        "authors": paper["authors"],
+                        "abstract": paper["abstract"],
+                    })
                     result_count += 1
                     if limit is not None and result_count >= limit:
                         break
@@ -160,5 +175,5 @@ def result():
 
 
 if __name__ == "__main__":
-    # app.run(debug=True, host="0.0.0.0", port=5000, use_reloader=True)
-    app.run(debug=False, host="0.0.0.0", port=5000, use_reloader=False)
+    # app.run(debug=True, host="0.0.0.0", port=8000, use_reloader=True)
+    app.run(debug=False, host="0.0.0.0", port=9000, use_reloader=False)
