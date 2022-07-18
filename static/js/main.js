@@ -54,11 +54,12 @@ function update_result(data) {
         }
         author_html = '<ul class="authors">' + author_html + "</ul>";
 
+        var abstract_id = `abs-${i}-${conf}${year}`
         var abstract_button = `
-        <a class="abstract" href="#abs-${i}-${conf}${year}" data-toggle="collapse" data-target="#abs-${i}-${conf}${year}" aria-expanded="false" aria-controls="abs-${i}-${conf}${year}">abstract</a>`;
+        <a class="abstract" href="#${abstract_id}" data-toggle="collapse" data-target="#${abstract_id}" aria-expanded="false" aria-controls="${abstract_id}">abstract</a>`;
 
         var abstract_item = `
-        <div id="abs-${i}-${conf}${year}" class="collapse">
+        <div id="${abstract_id}" class="collapse">
         <div class="abstract-item">${abstract}</div>
         </div>`;
 
@@ -80,7 +81,7 @@ function update_result(data) {
         item_html += "</div>";
         item_html += "</div>";
 
-        all_html += item_html;
+        all_html += item_html.replaceAll(`${abstract_id}`, `${abstract_id}-all`);
         conf_html += item_html;
         count++;
       }
