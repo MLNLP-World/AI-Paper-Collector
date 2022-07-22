@@ -38,6 +38,11 @@ function update_result(data) {
       // console.log(data[0][conf]);
       // console.log(year_i);
       // console.log(Object.keys(data[0][conf]));
+      // check has key year
+      if (Object.keys(data[0][conf])[year_i] == undefined) {
+        continue;
+      }
+
       var year = Object.keys(data[0][conf])[year_i];
       for (var i in data[0][conf][year]) {
         var title = data[0][conf][year][i]["title"];
@@ -48,13 +53,23 @@ function update_result(data) {
           abstract = "No abstract available";
         }
 
+        // replace < and > with &lt; and &gt; in abstract
+        abstract = abstract.replace(/</g, "&lt;");
+        abstract = abstract.replace(/>/g, "&gt;");
+
+        // console.log(title);
+        // console.log(url);
+        // console.log(authors);
+        // console.log(abstract);
+        // console.log("\n");
+
         var author_html = "";
         for (var j in authors) {
           author_html += '<li class="author-item">' + authors[j] + "</li>";
         }
         author_html = '<ul class="authors">' + author_html + "</ul>";
 
-        var abstract_id = `abs-${i}-${conf}${year}`
+        var abstract_id = `abs-${i}-${conf}${year}`;
         var abstract_button = `
         <a class="abstract" href="#${abstract_id}" data-toggle="collapse" data-target="#${abstract_id}" aria-expanded="false" aria-controls="${abstract_id}">abstract</a>`;
 
@@ -75,13 +90,20 @@ function update_result(data) {
         item_html += abstract_button;
         item_html += author_html;
         item_html += abstract_item;
-        item_html += '<p class="media-item"><span class="label label-success">' + conf + year + "</span></p>";
+        item_html +=
+          '<p class="media-item"><span class="label label-success">' +
+          conf +
+          year +
+          "</span></p>";
         item_html += "</div>";
         item_html += "</div>";
         item_html += "</div>";
         item_html += "</div>";
 
-        all_html += item_html.replaceAll(`${abstract_id}`, `${abstract_id}-all`);
+        all_html += item_html.replaceAll(
+          `${abstract_id}`,
+          `${abstract_id}-all`
+        );
         conf_html += item_html;
         count++;
       }
