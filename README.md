@@ -69,7 +69,7 @@ pip install -r requirements.txt
 
 ## <img src="https://cdn.jsdelivr.net/gh/LightChen233/blog-img/catalogue.png" width="27" /> Usage(v0.1.0)
 
-We provide three usage modes, the first is **interactive** (`main.py`), the second is **command-line** (`cli_main.py`) and the other is **web interface** (`app.py`).
+We provide three usage modes, the first is [**interactive**](https://github.com/MLNLP-World/AI-Paper-Collector#-interactive-usage-with-example) (`main.py`), the second is [**command-line**](https://github.com/MLNLP-World/AI-Paper-Collector#-command-line-usage) (`cli_main.py`) and the other is [**web interface**](https://github.com/MLNLP-World/AI-Paper-Collector#-web-interface-usage) (`app.py`).
 The interactive mode is recommended for the first time users.
 
 ### <img src="https://cdn.jsdelivr.net/gh/LightChen233/blog-img/notes.png" width="23" /> Interactive Usage with Example
