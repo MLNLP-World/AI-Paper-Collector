@@ -518,5 +518,9 @@
     {
         "name": "KDD2022",
         "url": "https://dblp.org/db/conf/kdd/kdd2022.html"
+    },
+    {
+        "name": "IJCAI2022",
+        "url": "https://dblp.org/db/conf/ijcai/ijcai2022.html"
     }
 ]
