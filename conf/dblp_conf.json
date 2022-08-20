@@ -514,5 +514,9 @@
     {
         "name": "BMVC2019",
         "url": "https://dblp.org/db/conf/bmvc/bmvc2019.html"
+    },
+    {
+        "name": "KDD2022",
+        "url": "https://dblp.org/db/conf/kdd/kdd2022.html"
     }
 ]
