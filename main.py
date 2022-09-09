@@ -1,12 +1,14 @@
 from constant import init
-from searcher import exec_search
+from searcher import exec_search, boolean_search
 from utils import show_res, output_res, special_input
 
 
 
 def main():
 
-    indexes, candidates = init()
+    indexes, candidates, postings, posting_indexes = init()
+    print(postings['pre-train'])
+    modes_map = {"1": "exact", "2": "fuzzy", "3": "boolean"}
 
     while(1):
         mode, threshold, confs, limit = None, None, None, None
@@ -14,11 +16,11 @@ def main():
         query = input('[+] Enter your query: ')
         if(special_input(query) or query == ''): continue
 
-        print("\n[+] Select search mode:\n\t[1] Exact\n\t[2] Fuzzy")
-        select_mode = input('[+] Enter a number between 1 to 2: ')
+        print("\n[+] Select search mode:\n\t[1] Exact\n\t[2] Fuzzy\n\t[3] Boolean")
+        select_mode = input('[+] Enter a number between 1 to 3: ')
         if(special_input(select_mode, mode='select_mode')): continue
         if select_mode == '': select_mode = '1'
-        mode = 'exact' if select_mode == '1' else 'fuzzy'
+        mode = modes_map[select_mode]
 
         if mode == 'fuzzy':
 
@@ -38,8 +40,12 @@ def main():
         if confs == '': confs = None
         else: confs = confs.split(',')
 
-
-        results = exec_search(indexes, candidates, query, mode, threshold, confs, limit)
+        if mode in ['fuzzy', 'exact']:
+            results = exec_search(indexes, candidates, query, mode, threshold, confs, limit)
+        elif mode == 'boolean':
+            results = boolean_search(query, postings, posting_indexes, confs)
+        else:
+            pass # TODO
         if len(results) == 0: print('[-] No results found.\n'); continue
         show_res(results)
         

@@ -1,7 +1,7 @@
 from unicodedata import category
 import warnings
 from crawler import do_crawl
-from searcher import build_index
+from searcher import build_index, get_posting_list
 warnings.filterwarnings("ignore")
 
 open_flag = """
@@ -44,5 +44,6 @@ def init(force=False):
     cache_file = 'cache/cache.json'
     res = do_crawl(cache_file, force)
     indexes, candidates = build_index(res)
-    return indexes, candidates
+    postings, posting_indexes = get_posting_list(res)
+    return indexes, candidates, postings, posting_indexes
 
