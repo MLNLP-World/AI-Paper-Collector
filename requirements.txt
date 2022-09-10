@@ -8,3 +8,4 @@ Flask
 numpy
 flask-bootstrap
 pytz
+nltk

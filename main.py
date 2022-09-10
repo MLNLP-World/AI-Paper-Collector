@@ -7,7 +7,6 @@ from utils import show_res, output_res, special_input
 def main():
 
     indexes, candidates, postings, posting_indexes = init()
-    print(postings['pre-train'])
     modes_map = {"1": "exact", "2": "fuzzy", "3": "boolean"}
 
     while(1):

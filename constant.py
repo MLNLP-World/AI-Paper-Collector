@@ -1,4 +1,3 @@
-from unicodedata import category
 import warnings
 from crawler import do_crawl
 from searcher import build_index, get_posting_list

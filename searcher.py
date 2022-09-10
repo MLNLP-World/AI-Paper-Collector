@@ -1,7 +1,15 @@
-import functools
 import re
+import os
+import nltk
+import pickle
+import functools
+from tqdm import tqdm
 from thefuzz import process
 from collections import defaultdict
+from nltk.stem.porter import PorterStemmer
+from nltk.tokenize import word_tokenize
+nltk.download('punkt')
+stemmer = PorterStemmer()
 
 
 def build_index(res):
@@ -16,17 +24,29 @@ def build_index(res):
     return indexes, candidates
 
 
-def get_posting_list(res):
+def get_posting_list(res, file_name="postings.pkl"):
+    def _check_filename(filename):
+        if os.path.dirname(filename) == '':
+            filename = os.path.join('output', filename)
+        if not os.path.exists(os.path.dirname(filename)):
+            os.makedirs(os.path.dirname(filename))
+        return filename
+    
+    posting_path = _check_filename(file_name)
+    if os.path.exists(posting_path):
+        postings, posting_indexes = pickle.load(open(posting_path, 'rb'))
+        return postings, posting_indexes
     idx = 0
     posting_indexes = []
     postings = defaultdict(dict)
-    for conf, papers in res.items():
+    print("Buiding posting list...")
+    for conf, papers in tqdm(res.items(), ncols=100):
         for paper in papers:
             posting_indexes.append([conf, paper, idx])
-            for token in paper['paper_name'].strip().split():
-                token = token.lower()
-                postings[token][idx] = 1
+            for word in paper['paper_name'].strip().split():
+                postings[stemmer.stem(word)][idx] = 1
             idx += 1
+    pickle.dump([postings, posting_indexes], open(posting_path, 'wb'))
     return postings, posting_indexes
 
 
@@ -132,9 +152,8 @@ def boolean_search(query, postings, posting_indexes, confs=None):
     precedence['('] = 100
     precedence[')'] = -100
 
-    all_docs = set([str(x) for x in range(len(posting_indexes))])
-    query = "( ".join(" )".join(query.split(")")).split("(")) # add space after "(" and before ")"
-    query_units = query.split()
+    all_docs = set(range(len(posting_indexes)))
+    query_units = [stemmer.stem(token) if token not in ['AND', 'OR', 'NOT'] else token for token in word_tokenize(query)]
 
     cand_ids = _parse_query(query_units)
     results = [posting_indexes[x] for x in cand_ids]
