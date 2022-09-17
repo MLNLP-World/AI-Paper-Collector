@@ -14,7 +14,7 @@ def special_input(input_str, mode=None):
         print(category_flag)
         return True
     elif mode == 'select_mode':
-        if not input_str in ['1', '2', '']:
+        if not input_str in ['1', '2', '3', '']:
             print('[-] Invalid input.\n')
             return True
     elif mode == 'threshold':

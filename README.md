@@ -80,10 +80,12 @@ To start the interactive, type:
 python main.py
 ```
 
+The initialization of indices and posting-list may take several seconds when you first use this script, after that they will be stored in `./output/` and you don't have to initialized them again. When the `./cache/cache.json` is updated, you should manually delete `./output/postings.pkl` and run `main.py` again.
+
 Serveral steps to interactively search paper.
 
 1. the keyword query
-2. search mode (exact or fuzzy)
+2. search mode (exact, fuzzy or boolean)
 3. (fuzzy) threshold
 4. the limit of results
 5. a list of conferences, separated by comma
@@ -99,7 +101,8 @@ E.g.
 [+] Select search mode:
 	[1] Exact
 	[2] Fuzzy
-[+] Enter a number between 1 to 2: 2
+  [3] Boolean
+[+] Enter a number between 1 to 3: 2
 [+] Enter threshold between 0 and 100 (default: 50):
 [+] Enter limit >= 0 (default: None):
 [+] Enter the list of confs separated by comma
@@ -118,6 +121,17 @@ E.g.
 [+] Writing results to output/fuzzy_None_SIGIR_WSDM_CIKM_few-shot.txt
 [+] Writing results Done!
 ```
+
+### Boolean Query Rules:
+For boolean search, you can use the standard boolean expressions with [AND, OR, NOT] and brackets. For example, you can write your queries like:
+
+1. language AND generation AND (pre-train OR pretrain)
+2. (dialogue OR dialog) AND generation AND NOT (response AND selection)
+3. toxic AND (dialogue OR conversation OR dialog)
+
+Note that when you want to search for a phrase (e.g. contrastive learning), you should type `contrastive AND learning` instead of leaving blank between the words like `contrastive learning`.
+
+The boolean query allows you to search exactly the key-words that you are interested in. Besides, it also helps to include the near-synonyms (like dialog, dialogue and conversation) and exclude the words that you are not interested in (like the second example).
 
 ### <img src="https://cdn.jsdelivr.net/gh/LightChen233/blog-img/notes.png" width="23" /> Command-line Usage
 
