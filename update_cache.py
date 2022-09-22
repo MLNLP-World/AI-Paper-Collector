@@ -26,7 +26,7 @@ def parse_issue(issue):
 
 def check_duplicate(confs, item):
     for conf in confs:
-        if conf["name"] == item["name"]:
+        if conf["name"] == item["name"] and conf["url"] == item["url"]:
             return True
     return False
 
