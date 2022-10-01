@@ -522,5 +522,121 @@
     {
         "name": "IJCAI2022",
         "url": "https://dblp.org/db/conf/ijcai/ijcai2022.html"
+    },
+    {
+        "name": "MICCAI2022",
+        "url": "https://dblp.org/db/conf/miccai/miccai2022-1.html"
+    },
+    {
+        "name": "MICCAI2022",
+        "url": "https://dblp.org/db/conf/miccai/miccai2022-2.html"
+    },
+    {
+        "name": "MICCAI2022",
+        "url": "https://dblp.org/db/conf/miccai/miccai2022-3.html"
+    },
+    {
+        "name": "MICCAI2022",
+        "url": "https://dblp.org/db/conf/miccai/miccai2022-4.html"
+    },
+    {
+        "name": "MICCAI2022",
+        "url": "https://dblp.org/db/conf/miccai/miccai2022-5.html"
+    },
+    {
+        "name": "MICCAI2022",
+        "url": "https://dblp.org/db/conf/miccai/miccai2022-6.html"
+    },
+    {
+        "name": "MICCAI2022",
+        "url": "https://dblp.org/db/conf/miccai/miccai2022-7.html"
+    },
+    {
+        "name": "MICCAI2022",
+        "url": "https://dblp.org/db/conf/miccai/miccai2022-8.html"
+    },
+    {
+        "name": "MICCAI2021",
+        "url": "https://dblp.org/db/conf/miccai/miccai2021-1.html"
+    },
+    {
+        "name": "MICCAI2021",
+        "url": "https://dblp.org/db/conf/miccai/miccai2021-2.html"
+    },
+    {
+        "name": "MICCAI2021",
+        "url": "https://dblp.org/db/conf/miccai/miccai2021-3.html"
+    },
+    {
+        "name": "MICCAI2021",
+        "url": "https://dblp.org/db/conf/miccai/miccai2021-4.html"
+    },
+    {
+        "name": "MICCAI2021",
+        "url": "https://dblp.org/db/conf/miccai/miccai2021-5.html"
+    },
+    {
+        "name": "MICCAI2021",
+        "url": "https://dblp.org/db/conf/miccai/miccai2021-6.html"
+    },
+    {
+        "name": "MICCAI2021",
+        "url": "https://dblp.org/db/conf/miccai/miccai2021-7.html"
+    },
+    {
+        "name": "MICCAI2021",
+        "url": "https://dblp.org/db/conf/miccai/miccai2021-8.html"
+    },
+    {
+        "name": "MICCAI2020",
+        "url": "https://dblp.org/db/conf/miccai/miccai2020-1.html"
+    },
+    {
+        "name": "MICCAI2020",
+        "url": "https://dblp.org/db/conf/miccai/miccai2020-2.html"
+    },
+    {
+        "name": "MICCAI2020",
+        "url": "https://dblp.org/db/conf/miccai/miccai2020-3.html"
+    },
+    {
+        "name": "MICCAI2020",
+        "url": "https://dblp.org/db/conf/miccai/miccai2020-4.html"
+    },
+    {
+        "name": "MICCAI2020",
+        "url": "https://dblp.org/db/conf/miccai/miccai2020-5.html"
+    },
+    {
+        "name": "MICCAI2020",
+        "url": "https://dblp.org/db/conf/miccai/miccai2020-6.html"
+    },
+    {
+        "name": "MICCAI2020",
+        "url": "https://dblp.org/db/conf/miccai/miccai2020-7.html"
+    },
+    {
+        "name": "MICCAI2019",
+        "url": "https://dblp.org/db/conf/miccai/miccai2019-1.html"
+    },
+    {
+        "name": "MICCAI2019",
+        "url": "https://dblp.org/db/conf/miccai/miccai2019-2.html"
+    },
+    {
+        "name": "MICCAI2019",
+        "url": "https://dblp.org/db/conf/miccai/miccai2019-3.html"
+    },
+    {
+        "name": "MICCAI2019",
+        "url": "https://dblp.org/db/conf/miccai/miccai2019-4.html"
+    },
+    {
+        "name": "MICCAI2019",
+        "url": "https://dblp.org/db/conf/miccai/miccai2019-5.html"
+    },
+    {
+        "name": "MICCAI2019",
+        "url": "https://dblp.org/db/conf/miccai/miccai2019-6.html"
     }
 ]
