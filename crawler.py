@@ -1,17 +1,17 @@
 import json
 import os
 import re
-
+import yaml
 import requests
 from bs4 import BeautifulSoup
 from tqdm import tqdm
 
+HEADERS = {
+    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36"
+}
 
 def search_from_iclr(url, name, res):
-    headers = {
-        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36"
-    }
-    r = requests.get(url, headers=headers)
+    r = requests.get(url, headers=HEADERS)
     data = r.json()
     if name not in res:
         res[name] = []
@@ -27,7 +27,7 @@ def search_from_iclr(url, name, res):
     return res
 
 def search_abs_from_nips(url):
-    r = requests.get(url)
+    r = requests.get(url, headers=HEADERS)
     soup = BeautifulSoup(r.text, "html.parser")
     abstract = soup.find(
         lambda tag: tag.name == "h4" and 'Abstract' in tag.text
@@ -35,7 +35,7 @@ def search_abs_from_nips(url):
     return abstract
 
 def search_from_nips(url, name, res):
-    r = requests.get(url)
+    r = requests.get(url, headers=HEADERS)
     soup = BeautifulSoup(r.text, "html.parser")
     if name not in res:
         res[name] = []
@@ -46,8 +46,11 @@ def search_from_nips(url, name, res):
             paper_author = [author.strip() for author in paper_item.i.string.split(',')]
         else:
             paper_author = []
-        
-        paper_abstract = search_abs_from_nips(paper_url)
+        try:
+            paper_abstract = search_abs_from_nips(paper_url)
+        except:
+            print(f"Skip url:{paper_url}")
+            paper_abstract = ""
 
         res[name].append(
             {
@@ -61,7 +64,7 @@ def search_from_nips(url, name, res):
 
 
 def search_from_acl(url, tag, name, res):
-    r = requests.get(url)
+    r = requests.get(url, headers=HEADERS)
     soup = BeautifulSoup(r.text, "html.parser")
     if name not in res:
         res[name] = []
@@ -75,6 +78,7 @@ def search_from_acl(url, tag, name, res):
             if tp.next_sibling is not None and tp.next_sibling.string is not None:
                 paper_abstract = tp.next_sibling.string
             else:
+                print(f"Skip url:{paper_url}")
                 paper_abstract = ""
             
             res[name].append(
@@ -88,8 +92,46 @@ def search_from_acl(url, tag, name, res):
     return res
 
 
+def search_abs_from_dblp(url):
+    r = requests.get(url, headers=HEADERS)
+    soup = BeautifulSoup(r.text, "html.parser")
+
+    if 'ieee' in r.url:
+        abstract = yaml.safe_load(soup.find(
+            lambda tag: tag.name == 'script' and 'xplGlobal.document.metadata' in tag.text
+        ).text.split('\n\t')[-1].strip()[28:-1])['abstract']
+
+    elif 'acm' in r.url:
+        abstract = soup.find(class_="abstractSection").p.string.strip()
+
+    elif 'openreview' in r.url:
+        url = 'https://api.openreview.net/notes?forum=' + r.url.split("=")[-1]
+        r = requests.get(url, headers=headers)
+        abstract = r.json()["notes"][-1]["content"]["abstract"]
+
+    elif 'mlr' in r.url:
+        abstract = soup.find(id="abstract").string.strip()
+
+    elif 'aaai' in r.url:
+        abstract = soup.find(class_="abstract").p.string.strip()
+
+    elif 'ijcai' in r.url:
+        abstract = soup.find(class_="proceedings-detail").find(class_="col-md-12").string.strip()
+
+    elif 'springer' in r.url:
+        abstract = soup.find(id="Abs1-content").next_element.text.strip()
+
+    elif 'jmlr' in r.url:
+        abstract = soup.find(class_="abstract").string.strip()
+
+    else:
+        abstract = ""
+
+    return abstract
+
+
 def search_from_dblp(url, name, res):
-    r = requests.get(url)
+    r = requests.get(url, headers=HEADERS)
     soup = BeautifulSoup(r.text, "html.parser")
     if name not in res:
         res[name] = []
@@ -104,25 +146,30 @@ def search_from_dblp(url, name, res):
 
         items = [item.string if item.string else item for item in paper_name.contents]
         paper = "".join([item for item in items if isinstance(item, str)])
+        try:
+            paper_abstract = search_abs_from_dblp(paper_url)
+        except:
+            print(f"Skip url:{paper_url}")
+            paper_abstract = ""
         res[name].append(
             {
                 "paper_name": paper, 
                 "paper_url": paper_url,
                 "paper_authors": paper_authors,
-                "paper_abstract": "",
+                "paper_abstract": paper_abstract,
             }
         )
     return res
 
 
 def search_abs_from_thecvf(url):
-    r = requests.get(url)
+    r = requests.get(url, headers=HEADERS)
     soup = BeautifulSoup(r.text, "html.parser")
     abstract = soup.find(id="abstract").text.strip()
     return abstract
 
 def search_from_thecvf(url, name, res):
-    r = requests.get(url)
+    r = requests.get(url, headers=HEADERS)
     soup = BeautifulSoup(r.text, "html.parser")
     if name not in res:
         res[name] = []
@@ -131,7 +178,11 @@ def search_from_thecvf(url, name, res):
         paper_url = "https://openaccess.thecvf.com" + paper_item.a["href"]
         paper = paper_item.a.string
         paper_authors = [author.string for author in paper_item.next_sibling.next_sibling.find_all('a', href='#')]
-        paper_abstract = search_abs_from_thecvf(paper_url)
+        try:
+            paper_abstract = search_abs_from_thecvf(paper_url)
+        except:
+            print(f"Skip url:{paper_url}")
+            paper_abstract = ""
         res[name].append(
             {
                 "paper_name": paper, 
