@@ -9,3 +9,4 @@ numpy
 flask-bootstrap
 pytz
 nltk
+pyyaml
