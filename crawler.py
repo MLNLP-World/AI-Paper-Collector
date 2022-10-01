@@ -175,7 +175,10 @@ def search_from_thecvf(url, name, res):
         res[name] = []
         
     for paper_item in soup.find_all("dt", class_="ptitle"):
-        paper_url = "https://openaccess.thecvf.com" + paper_item.a["href"]
+        url_postfix = paper_item.a["href"]
+        if url_postfix[0] == '/':
+            url_postfix = url_postfix[1:]
+        paper_url = "https://openaccess.thecvf.com/" + paper_item.a["href"]
         paper = paper_item.a.string
         paper_authors = [author.string for author in paper_item.next_sibling.next_sibling.find_all('a', href='#')]
         try:
