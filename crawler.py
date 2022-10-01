@@ -26,6 +26,13 @@ def search_from_iclr(url, name, res):
         )
     return res
 
+def search_abs_from_nips(url):
+    r = requests.get(url)
+    soup = BeautifulSoup(r.text, "html.parser")
+    abstract = soup.find(
+        lambda tag: tag.name == "h4" and 'Abstract' in tag.text
+    ).next_sibling.next_sibling.text.strip()
+    return abstract
 
 def search_from_nips(url, name, res):
     r = requests.get(url)
@@ -39,13 +46,15 @@ def search_from_nips(url, name, res):
             paper_author = [author.strip() for author in paper_item.i.string.split(',')]
         else:
             paper_author = []
+        
+        paper_abstract = search_abs_from_nips(paper_url)
 
         res[name].append(
             {
                 "paper_name": paper_item.a.string, 
                 "paper_url": paper_url,
                 "paper_authors": paper_author,
-                "paper_abstract": "",
+                "paper_abstract": paper_abstract,
             }
         )
     return res
@@ -106,6 +115,12 @@ def search_from_dblp(url, name, res):
     return res
 
 
+def search_abs_from_thecvf(url):
+    r = requests.get(url)
+    soup = BeautifulSoup(r.text, "html.parser")
+    abstract = soup.find(id="abstract").text.strip()
+    return abstract
+
 def search_from_thecvf(url, name, res):
     r = requests.get(url)
     soup = BeautifulSoup(r.text, "html.parser")
@@ -116,12 +131,13 @@ def search_from_thecvf(url, name, res):
         paper_url = "https://openaccess.thecvf.com" + paper_item.a["href"]
         paper = paper_item.a.string
         paper_authors = [author.string for author in paper_item.next_sibling.next_sibling.find_all('a', href='#')]
+        paper_abstract = search_abs_from_thecvf(paper_url)
         res[name].append(
             {
                 "paper_name": paper, 
                 "paper_url": paper_url,
                 "paper_authors": paper_authors,
-                "paper_abstract": "",
+                "paper_abstract": paper_abstract,
             }
         )
     return res
