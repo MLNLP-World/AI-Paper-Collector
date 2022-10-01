@@ -75,8 +75,8 @@ def search_from_acl(url, tag, name, res):
 
             paper = "".join([item for item in items if isinstance(item, str)])
             paper_url = "https://aclanthology.org" + paper_item["href"]
-            if tp.next_sibling is not None and tp.next_sibling.string is not None:
-                paper_abstract = tp.next_sibling.string
+            if tp.next_sibling is not None and tp.next_sibling.has_attr("id") and "abstract" in tp.next_sibling["id"]:
+                paper_abstract = tp.next_sibling.text
             else:
                 print(f"Skip url:{paper_url}")
                 paper_abstract = ""
