@@ -110,14 +110,14 @@ def search_abs_from_dblp(url):
         ).text.split('\n\t')[-1].strip()[28:-1])['abstract']
 
     elif 'acm' in r.url:
-        abstract = soup.find(class_="abstractSection").p.string.strip()
+        abstract = soup.find(class_="abstractSection").p.text.strip()
 
     elif 'openreview' in r.url:
         url = 'https://api.openreview.net/notes?forum=' + r.url.split("=")[-1]
         r = requests.get(url, headers=HEADERS)
         abstract = r.json()["notes"][-1]["content"]["abstract"]
 
-    elif 'mlr' in r.url:
+    elif 'mlr.press' in r.url:
         abstract = soup.find(id="abstract").text.strip()
 
     elif 'aaai' in r.url:
