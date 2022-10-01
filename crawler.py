@@ -242,12 +242,6 @@ def crawl(cache_file=None, force=False):
             continue
         res = search_from_thecvf(url, name, res)
         
-#     for conf in tqdm(dblp_conf, desc="[+] Crawling DBLP", dynamic_ncols=True):
-#         assert conf.get("name") and conf.get("url")
-#         url, name = conf["url"], conf["name"]
-#         if name in cache_conf:
-#             continue
-#         res = search_from_dblp(url, name, res)
 
     for conf in tqdm(nips_conf, desc="[+] Crawling NeurIPS", dynamic_ncols=True):
         assert conf.get("name") and conf.get("url")
@@ -255,6 +249,20 @@ def crawl(cache_file=None, force=False):
         if name in cache_conf:
             continue
         res = search_from_nips(url, name, res)
+    import time
+    st = time.time()
+    print(f"st time:{st}")
+    for conf in tqdm(dblp_conf, desc="[+] Crawling DBLP", dynamic_ncols=True):
+        assert conf.get("name") and conf.get("url")
+        url, name = conf["url"], conf["name"]
+        if name in cache_conf:
+            continue
+        res = search_from_dblp(url, name, res)
+        ed = time.time()
+        if (ed-st) % 3600 == 0:
+            print(f"now time:{ed}")
+        if (ed-st) / 3600 > 4:
+            break
      
 
     res.update(cache_res)
