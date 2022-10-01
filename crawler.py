@@ -78,7 +78,7 @@ def search_from_acl(url, tag, name, res):
             if tp.next_sibling is not None and tp.next_sibling.has_attr("id") and "abstract" in tp.next_sibling["id"]:
                 paper_abstract = tp.next_sibling.text
             else:
-                print(f"Skip url:{paper_url}")
+                # print(f"Skip url:{paper_url}")
                 paper_abstract = ""
             
             res[name].append(
@@ -216,21 +216,14 @@ def crawl(cache_file=None, force=False):
         if name in cache_conf:
             continue
         res = search_from_acl(url, tag, name, res)
-
-    for conf in tqdm(nips_conf, desc="[+] Crawling NeurIPS", dynamic_ncols=True):
-        assert conf.get("name") and conf.get("url")
-        url, name = conf["url"], conf["name"]
-        if name in cache_conf:
-            continue
-        res = search_from_nips(url, name, res)
-
+        
     for conf in tqdm(iclr_conf, desc="[+] Crawling ICLR", dynamic_ncols=True):
         assert conf.get("name") and conf.get("url")
         url, name = conf["url"], conf["name"]
         if name in cache_conf:
             continue
         res = search_from_iclr(url, name, res)
-
+        
     for conf in tqdm(thecvf_conf, desc="[+] Crawling openacess.thecvf", dynamic_ncols=True):
         assert conf.get("name") and conf.get("url")
         url, name = conf["url"], conf["name"]
@@ -244,6 +237,14 @@ def crawl(cache_file=None, force=False):
         if name in cache_conf:
             continue
         res = search_from_dblp(url, name, res)
+
+    for conf in tqdm(nips_conf, desc="[+] Crawling NeurIPS", dynamic_ncols=True):
+        assert conf.get("name") and conf.get("url")
+        url, name = conf["url"], conf["name"]
+        if name in cache_conf:
+            continue
+        res = search_from_nips(url, name, res)
+     
 
     res.update(cache_res)
     return res
