@@ -93,7 +93,15 @@ def search_from_acl(url, tag, name, res):
 
 
 def search_abs_from_dblp(url):
-    r = requests.get(url, headers=HEADERS)
+    try:
+        r = requests.get(url, headers=HEADERS)
+    except Exception as e:
+        msg = str(e)
+        if "doesn't match either of 'aaai.org'" in msg:
+            hostname = e.request.url.replace('//','/').split('/')[1]
+            url = e.request.url.replace(hostname,'aaai.org')
+        r = requests.get(url, headers=HEADERS)
+
     soup = BeautifulSoup(r.text, "html.parser")
 
     if 'ieee' in r.url:
@@ -106,23 +114,23 @@ def search_abs_from_dblp(url):
 
     elif 'openreview' in r.url:
         url = 'https://api.openreview.net/notes?forum=' + r.url.split("=")[-1]
-        r = requests.get(url, headers=headers)
+        r = requests.get(url, headers=HEADERS)
         abstract = r.json()["notes"][-1]["content"]["abstract"]
 
     elif 'mlr' in r.url:
-        abstract = soup.find(id="abstract").string.strip()
+        abstract = soup.find(id="abstract").text.strip()
 
     elif 'aaai' in r.url:
-        abstract = soup.find(class_="abstract").p.string.strip()
+        abstract = soup.find(class_="abstract").p.text.strip()
 
     elif 'ijcai' in r.url:
-        abstract = soup.find(class_="proceedings-detail").find(class_="col-md-12").string.strip()
+        abstract = soup.find(class_="proceedings-detail").find(class_="col-md-12").text.strip()
 
     elif 'springer' in r.url:
         abstract = soup.find(id="Abs1-content").next_element.text.strip()
 
     elif 'jmlr' in r.url:
-        abstract = soup.find(class_="abstract").string.strip()
+        abstract = soup.find(class_="abstract").text.strip()
 
     else:
         abstract = ""
@@ -234,12 +242,12 @@ def crawl(cache_file=None, force=False):
             continue
         res = search_from_thecvf(url, name, res)
         
-    for conf in tqdm(dblp_conf, desc="[+] Crawling DBLP", dynamic_ncols=True):
-        assert conf.get("name") and conf.get("url")
-        url, name = conf["url"], conf["name"]
-        if name in cache_conf:
-            continue
-        res = search_from_dblp(url, name, res)
+#     for conf in tqdm(dblp_conf, desc="[+] Crawling DBLP", dynamic_ncols=True):
+#         assert conf.get("name") and conf.get("url")
+#         url, name = conf["url"], conf["name"]
+#         if name in cache_conf:
+#             continue
+#         res = search_from_dblp(url, name, res)
 
     for conf in tqdm(nips_conf, desc="[+] Crawling NeurIPS", dynamic_ncols=True):
         assert conf.get("name") and conf.get("url")
