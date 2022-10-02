@@ -177,6 +177,18 @@ $("#research-button").click(function () {
 		query = query.trim();
 		// console.log(query);
 
+		var sp_author = $("#sp_author").val();
+		sp_author = sp_author.toLowerCase();
+		sp_author = sp_author.replace(/\s+/g, " ");
+		sp_author = sp_author.replace("-", " ");
+		sp_author = sp_author.trim();
+
+		var sp_year = $("#sp_year").val();
+		sp_year = sp_year.trim();
+		if (sp_year != "") {
+			sp_year = parseInt(sp_year);
+		}
+
 		data_ = {};
 
 		// search for query
@@ -186,19 +198,35 @@ $("#research-button").click(function () {
 				data_[conf][year] = [];
 				for (var i in data[0][conf][year]) {
 					console.log(data[0][conf][year][i]);
+
+					if (sp_year != "" && sp_year != year) {
+						continue;
+					}
+
 					var title = data[0][conf][year][i]["title"].toLowerCase();
 					title = title.replace(/\s+/g, " ");
 					title = title.replace("-", " ");
 					title = title.trim();
+
+					var author = data[0][conf][year][i]["authors"].join(" ").toLowerCase();
+					author = author.replace(/\s+/g, " ");
+					author = author.replace("-", " ");
+					author = author.trim();
+
 					if (title.indexOf(query) != -1) {
-						data_[conf][year].push(data[0][conf][year][i]);
+						if (sp_author == "") {
+							data_[conf][year].push(data[0][conf][year][i]);
+						} else {
+							if (author.indexOf(sp_author) != -1) {
+								data_[conf][year].push(data[0][conf][year][i]);
+							}
+						}
 					}
 				}
 			}
 		}
 		data = [];
 		data.push(data_);
-		// console.log(data);
 		update_result(data);
 	}
 });
