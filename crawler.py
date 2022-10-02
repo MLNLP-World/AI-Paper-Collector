@@ -266,12 +266,16 @@ def get_citation(keyword):
     url = 'https://scholar.google.com/scholar?hl=en&q=' + keyword
     r = requests.get(url, headers=HEADERS)
     soup = BeautifulSoup(r.text, "html.parser")
-    citation = int(soup.find('div', {'data-rp':0}).find(
-        lambda tag: tag.name == 'a' and 'cites' in tag['href']).text.split('Cited by ')[1])
+    citation = soup.find('div', {'data-rp':0}).find(
+        lambda tag: tag.name == 'a' and 'cites' in tag['href'])
+    if citation is None:
+        citation = 0
+    else:
+        citation = int(citation.text.split('Cited by ')[1])
     return citation
 
 def add_citation(res):
-    for conf in res:
+    for conf in tqdm(res, desc="[+] Crawling Citation", dynamic_ncols=True):
         for ii, item in enumerate(res[conf]):
             paper_name = item['paper_name']
             paper_citation = item["paper_cite"]
@@ -279,10 +283,7 @@ def add_citation(res):
                 continue
             if paper_name.endswith('.'):
                 paper_name = paper_name[:-1]
-            try:
-                citation = get_citation(paper_name)
-            except:
-                citation = -1
+            citation = get_citation(paper_name)
             res[conf][ii]['paper_cite'] = citation
     return res
 
