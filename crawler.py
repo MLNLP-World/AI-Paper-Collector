@@ -3,6 +3,7 @@ import os
 import re
 import yaml
 import requests
+import time
 from bs4 import BeautifulSoup
 from tqdm import tqdm
 
@@ -263,15 +264,15 @@ def add_code_links(res):
     return res
 
 def get_citation(keyword):
-    url = 'https://scholar.google.com/scholar?hl=en&q=' + keyword
+    url = f'https://api.semanticscholar.org/graph/v1/paper/search?query={keyword}&limit=1&fields=title,citationCount'
     r = requests.get(url, headers=HEADERS)
-    soup = BeautifulSoup(r.text, "html.parser")
-    citation = soup.find('div', {'data-rp':0}).find(
-        lambda tag: tag.name == 'a' and 'cites' in tag['href'])
-    if citation is None:
-        citation = 0
+    data = r.json()
+    if len(data['data']):
+        citation = data['data'][0]['citationCount']
+        title = data['data'][0]['title']
     else:
-        citation = int(citation.text.split('Cited by ')[1])
+        citation = 0
+    time.sleep(4)
     return citation
 
 def add_citation(res):
