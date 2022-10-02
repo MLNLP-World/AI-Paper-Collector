@@ -95,9 +95,8 @@ function update_result(data) {
 					conf +
 					year +
 					"</span>" +
-					'<a href="' + code + '" style="text-decoration:none; margin-left:5px; margin-right:5px;"><span class="label label-info">Code</span></a>' +
-					'<span class="label label-success">Cite by ' + citation + "</span></p>";
-				"</p>";
+					'<a href="' + code + '" style="text-decoration:none; margin-left:5px;"><span class="label label-info">Code</span></a>' +
+					"</p>";
 				item_html += "</div>";
 				item_html += "</div>";
 				item_html += "</div>";
@@ -151,13 +150,50 @@ function update_result(data) {
 	$("#result-list-group .nav-tabs li").first().addClass("active");
 }
 
+function JSONToCSVConvertor(data) {
+	var csv = "";
+	let row = "";
+	let _item = ['title', 'url', 'authors', 'abstract', 'code', 'citation'];
+	for (var index in _item) {
+		row += _item[index] + ',';
+	}
+	row += 'conf,year';
+	csv += row + '\r\n';
+	for (var conf in data[0]) {
+		for (var year in data[0][conf]) {
+			for (var i in data[0][conf][year]) {
+				let item = data[0][conf][year][i];
+				if (item == null) {
+					continue;
+				}
+				let row = "";
+				for (var index in item) {
+					row += '"' + item[index] + '",';
+				}
+				row += conf + ',' + year;
+				csv += row + '\r\n';
+			}
+		}
+	}
+	return csv;
+}
+
+function export_result_to_csv(data) {
+	let csv = JSONToCSVConvertor(data);
+	let dataUri =
+		"data:text/csv;charset=utf-8," + encodeURIComponent(csv);
+	let exportFileDefaultName = "result.csv";
+	let linkElement = document.createElement("a");
+	linkElement.setAttribute("href", dataUri);
+	linkElement.setAttribute("download", exportFileDefaultName);
+	linkElement.click();
+}
+
 function export_result(data) {
 	let dataStr = JSON.stringify(data);
 	let dataUri =
 		"data:application/json;charset=utf-8," + encodeURIComponent(dataStr);
-
 	let exportFileDefaultName = "result.json";
-
 	let linkElement = document.createElement("a");
 	linkElement.setAttribute("href", dataUri);
 	linkElement.setAttribute("download", exportFileDefaultName);
@@ -167,6 +203,7 @@ function export_result(data) {
 $("#export-button").click(function () {
 	if (typeof data !== "undefined") {
 		export_result(data);
+		export_result_to_csv(data);
 	}
 });
 
