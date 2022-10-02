@@ -155,7 +155,8 @@ def search_from_dblp(url, name, res):
         items = [item.string if item.string else item for item in paper_name.contents]
         paper = "".join([item for item in items if isinstance(item, str)])
         try:
-            paper_abstract = search_abs_from_dblp(paper_url)
+            # paper_abstract = search_abs_from_dblp(paper_url)
+            paper_abstract = "" # due to limits
         except:
             print(f"Skip url:{paper_url}")
             paper_abstract = ""
@@ -249,20 +250,13 @@ def crawl(cache_file=None, force=False):
         if name in cache_conf:
             continue
         res = search_from_nips(url, name, res)
-    import time
-    st = time.time()
-    print(f"st time:{st}")
+
     for conf in tqdm(dblp_conf, desc="[+] Crawling DBLP", dynamic_ncols=True):
         assert conf.get("name") and conf.get("url")
         url, name = conf["url"], conf["name"]
         if name in cache_conf:
             continue
         res = search_from_dblp(url, name, res)
-        ed = time.time()
-        if (ed-st) % 3600 == 0:
-            print(f"now time:{ed}")
-        if (ed-st) / 3600 > 4:
-            break
      
 
     res.update(cache_res)
