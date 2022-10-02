@@ -267,17 +267,17 @@ def get_citation(keyword):
     url = f'https://api.semanticscholar.org/graph/v1/paper/search?query={keyword}&limit=1&fields=title,citationCount'
     r = requests.get(url, headers=HEADERS)
     data = r.json()
-    if len(data['data']):
+    if 'data' in data and len(data['data']):
         citation = data['data'][0]['citationCount']
         title = data['data'][0]['title']
     else:
         citation = 0
-    time.sleep(4)
+    time.sleep(3)
     return citation
 
 def add_citation(res):
-    for conf in tqdm(res, desc="[+] Crawling Citation", dynamic_ncols=True):
-        for ii, item in enumerate(res[conf]):
+    for conf in res:
+        for ii, item in enumerate(tqdm(res[conf], desc="[+] Crawling Citation", dynamic_ncols=True)):
             paper_name = item['paper_name']
             paper_citation = item["paper_cite"]
             if paper_citation != -1:
@@ -343,7 +343,7 @@ def crawl(cache_file=None, force=False):
     res.update(cache_res)
 
     res = add_code_links(res)
-    res = add_citation(res)
+    # res = add_citation(res) # hard to get citations
 
     return res
 
