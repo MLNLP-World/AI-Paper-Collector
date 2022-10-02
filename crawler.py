@@ -267,7 +267,7 @@ def get_citation(keyword):
     r = requests.get(url, headers=HEADERS)
     soup = BeautifulSoup(r.text, "html.parser")
     citation = int(soup.find('div', {'data-rp':0}).find(
-        lambda tag: tag.name == 'a' and 'cites' in tag['href']).text.split('Cited by ')[0])
+        lambda tag: tag.name == 'a' and 'cites' in tag['href']).text.split('Cited by ')[1])
     return citation
 
 def add_citation(res):
