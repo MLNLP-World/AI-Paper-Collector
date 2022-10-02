@@ -48,6 +48,7 @@ function update_result(data) {
 				var authors = data[0][conf][year][i]["authors"];
 				var abstract = data[0][conf][year][i]["abstract"];
 				var code = data[0][conf][year][i]["code"];
+				var citation = data[0][conf][year][i]["citation"];
 				if (abstract == null || abstract == "") {
 					abstract = "No abstract available";
 				}
@@ -94,8 +95,9 @@ function update_result(data) {
 					conf +
 					year +
 					"</span>" +
-					'<a href="' + code + '" style="text-decoration:none; margin-left:5px"><span class="label label-info">Code</span></a>' +
-					"</p>";
+					'<a href="' + code + '" style="text-decoration:none; margin-left:5px; margin-right:5px;"><span class="label label-info">Code</span></a>' +
+					'<span class="label label-success">Cite by ' + citation + "</span></p>";
+				"</p>";
 				item_html += "</div>";
 				item_html += "</div>";
 				item_html += "</div>";

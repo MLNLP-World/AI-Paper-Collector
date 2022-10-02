@@ -22,6 +22,8 @@ def search_from_iclr(url, name, res):
                 "paper_url": "https://openreview.net" + item["content"]["pdf"],
                 "paper_authors": item["content"]["authors"],
                 "paper_abstract": item['content']['abstract'],
+                "paper_code": "#",
+                "paper_cite": -1,
             }
         )
     return res
@@ -58,6 +60,8 @@ def search_from_nips(url, name, res):
                 "paper_url": paper_url,
                 "paper_authors": paper_author,
                 "paper_abstract": paper_abstract,
+                "paper_code": "#",
+                "paper_cite": -1,
             }
         )
     return res
@@ -87,6 +91,8 @@ def search_from_acl(url, tag, name, res):
                     "paper_url": paper_url,
                     "paper_authors": [author.string for author in tp.find_all('a', href=re.compile("people/"))],
                     "paper_abstract": paper_abstract,
+                    "paper_code": "#",
+                    "paper_cite": -1,
                 }
             )
     return res
@@ -166,6 +172,8 @@ def search_from_dblp(url, name, res):
                 "paper_url": paper_url,
                 "paper_authors": paper_authors,
                 "paper_abstract": paper_abstract,
+                "paper_code": "#",
+                "paper_cite": -1,
             }
         )
     return res
@@ -201,6 +209,8 @@ def search_from_thecvf(url, name, res):
                 "paper_url": paper_url,
                 "paper_authors": paper_authors,
                 "paper_abstract": paper_abstract,
+                "paper_code": "#",
+                "paper_cite": -1,
             }
         )
     return res
@@ -252,6 +262,29 @@ def add_code_links(res):
                 import pdb; pdb.set_trace();
     return res
 
+def get_citation(keyword):
+    url = 'https://scholar.google.com/scholar?hl=en&q=' + keyword
+    r = requests.get(url, headers=HEADERS)
+    soup = BeautifulSoup(r.text, "html.parser")
+    citation = int(soup.find('div', {'data-rp':0}).find(
+        lambda tag: tag.name == 'a' and 'cites' in tag['href']).text.split('Cited by ')[0])
+    return citation
+
+def add_citation(res):
+    for conf in res:
+        for ii, item in enumerate(res[conf]):
+            paper_name = item['paper_name']
+            paper_citation = item["paper_cite"]
+            if paper_citation != -1:
+                continue
+            if paper_name.endswith('.'):
+                paper_name = paper_name[:-1]
+            try:
+                citation = get_citation(paper_name)
+            except:
+                citation = -1
+            res[conf][ii]['paper_cite'] = citation
+    return res
 
 def crawl(cache_file=None, force=False):
     res = {}
@@ -308,6 +341,7 @@ def crawl(cache_file=None, force=False):
     res.update(cache_res)
 
     res = add_code_links(res)
+    res = add_citation(res)
 
     return res
 

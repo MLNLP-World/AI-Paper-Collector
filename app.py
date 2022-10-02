@@ -44,6 +44,7 @@ def add_item(item: dict):
             "authors_format": item["authors_format"],
             "abstract": item["abstract"],
             "code": item["code"],
+            "citation": item["citation"],
         }
     )
 
@@ -72,6 +73,7 @@ def load_data():
                     "authors_format": " ".join(paper["paper_authors"]).lower(),
                     "abstract": paper["paper_abstract"],
                     "code": paper["paper_code"],
+                    "citation": paper["paper_cite"],
                 }
             )
 
@@ -110,6 +112,7 @@ def search(query, confs, year, sp_year=None, sp_author=None, limit=None):
                         "authors": paper["authors"],
                         "abstract": paper["abstract"],
                         "code": paper["code"],
+                        "citation": paper["citation"],
                     })
                     result_count += 1
                     if limit is not None and result_count >= limit:
@@ -121,6 +124,7 @@ def search(query, confs, year, sp_year=None, sp_author=None, limit=None):
                         "authors": paper["authors"],
                         "abstract": paper["abstract"],
                         "code": paper["code"],
+                        "citation": paper["citation"],
                     })
                     result_count += 1
                     if limit is not None and result_count >= limit:
