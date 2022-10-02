@@ -93,9 +93,9 @@ function update_result(data) {
 					'<p class="media-item"><span class="label label-success">' +
 					conf +
 					year +
-					"</span></p>";
-				item_html +=
-					'<a href="' + code + '" style="text-decoration:none;"><span class="label label-info">Code</span></a>';
+					"</span>" +
+					'<a href="' + code + '" style="text-decoration:none;"><span class="label label-info">Code</span></a>' +
+					"</p>";
 				item_html += "</div>";
 				item_html += "</div>";
 				item_html += "</div>";
