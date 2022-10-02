@@ -94,7 +94,7 @@ function update_result(data) {
 					conf +
 					year +
 					"</span>" +
-					'<a href="' + code + '" style="text-decoration:none;"><span class="label label-info">Code</span></a>' +
+					'<a href="' + code + '" style="text-decoration:none; margin-left:5px"><span class="label label-info">Code</span></a>' +
 					"</p>";
 				item_html += "</div>";
 				item_html += "</div>";
