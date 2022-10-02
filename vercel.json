@@ -8,7 +8,6 @@
         {
             "src": "app.py",
             "use": "@vercel/python",
-            "config": { "excludeFiles": "cache/**" }
         }
     ],
     "routes": [
