@@ -206,6 +206,53 @@ def search_from_thecvf(url, name, res):
     return res
 
 
+def get_code_links(url):
+    r = requests.get(url, headers=HEADERS)
+    texts = [[text.strip().split('\r\n\r\n')[0].split('\n')[0].replace('#','').strip(), 
+              text.strip().split('代码链接')[-1].replace('：',':').replace(':[','').replace(':h','h')
+            ]for text in r.text.split('####') if text != '']
+    for i, text in enumerate(texts):
+        try:
+            idx = texts[i][1].rindex('](')
+            texts[i][1] = texts[i][1][:idx]
+        except:
+            pass
+        try:
+            idx = texts[i][1].rindex(')')
+            texts[i][1] = texts[i][1][:idx]
+        except:
+            pass
+    texts = [text for text in texts if text[1].startswith("http")]
+    return texts
+
+def add_code_links(res):
+    url = 'https://github.com/MLNLP-World/Top-AI-Conferences-Paper-with-Code'
+    r = requests.get(url, headers=HEADERS)
+    soup = BeautifulSoup(r.text, "html.parser")
+    urls = [url['href'] for url in soup.find('table').find_all('a')]
+    urls = {url.split('/')[-1][:-3].upper().replace('-','').replace('EUR',''):
+            url.replace('github.com', 'raw.githubusercontent.com').replace('blob/','') for url in urls}
+
+    for conf in urls:
+        code_url = urls[conf]
+        code_data = get_code_links(code_url)
+        flag = False
+        if conf not in res:
+            continue
+        for title, link in code_data:
+            for ii, item in enumerate(res[conf]):
+                paper_name = item['paper_name']
+                if paper_name.endswith('.'):
+                    paper_name = paper_name[:-1]
+                if title.lower() == paper_name.lower():
+                    flag = True
+                    res[conf][ii]['paper_code'] = link
+                    break
+            if not flag:
+                import pdb; pdb.set_trace();
+    return res
+
+
 def crawl(cache_file=None, force=False):
     res = {}
 
@@ -258,8 +305,10 @@ def crawl(cache_file=None, force=False):
             continue
         res = search_from_dblp(url, name, res)
      
-
     res.update(cache_res)
+
+    res = add_code_links(res)
+
     return res
 
 
