@@ -47,6 +47,7 @@ function update_result(data) {
 				var url = data[0][conf][year][i]["url"];
 				var authors = data[0][conf][year][i]["authors"];
 				var abstract = data[0][conf][year][i]["abstract"];
+				var code = data[0][conf][year][i]["code"];
 				if (abstract == null || abstract == "") {
 					abstract = "No abstract available";
 				}
@@ -93,6 +94,8 @@ function update_result(data) {
 					conf +
 					year +
 					"</span></p>";
+				item_html +=
+					'<a href="' + code + '" style="text-decoration:none;"><span class="label label-info">Code</span></a>';
 				item_html += "</div>";
 				item_html += "</div>";
 				item_html += "</div>";
