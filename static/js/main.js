@@ -25,6 +25,7 @@ function update_result(data) {
 
 	var count = 0;
 
+
 	for (var conf in data[0]) {
 		var flag = false;
 		var conf_html =
@@ -65,7 +66,14 @@ function update_result(data) {
 
 				var author_html = "";
 				for (var j in authors) {
-					author_html += '<li class="author-item">' + authors[j] + "</li>";
+
+					var conf_idx = location.href.indexOf('&confs');
+					var author_query = '/r?query=&year=&sp_year=&sp_author=' + authors[j] + location.href.substring(conf_idx);
+
+
+					author_html += '<li class="author-item">' +
+						'<a href="' + author_query + '" >' +
+						authors[j] + "</a>" + "</li>";
 				}
 				author_html = '<ul class="authors">' + author_html + "</ul>";
 
