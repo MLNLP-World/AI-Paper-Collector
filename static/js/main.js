@@ -53,6 +53,9 @@ function update_result(data) {
 				if (abstract == null || abstract == "") {
 					abstract = "No abstract available";
 				}
+				if (code == null || code == "" || code == "#") {
+					code = "https://paperswithcode.com/search?q=" + title;
+				}
 
 				// replace < and > with &lt; and &gt; in abstract
 				abstract = abstract.replace(/</g, "&lt;");
