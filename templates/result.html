@@ -5,13 +5,17 @@ content %}
     <div class="row">{% include "search.html" %}</div>
   </div>
 
-  <script src="/static/js/main.js?" + Math.random()></script>
+  <script src="/static/js/main.js?v=1.0.0"></script>
 
   <script>
-    var data = eval('[' + {{ json_data| tojson }} +']');
+    var data = eval('[' + {
+      {
+        json_data | tojson
+      }
+    } + ']');
     // console.log(data);
-    $(document).ready(function(){
-        update_result(data);
+    $(document).ready(function () {
+      update_result(data);
     });
   </script>
 
