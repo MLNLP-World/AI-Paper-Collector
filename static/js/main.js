@@ -107,7 +107,7 @@ function update_result(data) {
 					year +
 					"</span>" +
 					'<a href="' + code + '" style="text-decoration:none; margin-left:5px;"><span class="label label-info">Code</span></a>' + 
-					'<a style="text-decoration:none; margin-left:5px;" class="label label-warning" title="Bibtext" data-container="body" data-toggle="bibtext" data-placement="right" data-content="Under Construction">Bibtext</a>' +
+					'<a style="text-decoration:none; margin-left:5px;" class="label label-warning" title="BibTeX" data-container="body" data-toggle="bibtex" data-placement="right" data-content="Under Construction">BibTeX</a>' +
 					"</p>";
 				item_html += "</div>";
 				item_html += "</div>";
@@ -161,7 +161,7 @@ function update_result(data) {
 	$("#result-list-group .tab-body").first().addClass("active");
 	$("#result-list-group .nav-tabs li").first().addClass("active");
     $(function () { 
-      $("[data-toggle='bibtext']").popover();
+      $("[data-toggle='bibtex']").popover();
     });
 }
 
