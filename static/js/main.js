@@ -106,7 +106,8 @@ function update_result(data) {
 					conf +
 					year +
 					"</span>" +
-					'<a href="' + code + '" style="text-decoration:none; margin-left:5px;"><span class="label label-info">Code</span></a>' +
+					'<a href="' + code + '" style="text-decoration:none; margin-left:5px;"><span class="label label-info">Code</span></a>' + 
+					'<a style="text-decoration:none; margin-left:5px;" class="label label-warning" title="Bibtext" data-container="body" data-toggle="bibtext" data-placement="right" data-content="Under Construction">Bibtext</a>' +
 					"</p>";
 				item_html += "</div>";
 				item_html += "</div>";
@@ -159,6 +160,9 @@ function update_result(data) {
 	$("#result-list-group").html(prompt_html + tab_html + tab_content_html);
 	$("#result-list-group .tab-body").first().addClass("active");
 	$("#result-list-group .nav-tabs li").first().addClass("active");
+    $(function () { 
+      $("[data-toggle='bibtext']").popover();
+    });
 }
 
 function JSONToCSVConvertor(data) {
