@@ -167,6 +167,8 @@ def search_from_dblp(url, name, res):
         except:
             print(f"Skip url:{paper_url}")
             paper_abstract = ""
+        if paper[-1] == ".":
+            paper = paper[:-1]
         res[name].append(
             {
                 "paper_name": paper, 
