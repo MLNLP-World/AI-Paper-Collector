@@ -642,5 +642,9 @@
     {
         "name": "RECSYS2022",
         "url": "https://dblp.org/db/conf/recsys/recsys2022.html"
+    },
+    {
+        "name": "ICME2022",
+        "url": "https://dblp.org/db/conf/icmcs/icme2022.html"
     }
 ]
