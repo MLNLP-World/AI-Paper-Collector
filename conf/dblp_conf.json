@@ -638,5 +638,9 @@
     {
         "name": "MICCAI2019",
         "url": "https://dblp.org/db/conf/miccai/miccai2019-6.html"
+    },
+    {
+        "name": "RECSYS2022",
+        "url": "https://dblp.org/db/conf/recsys/recsys2022.html"
     }
 ]
