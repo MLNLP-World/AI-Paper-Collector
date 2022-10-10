@@ -193,6 +193,23 @@ function JSONToCSVConvertor(data) {
 	return csv;
 }
 
+function JSONToText(data) {
+	var txt = "";
+	for (var conf in data[0]) {
+		for (var year in data[0][conf]) {
+			for (var i in data[0][conf][year]) {
+				let item = data[0][conf][year][i];
+				if (item == null) {
+					continue;
+				}
+				let row = "[" + conf + year + "]\t" + item["title"];
+				txt += row + '\r\n';
+			}
+		}
+	}
+	return txt;
+}
+
 function export_result_to_csv(data) {
 	let csv = JSONToCSVConvertor(data);
 	let dataUri =
@@ -215,10 +232,22 @@ function export_result(data) {
 	linkElement.click();
 }
 
+function export_result_txt(data) {
+	let txt = JSONToText(data);
+	let dataUri =
+		"data:text/plain;charset=utf-8," + encodeURIComponent(txt);
+	let exportFileDefaultName = "result.txt";
+	let linkElement = document.createElement("a");
+	linkElement.setAttribute("href", dataUri);
+	linkElement.setAttribute("download", exportFileDefaultName);
+	linkElement.click();
+}
+
 $("#export-button").click(function () {
 	if (typeof data !== "undefined") {
-		export_result(data);
 		export_result_to_csv(data);
+		export_result_txt(data);
+		export_result(data);
 	}
 });
 

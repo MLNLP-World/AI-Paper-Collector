@@ -88,6 +88,7 @@ def prepare():
 prepare()
 
 
+
 def search(query, confs, year, sp_year=None, sp_author=None, limit=None):
     # search in database
     result_count = 0
@@ -103,7 +104,21 @@ def search(query, confs, year, sp_year=None, sp_author=None, limit=None):
                 continue
             conf_results[conf_year] = []
             for paper in cache_data[conf][conf_year]:
-                if query in paper["title_format"]:
+                if query.lower() == 'findall' and len(confs) == 1:
+                    if sp_author is not None and sp_author not in paper["authors_format"]:
+                        continue
+                    conf_results[conf_year].append({
+                        "title": paper["title"], 
+                        "url": paper["url"],
+                        "authors": paper["authors"],
+                        "abstract": paper["abstract"],
+                        "code": paper["code"],
+                        "citation": paper["citation"],
+                    })
+                    result_count += 1
+                    if limit is not None and result_count >= limit:
+                        break
+                elif query in paper["title_format"]:
                     if sp_author is not None and sp_author not in paper["authors_format"]:
                         continue
                     conf_results[conf_year].append({
@@ -199,7 +214,6 @@ def result():
 
     # print(query, confs, year, sp_year)
     results = search(query, confs, year, sp_year=sp_year, sp_author=sp_author, limit=5000)
-    # print(results)
     return render_template(
         "result.html",
         confs=support_confs,
