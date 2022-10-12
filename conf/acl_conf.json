@@ -78,5 +78,10 @@
         "name": "NAACL2022",
         "url": "https://aclanthology.org/volumes/2022.findings-naacl/",
         "tag": "^/2022.findings*"
+    },
+    {
+        "name": "COLING2022",
+        "url": "https://aclanthology.org/events/coling-2022/",
+        "tag": "^/2022.coling*"
     }
 ]
