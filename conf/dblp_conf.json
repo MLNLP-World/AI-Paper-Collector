@@ -646,5 +646,9 @@
     {
         "name": "ICME2022",
         "url": "https://dblp.org/db/conf/icmcs/icme2022.html"
+    },
+    {
+        "name": "MM2022",
+        "url": "https://dblp.org/db/conf/mm/mm2022.html"
     }
 ]
