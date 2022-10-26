@@ -650,5 +650,9 @@
     {
         "name": "MM2022",
         "url": "https://dblp.org/db/conf/mm/mm2022.html"
+    },
+    {
+        "name": "CIKM2022",
+        "url": "https://dblp.org/db/conf/cikm/cikm2022.html"
     }
 ]
