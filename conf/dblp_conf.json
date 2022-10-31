@@ -718,5 +718,9 @@
     {
         "name": "INTERSPEECH2022",
         "url": "https://dblp.org/db/conf/interspeech/interspeech2022.html"
+    },
+    {
+        "name": "ISWC2022",
+        "url": "https://dblp.org/db/conf/semweb/iswc2022.html"
     }
 ]
