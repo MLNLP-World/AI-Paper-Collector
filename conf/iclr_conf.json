@@ -1,14 +1,26 @@
 [
     {
-     "name": "ICLR2022",
-     "url": "https://api.openreview.net/notes?content.venue=ICLR 2022 Poster&offset=0&limit=1000&invitation=ICLR.cc/2022/Conference/-/Blind_Submission"
+        "name": "ICLR2022",
+        "url": "https://api.openreview.net/notes?content.venue=ICLR 2022 Poster&offset=0&limit=1000&invitation=ICLR.cc/2022/Conference/-/Blind_Submission"
     },
     {
-     "name": "ICLR2022",
-     "url": "https://api.openreview.net/notes?content.venue=ICLR 2022 Oral&offset=0&limit=1000&invitation=ICLR.cc/2022/Conference/-/Blind_Submission"
+        "name": "ICLR2022",
+        "url": "https://api.openreview.net/notes?content.venue=ICLR 2022 Oral&offset=0&limit=1000&invitation=ICLR.cc/2022/Conference/-/Blind_Submission"
     },
     {
-     "name": "ICLR2022",
-     "url": "https://api.openreview.net/notes?content.venue=ICLR 2022 Spotlight&offset=0&limit=1000&invitation=ICLR.cc/2022/Conference/-/Blind_Submission"     
-    } 
+        "name": "ICLR2022",
+        "url": "https://api.openreview.net/notes?content.venue=ICLR 2022 Spotlight&offset=0&limit=1000&invitation=ICLR.cc/2022/Conference/-/Blind_Submission"
+    },
+    {
+        "name": "NIPS2022",
+        "url": "https://api.openreview.net/notes?content.venue=NeurIPS+2022+Accept&details=replyCount&offset=0&limit=1000&invitation=NeurIPS.cc%2F2022%2FConference%2F-%2FBlind_Submission"
+    },
+    {
+        "name": "NIPS2022",
+        "url": "https://api.openreview.net/notes?content.venue=NeurIPS+2022+Accept&details=replyCount&offset=1000&limit=1000&invitation=NeurIPS.cc%2F2022%2FConference%2F-%2FBlind_Submission"
+    },
+    {
+        "name": "NIPS2022",
+        "url": "https://api.openreview.net/notes?content.venue=NeurIPS+2022+Accept&details=replyCount&offset=2000&limit=1000&invitation=NeurIPS.cc%2F2022%2FConference%2F-%2FBlind_Submission"
+    }
 ]
