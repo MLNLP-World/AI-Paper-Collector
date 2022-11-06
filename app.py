@@ -70,7 +70,6 @@ def load_data():
                     "title_format": re.sub("-", " ", re.sub("\s+", " ", paper["paper_name"])).lower(),
                     "url": paper["paper_url"],
                     "authors": paper["paper_authors"],
-                    "authors_format": " ".join(paper["paper_authors"]).lower(),
                     "abstract": paper["paper_abstract"],
                     "code": paper["paper_code"],
                     "citation": paper["paper_cite"],
@@ -104,8 +103,9 @@ def search(query, confs, year, sp_year=None, sp_author=None, limit=None):
                 continue
             conf_results[conf_year] = []
             for paper in cache_data[conf][conf_year]:
+                authors_format = [author.lower() for author in paper["authors"]] #exact match
                 if query.lower() == 'findall' and len(confs) == 1:
-                    if sp_author is not None and sp_author not in paper["authors_format"]:
+                    if sp_author is not None and sp_author not in authors_format:
                         continue
                     conf_results[conf_year].append({
                         "title": paper["title"], 
@@ -119,7 +119,7 @@ def search(query, confs, year, sp_year=None, sp_author=None, limit=None):
                     if limit is not None and result_count >= limit:
                         break
                 elif query in paper["title_format"]:
-                    if sp_author is not None and sp_author not in paper["authors_format"]:
+                    if sp_author is not None and sp_author not in authors_format:
                         continue
                     conf_results[conf_year].append({
                         "title": paper["title"], 
@@ -132,7 +132,7 @@ def search(query, confs, year, sp_year=None, sp_author=None, limit=None):
                     result_count += 1
                     if limit is not None and result_count >= limit:
                         break
-                elif query == "#" and sp_author is not None and sp_author in paper["authors_format"]:
+                elif query == "#" and sp_author is not None and sp_author not in authors_format:
                     conf_results[conf_year].append({
                         "title": paper["title"], 
                         "url": paper["url"],
