@@ -41,7 +41,6 @@ def add_item(item: dict):
             "title_format": item["title_format"],
             "url": item["url"],
             "authors": item["authors"],
-            "authors_format": item["authors_format"],
             "abstract": item["abstract"],
             "code": item["code"],
             "citation": item["citation"],
