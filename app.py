@@ -1,12 +1,9 @@
-import shutil
 from flask import Flask, render_template, request, make_response
 from flask_bootstrap import Bootstrap
 import os
 import pytz
 import datetime
-import time
 import json
-import sqlite3
 import re
 
 cn = pytz.timezone("Asia/Shanghai")
@@ -60,7 +57,6 @@ def load_data():
             support_confs.append(conf_name.upper())
 
         for paper in data[conf]:
-            # print(conf_name, year, paper)
             add_item(
                 {
                     "conf": conf_name.upper(),
@@ -80,7 +76,6 @@ def load_data():
 
 def prepare():
     load_data()
-    # print(cache_data)
 
 
 prepare()
@@ -171,9 +166,14 @@ def result():
     sp_year = request.form.get("sp_year") or request.args.get("sp_year") or None
     sp_author = request.form.get("sp_author") or request.args.get("sp_author") or None
     confs = request.form.getlist("confs") or request.args.getlist("confs") or None
+    searchtype = request.form.get("searchtype") or request.args.get("searchtype") or None
 
     if query is None and sp_author is None:
         return render_template("index.html", confs=support_confs, year_now=datetime.datetime.now(cn).year)
+    elif searchtype == 'author':
+        sp_author = query
+        last_query = "#"
+        query = "#"      
     elif query is None and sp_author is not None:
         last_query = "#"
         query = "#"
@@ -219,7 +219,6 @@ def result():
         confs = [x for x in confs if x in support_confs]
 
 
-    # print(query, confs, year, sp_year)
     results = search(query, confs, year, sp_year=sp_year, sp_author=sp_author, limit=5000)
     return render_template(
         "result.html",
@@ -232,4 +231,3 @@ def result():
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=8000, use_reloader=True)
-    # app.run(debug=False, host="0.0.0.0", port=9000, use_reloader=False)
