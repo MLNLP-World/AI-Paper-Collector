@@ -9,6 +9,7 @@ content %}
 
   <script>
     var data = eval('[' + {{ json_data| tojson }} +']');
+    var delete_items = [];
     // console.log(data);
     $(document).ready(function(){
       update_result(data);

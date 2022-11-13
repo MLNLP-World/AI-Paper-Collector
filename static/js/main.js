@@ -93,7 +93,9 @@ function update_result(data) {
 				var item_html = "";
 				item_html += '<div class="panel panel-default list-group-item">';
 				item_html += '<div class="panel-body">';
-				item_html += '<div class="media">';
+				item_html += '<div class="media" style="display:flex;">';
+
+
 				item_html += '<div class="media-body">';
 				item_html += '<a href="' + url + '" target="_blank">';
 				item_html += '<h4 class="media-heading">' + title + "</h4>";
@@ -110,6 +112,11 @@ function update_result(data) {
 					'<a style="text-decoration:none; margin-left:5px;" class="label label-warning" title="BibTeX" data-container="body" data-toggle="bibtex" data-placement="right" data-content="Under Construction">BibTeX</a>' +
 					"</p>";
 				item_html += "</div>";
+
+				item_html += '<div class="delete-btn" style="margin-left: auto; margin-right: 0; display: flex; justify-content: flex-end;">'
+				item_html += '<a href="javascript:void(0)"><img src="static/delete.svg" width="50%" height="100%"></a>'
+				item_html += "</div>";
+
 				item_html += "</div>";
 				item_html += "</div>";
 				item_html += "</div>";
@@ -163,9 +170,22 @@ function update_result(data) {
     $(function () { 
       $("[data-toggle='bibtex']").popover();
     });
+	$("li[role='presentation']").on("click", function() {
+		// clear the delete_items
+		delete_items = [];
+	});
+	//click the delete-item tag to remove div
+	$(".delete-btn a").on("click", function() {
+		if (typeof delete_items != "undefined") {
+			//get media-heading
+			var title = $(this).parent().parent().find(".media-heading").text();
+			delete_items.push(title);
+		}
+		$(this).parents(".list-group-item").remove();
+	});
 }
 
-function JSONToCSVConvertor(data) {
+function JSONToCSVConvertor(data, tab) {
 	var csv = "";
 	let row = "";
 	let _item = ['title', 'url', 'authors', 'abstract', 'code', 'citation'];
@@ -175,10 +195,16 @@ function JSONToCSVConvertor(data) {
 	row += 'conf,year';
 	csv += row + '\r\n';
 	for (var conf in data[0]) {
+		if (tab != "all" && conf != tab) {
+			continue;
+		}
 		for (var year in data[0][conf]) {
 			for (var i in data[0][conf][year]) {
 				let item = data[0][conf][year][i];
 				if (item == null) {
+					continue;
+				}
+				if (delete_items.includes(item["title"])) {
 					continue;
 				}
 				let row = "";
@@ -193,13 +219,19 @@ function JSONToCSVConvertor(data) {
 	return csv;
 }
 
-function JSONToText(data) {
+function JSONToText(data, tab) {
 	var txt = "";
 	for (var conf in data[0]) {
+		if (tab != "all" && conf != tab) {
+			continue;
+		}
 		for (var year in data[0][conf]) {
 			for (var i in data[0][conf][year]) {
 				let item = data[0][conf][year][i];
 				if (item == null) {
+					continue;
+				}
+				if (delete_items.includes(item["title"])) {
 					continue;
 				}
 				let row = "[" + conf + year + "]\t" + item["title"];
@@ -211,10 +243,23 @@ function JSONToText(data) {
 }
 
 function export_result_to_csv(data) {
-	let csv = JSONToCSVConvertor(data);
+	let tab = $(".active[role='presentation'] a").attr('aria-controls')
+	let csv = JSONToCSVConvertor(data, tab);
 	let dataUri =
 		"data:text/csv;charset=utf-8," + encodeURIComponent(csv);
 	let exportFileDefaultName = "result.csv";
+	let linkElement = document.createElement("a");
+	linkElement.setAttribute("href", dataUri);
+	linkElement.setAttribute("download", exportFileDefaultName);
+	linkElement.click();
+}
+
+function export_result_txt(data) {
+	let tab = $(".active[role='presentation'] a").attr('aria-controls')
+	let txt = JSONToText(data, tab);
+	let dataUri =
+		"data:text/plain;charset=utf-8," + encodeURIComponent(txt);
+	let exportFileDefaultName = "result.txt";
 	let linkElement = document.createElement("a");
 	linkElement.setAttribute("href", dataUri);
 	linkElement.setAttribute("download", exportFileDefaultName);
@@ -232,22 +277,11 @@ function export_result(data) {
 	linkElement.click();
 }
 
-function export_result_txt(data) {
-	let txt = JSONToText(data);
-	let dataUri =
-		"data:text/plain;charset=utf-8," + encodeURIComponent(txt);
-	let exportFileDefaultName = "result.txt";
-	let linkElement = document.createElement("a");
-	linkElement.setAttribute("href", dataUri);
-	linkElement.setAttribute("download", exportFileDefaultName);
-	linkElement.click();
-}
-
 $("#export-button").click(function () {
 	if (typeof data !== "undefined") {
 		export_result_to_csv(data);
 		export_result_txt(data);
-		export_result(data);
+		// export_result(data);
 	}
 });
 
