@@ -26,7 +26,9 @@
     <br />
 </p>
 
-**Web demo**: [https://ai-paper-collector.vercel.app/](https://ai-paper-collector.vercel.app/) (recommended)
+**Web demo**: 
+- [https://ai-paper-collector.vercel.app/](https://ai-paper-collector.vercel.app/) (recommended)
+- [http://paper.hopto.org/](http://paper.hopto.org/) (for Mainland in China)
 
 **Colab notebook**: [here](https://colab.research.google.com/github/Doragd/AI-Paper-collector-Dev/blob/main/colab/AI_Paper_Collector_Colab.ipynb)
 
