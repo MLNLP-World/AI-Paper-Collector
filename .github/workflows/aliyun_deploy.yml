@@ -14,6 +14,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: print rsync version
+        run: rsync --version
       - name: Deploy to aliyun server
         uses: easingthemes/ssh-deploy@v2.0.7
         env:
