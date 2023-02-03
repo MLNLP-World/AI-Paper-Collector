@@ -22,5 +22,21 @@
     {
         "name": "NIPS2022",
         "url": "https://api.openreview.net/notes?content.venue=NeurIPS+2022+Accept&details=replyCount&offset=2000&limit=1000&invitation=NeurIPS.cc%2F2022%2FConference%2F-%2FBlind_Submission"
+    },
+    {
+        "name": "ICLR2023",
+        "url": "https://api.openreview.net/notes?content.venue=ICLR+2023+notable+top+5%25&details=replyCount&offset=0&limit=1000&invitation=ICLR.cc%2F2023%2FConference%2F-%2FBlind_Submission"
+    },
+    {
+        "name": "ICLR2023",
+        "url": "https://api.openreview.net/notes?content.venue=ICLR+2023+notable+top+25%25&details=replyCount&offset=0&limit=1000&invitation=ICLR.cc%2F2023%2FConference%2F-%2FBlind_Submission"
+    },
+    {
+        "name": "ICLR2023",
+        "url": "https://api.openreview.net/notes?content.venue=ICLR+2023+poster&details=replyCount&offset=0&limit=1000&invitation=ICLR.cc%2F2023%2FConference%2F-%2FBlind_Submission"
+    },
+    {
+        "name": "ICLR2023",
+        "url": "https://api.openreview.net/notes?content.venue=ICLR+2023+poster&details=replyCount&offset=1000&limit=1000&invitation=ICLR.cc%2F2023%2FConference%2F-%2FBlind_Submission"
     }
 ]
