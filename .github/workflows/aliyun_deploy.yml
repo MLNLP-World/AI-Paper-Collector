@@ -33,4 +33,4 @@ jobs:
           echo "${{ env.SSH_PRIVATE_KEY }}" | tr -d '\r' > ~/.ssh/id_rsa
           chmod 700 ~/.ssh/id_rsa
           ssh-keyscan -H "${{ env.REMOTE_HOST }}" >> ~/.ssh/known_hosts
-          ssh -o StrictHostKeyChecking=no "${{ env.REMOTE_USER }}@${{ env.REMOTE_HOST }}" "sudo systemctl restart myapp"
+          ssh -o StrictHostKeyChecking=no "${{ env.REMOTE_USER }}@${{ env.REMOTE_HOST }}" "systemctl restart myapp"
