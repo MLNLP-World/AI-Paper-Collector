@@ -83,5 +83,10 @@
         "name": "COLING2022",
         "url": "https://aclanthology.org/events/coling-2022/",
         "tag": "^/2022.coling*"
+    },
+    {
+        "name": "EMNLP2022",
+        "url": "https://aclanthology.org/events/emnlp-2022/",
+        "tag": "^/2022.emnlp*"
     }
 ]
