@@ -23,3 +23,9 @@ jobs:
           REMOTE_HOST: ${{ secrets.ALIYUN_SERVER_HOST }}
           REMOTE_USER: ${{ secrets.ALIYUN_REMOTE_USER }}
           TARGET: ${{ secrets.ALIYUN_TARGET }}
+      - name: Restart service
+        env:
+          REMOTE_HOST: ${{ secrets.ALIYUN_SERVER_HOST }}
+          REMOTE_USER: ${{ secrets.ALIYUN_REMOTE_USER }}
+        run: |
+          ssh -o StrictHostKeyChecking=no "${{ env.REMOTE_USER }}@${{ env.REMOTE_HOST }}" "sudo systemctl restart myapp"
