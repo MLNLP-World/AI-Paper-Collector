@@ -734,5 +734,17 @@
     {
         "name": "IJCV2022",
         "url": "https://dblp.uni-trier.de/db/journals/ijcv/ijcv130.html"
+    },
+    {
+        "name": "TNNLS2020",
+        "url": "https://dblp.org/db/journals/tnn/tnn31.html"
+    },
+    {
+        "name": "TNNLS2021",
+        "url": "https://dblp.org/db/journals/tnn/tnn32.html"
+    },
+    {
+        "name": "TNNLS2022",
+        "url": "https://dblp.org/db/journals/tnn/tnn33.html"
     }
 ]
