@@ -26,7 +26,9 @@
     <br />
 </p>
 
-**Web demo**: [https://ai-paper-collector.vercel.app/](https://ai-paper-collector.vercel.app/) (recommended)
+**Web demo**: 
+- [https://ai-paper-collector.vercel.app/](https://ai-paper-collector.vercel.app/) (recommended)
+- [http://47.101.133.186/](http://47.101.133.186/) (for Mainland in China)
 
 **Colab notebook**: [here](https://colab.research.google.com/github/Doragd/AI-Paper-collector-Dev/blob/main/colab/AI_Paper_Collector_Colab.ipynb)
 
@@ -42,16 +44,16 @@ Support fuzzy and exact search for paper titles.
 <!-- confs-list-start -->
 
 ```text
-- [EMNLP 2019-2021] [ACL 2019-2022] [NAACL 2019-2022] [COLING 2020-2022] 
-- [ICASSP 2019-2022] [WWW 2019-2022] [ICLR 2019-2022] [ICML 2019-2022] 
+- [EMNLP 2019-2022] [ACL 2019-2022] [NAACL 2019-2022] [COLING 2020-2022] 
+- [ICASSP 2019-2022] [WWW 2019-2022] [ICLR 2019-2023] [ICML 2019-2022] 
 - [AAAI 2019-2022] [IJCAI 2019-2022] [CVPR 2019-2022] [ICCV 2019-2021] 
 - [MM 2019-2022] [KDD 2019-2022] [CIKM 2019-2022] [SIGIR 2019-2022] 
 - [WSDM 2019-2022] [ECIR 2019-2022] [ECCV 2020-2022] [COLT 2019-2022] 
 - [AISTATS 2019-2022] [INTERSPEECH 2019-2022] [ISWC 2019-2022] [JMLR 2019-2022] 
 - [VLDB 2019-2021] [ICME 2019-2022] [TIP 2020-2022] [TPAMI 2020-2022] 
 - [RECSYS 2019-2022] [TKDE 2020-2022] [TOIS 2020-2022] [ICDM 2019-2021] 
-- [TASLP 2020-2022] [BMVC 2019-2021] [MICCAI 2019-2022] [NIPS 2019-2022] 
-- [MLSYS 2020-2022] [WACV 2020-2022] 
+- [TASLP 2020-2022] [BMVC 2019-2021] [MICCAI 2019-2022] [IJCV 2020-2022] 
+- [TNNLS 2020-2022] [NIPS 2019-2022] [MLSYS 2020-2022] [WACV 2020-2022] 
 ```
 
 
