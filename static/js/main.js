@@ -108,7 +108,7 @@ function update_result(data) {
 					conf +
 					year +
 					"</span>" +
-					'<a href="' + code + '" style="text-decoration:none; margin-left:5px;"><span class="label label-info">Code</span></a>' + 
+					'<a href="' + code + '" style="text-decoration:none; margin-left:5px;"><span class="label label-info">Code</span></a>' +
 					'<a style="text-decoration:none; margin-left:5px;" class="label label-warning" title="BibTeX" data-container="body" data-toggle="bibtex" data-placement="right" data-content="Under Construction">BibTeX</a>' +
 					"</p>";
 				item_html += "</div>";
@@ -154,28 +154,43 @@ function update_result(data) {
 	// console.log(tab_content_html);
 
 	var prompt_html = "";
+	var sort_html = `
+	<div class="btn-group">
+	<button type="button" class="btn btn-default non-clickable">默认排序</button>
+	<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+	  <span class="caret"></span>
+	  <span class="sr-only">切换下拉菜单</span>
+	</button>
+	<ul class="dropdown-menu" role="menu">
+	  <li><a id="sort-by-date" href="#">按照日期排序</a></li>
+	  <li><a id="sort-by-conf" href="#">按照会议排序</a></li>
+	</ul>
+  </div>`;
+
 	if (count == 0) {
 		prompt_html =
 			'<div class="alert alert-warning text-center" role="alert">No result found.</div>';
+
 	} else {
 		prompt_html =
-			'<div class="alert alert-success text-center" role="alert">' +
+			'<div class="alert-container"><div class="alert alert-success text-center" role="alert">' +
 			count +
 			" result(s) found.</div>";
+		prompt_html += sort_html + "</div>";
 	}
 
 	$("#result-list-group").html(prompt_html + tab_html + tab_content_html);
 	$("#result-list-group .tab-body").first().addClass("active");
 	$("#result-list-group .nav-tabs li").first().addClass("active");
-    $(function () { 
-      $("[data-toggle='bibtex']").popover();
-    });
-	$("li[role='presentation']").on("click", function() {
+	$(function () {
+		$("[data-toggle='bibtex']").popover();
+	});
+	$("li[role='presentation']").on("click", function () {
 		// clear the delete_items
 		delete_items = [];
 	});
 	//click the delete-item tag to remove div
-	$(".delete-btn a").on("click", function() {
+	$(".delete-btn a").on("click", function () {
 		if (typeof delete_items != "undefined") {
 			//get media-heading
 			var title = $(this).parent().parent().find(".media-heading").text();
@@ -363,4 +378,56 @@ $("#conf-invert").click(function () {
 	$('input[name="confs"]').each(function () {
 		$(this).prop("checked", !$(this).prop("checked"));
 	});
+});
+
+// sort list items by date
+function sortByDate() {
+	const listGroup = document.querySelector("#all>.list-group");
+	const listItems = Array.from(listGroup.children);
+	const sortedListItems = listItems.sort((a, b) => {
+		const labelA = a.querySelector(".label").textContent;
+		const labelB = b.querySelector(".label").textContent;
+		const yearA = labelA.slice(-4);
+		const yearB = labelB.slice(-4);
+		const confA = labelA.slice(0, -5);
+		const confB = labelB.slice(0, -5);
+		if (yearA === yearB) {	// if year is the same, sort by conference name
+			return confA.localeCompare(confB);
+		} else {
+			return yearB - yearA;
+		}
+	});
+	listGroup.innerHTML = "";
+	sortedListItems.forEach((item) => listGroup.appendChild(item));
+}
+
+// sort list items by conference name
+function sortByConf() {
+	const listGroup = document.querySelector("#all>.list-group");
+	const listItems = Array.from(listGroup.children);
+	const sortedListItems = listItems.sort((a, b) => {
+		const labelA = a.querySelector(".label").textContent;
+		const labelB = b.querySelector(".label").textContent;
+		const yearA = labelA.slice(-4);
+		const yearB = labelB.slice(-4);
+		const confA = labelA.slice(0, -5);
+		const confB = labelB.slice(0, -5);
+		if (confA === confB) {	// if conference name is the same, sort by year
+			return yearB - yearA;
+		} else {
+			return confA.localeCompare(confB);
+		}
+	});
+	listGroup.innerHTML = "";
+	sortedListItems.forEach((item) => listGroup.appendChild(item));
+}
+
+
+
+window.addEventListener("load", function () {
+	// add event listener to the dropdown menu items
+	const sortByDateItem = document.querySelector("#sort-by-date");
+	const sortByConfItem = document.querySelector("#sort-by-conf");
+	sortByDateItem.addEventListener("click", sortByDate);
+	sortByConfItem.addEventListener("click", sortByConf);
 });

@@ -93,3 +93,32 @@ label[for=search-query] {
 .delete-btn:hover a {
 	opacity: 1;
 }
+
+.alert-container {
+	display: flex;
+	align-items: center;
+}
+
+.alert-container .alert {
+	width: 980px;
+}
+
+.alert-container .btn-group {
+	margin-left: 10px;
+	height: 56px;
+	margin-bottom: 20px
+}
+
+.alert-container .btn-group .btn {
+	height: 100%;
+	padding: auto;
+}
+
+.alert-container .dropdown-menu {
+	min-width: 100%;
+}
+
+.alert-container .btn-group .non-clickable {
+	pointer-events: none;
+	cursor: default;
+}

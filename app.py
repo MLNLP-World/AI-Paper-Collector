@@ -204,22 +204,19 @@ def result():
     else:
         year = 2000
 
-    
     if sp_year is not None:
         sp_year = int(sp_year)
-
     
     if sp_author is not None:
         sp_author = sp_author.strip().lower()
         sp_author = re.sub("-", " ", re.sub("\s+", " ", sp_author))
-
     
     if confs is not None:
         confs = [x.upper() for x in confs]
         confs = [x for x in confs if x in support_confs]
 
-
     results = search(query, confs, year, sp_year=sp_year, sp_author=sp_author, limit=5000)
+
     return render_template(
         "result.html",
         confs=support_confs,
