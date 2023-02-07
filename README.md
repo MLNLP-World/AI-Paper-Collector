@@ -2,8 +2,8 @@
 <h1 align="center"> <img src="./pics/icon/ai.png" width="30" /> AI-Paper-Collector</h1>
 </p>
 <p align="center">
-  	<a href="https://img.shields.io/badge/version-v0.1.0-blue">
-      <img alt="version" src="https://img.shields.io/badge/version-v0.1.0-blue?color=FF8000?color=009922" />
+  	<a href="https://img.shields.io/badge/version-v1.0.4-blue">
+      <img alt="version" src="https://img.shields.io/badge/version-v1.0.4-blue?color=FF8000?color=009922" />
     </a>
   <a >
        <img alt="Status-building" src="https://img.shields.io/badge/Status-building-blue" />

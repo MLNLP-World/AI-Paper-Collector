@@ -5,13 +5,13 @@ content %}
     <div class="row">{% include "search.html" %}</div>
   </div>
 
-  <script src="/static/js/main.js?v=1.0.3"></script>
+  <script src="/static/js/main.js?v=1.0.4"></script>
 
   <script>
     var data = eval('[' + {{ json_data| tojson }} +']');
     var delete_items = [];
     // console.log(data);
-    $(document).ready(function(){
+    $(document).ready(function () {
       update_result(data);
     });
   </script>
