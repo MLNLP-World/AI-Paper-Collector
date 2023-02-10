@@ -158,7 +158,8 @@ def search(query, confs, year, sp_year=None, sp_author=None, limit=None):
 
 @app.route("/")
 def index():
-    return "index.html"
+    return render_template("index.html", confs=support_confs, year_now=datetime.datetime.now(cn).year)
+    # return "index.html"
 
 
 @app.route("/getGuessYouLike", methods=["POST", "GET"])
@@ -217,7 +218,7 @@ def result():
     # else:
     #     threshold = int(threshold)
 
-    
+
     if year is not None:
         year = int(year)
     else:
