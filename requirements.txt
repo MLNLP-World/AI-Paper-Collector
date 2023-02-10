@@ -12,5 +12,5 @@ nltk~=3.8.1
 pyyaml~=6.0
 
 aioflask~=0.4.0
-EdgeGPT~=0.0.20
+EdgeGPT
 asyncio~=3.4.3
