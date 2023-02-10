@@ -5,6 +5,8 @@ import pytz
 import datetime
 import json
 import re
+import asyncio
+from EdgeGPT import Chatbot
 
 cn = pytz.timezone("Asia/Shanghai")
 
@@ -156,7 +158,24 @@ def search(query, confs, year, sp_year=None, sp_author=None, limit=None):
 
 @app.route("/")
 def index():
-    return render_template("index.html", confs=support_confs, year_now=datetime.datetime.now(cn).year)
+    return "index.html"
+
+
+@app.route("/getGuessYouLike", methods=["POST", "GET"])
+def guessYouLike():
+    query = request.form.get("query") or request.args.get("query") or None
+
+    return asyncio.run(askHelper(query))
+
+
+async def askHelper(query):
+    bot = Chatbot()
+    prompt = f'Let us talk about search suggestion: If I want to search for papers on "{query}", what related and short search terms are suggested to me, please just return the top-10 related keywords of papers in JSON format. Do not perform any searches. No additional information or search results should be included in the output. The format is ```json``` with the key named "keywords".'
+    response = (await bot.ask(prompt=prompt))["item"]["messages"][1]["adaptiveCards"][0]["body"][0]["text"]
+    keywords = re.search("```json(.*)```", response, flags=re.DOTALL).group(1)
+    keywords = json.loads(keywords)
+    await bot.close()
+    return keywords
 
 
 @app.route("/r", methods=["POST", "GET"])
