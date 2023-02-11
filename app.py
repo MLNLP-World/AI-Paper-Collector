@@ -7,6 +7,7 @@ import json
 import re
 import time
 import asyncio
+import random
 from EdgeGPT import Chatbot as ChatbotEdge
 from revChatGPT.Official import Chatbot as ChatbotOfficial
 
@@ -26,6 +27,8 @@ app.config['BOOTSTRAP_SERVE_LOCAL'] = True
 base_dir = os.path.dirname(os.path.abspath(__file__))
 
 cache_json = os.path.join(base_dir, "cache", "cache.json")
+keywords_json = os.path.join(base_dir, "cache", "keywords.json")
+
 cache_data = {}
 support_confs = []
 
@@ -164,15 +167,43 @@ def index():
     # return "index.html"
 
 
+
+
 @app.route("/getGuessYouLike", methods=["POST", "GET"])
 def guessYouLike():
     query = request.form.get("query") or request.args.get("query") or None
+    keywords_cache = json.load(open(keywords_json, "r"))
+    if query is None:
+        return {"message:":"query is null."}
     st = time.time()
-    # response  = asyncio.run(askEdgeHelper(query))
-    response = askChatHelper(query)
+    response = askKeywordCache(query, keywords_cache)
+    if response is None:
+        # response  = asyncio.run(askEdgeHelper(query))
+        response = askChatHelper(query)
+        # store the keywords in cache
+        writeKeywordCache(query, keywords_cache, response['keywords'])
     ed = time.time()
     response['timecost'] = str(round(ed-st, 2) * 100) + 'ms'
     return response
+
+def askKeywordCache(query, keywords_cache, store_size=20):
+    if query in keywords_cache.keys():
+        response = keywords_cache[query]
+        if len(response['keywords']) == store_size:
+            response['keywords'] = random.sample(response['keywords'], 10)
+            return response
+        else: # if the keywords is not enough, we need to ask chatbot to get more keywords
+            return None
+    else:
+        return None
+    
+def writeKeywordCache(query, keywords_cache, keywords_list):
+    if query in keywords_cache.keys():
+        keywords_cache[query]['keywords'] = list(set(keywords_cache[query]['keywords'] + keywords_list))
+    else:
+        keywords_cache[query] = {'keywords': keywords_list}
+    with open(keywords_json, "w") as f:
+        json.dump(keywords_cache, f)
 
 def askChatHelper(query):
     engine = os.environ.get("OPENAI_ENGINE") or 'text-davinci-003'
