@@ -5,8 +5,10 @@ import pytz
 import datetime
 import json
 import re
+import time
 import asyncio
-from EdgeGPT import Chatbot
+from EdgeGPT import Chatbot as ChatbotEdge
+from revChatGPT.Official import Chatbot as ChatbotOfficial
 
 cn = pytz.timezone("Asia/Shanghai")
 
@@ -165,12 +167,28 @@ def index():
 @app.route("/getGuessYouLike", methods=["POST", "GET"])
 def guessYouLike():
     query = request.form.get("query") or request.args.get("query") or None
+    st = time.time()
+    # response  = asyncio.run(askEdgeHelper(query))
+    response = askChatHelper(query)
+    ed = time.time()
+    response['timecost'] = str(round(ed-st, 2) * 100) + 'ms'
+    return response
 
-    return asyncio.run(askHelper(query))
+def askChatHelper(query):
+    engine = os.environ.get("OPENAI_ENGINE") or 'text-davinci-003'
+    api_key = os.environ.get("OPENAI_API_KEY")
+    proxy = os.environ.get("OPENAI_PROXY")
 
+    temperature = 0.5
+    prompt = f'If I want to search for papers on "{query}", what keywords are recommended to me? Please just return the top-10 related keywords of papers in JSON format with the key named "keywords". The output must start with "```json" and end with "```".'
+    chatbot = ChatbotOfficial(api_key=api_key, engine=engine, proxy=proxy)
+    response = chatbot.ask(prompt, temperature=temperature)["choices"][0]["text"]
+    keywords = re.search("```json(.*)```", response, flags=re.DOTALL).group(1)
+    keywords = json.loads(keywords)
+    return keywords
 
-async def askHelper(query):
-    bot = Chatbot()
+async def askEdgeHelper(query):
+    bot = ChatbotEdge()
     prompt = f'Let us talk about search suggestion: If I want to search for papers on "{query}", what related and short search terms are suggested to me, please just return the top-10 related keywords of papers in JSON format. Do not perform any searches. No additional information or search results should be included in the output. The format is ```json``` with the key named "keywords".'
     response = (await bot.ask(prompt=prompt))["item"]["messages"][1]["adaptiveCards"][0]["body"][0]["text"]
     keywords = re.search("```json(.*)```", response, flags=re.DOTALL).group(1)
