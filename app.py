@@ -178,10 +178,13 @@ def guessYouLike():
     st = time.time()
     response = askKeywordCache(query, keywords_cache)
     if response is None:
-        # response  = asyncio.run(askEdgeHelper(query))
-        response = askChatHelper(query)
-        # store the keywords in cache
-        writeKeywordCache(query, keywords_cache, response['keywords'])
+        try:
+            # response  = asyncio.run(askEdgeHelper(query)) 
+            response = askChatHelper(query)
+            # store the keywords in cache
+            writeKeywordCache(query, keywords_cache, response['keywords'])
+        except:
+            response = {"message": "Sorry, the sevice is not available now. Please hold on."}
     ed = time.time()
     response['timecost'] = str(round(ed-st, 2) * 100) + 'ms'
     return response
