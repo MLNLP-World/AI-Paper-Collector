@@ -1,0 +1,55 @@
+<!--
+ * @Author: 0x3E5
+ * @Date: 2023-02-11 13:48:18
+ * @LastEditTime: 2023-02-15 16:22:07
+ * @LastEditors: 0x3E5
+ * @Description: 
+ * @FilePath: \ai-paper-search-web\index.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"
+    />
+    <title>AI-Paper-Search</title>
+  </head>
+  <body>
+    <div id="app">
+      <style>
+        .code-loader {
+          color: #999;
+          font-family: Consolas, Menlo, Monaco, monospace;
+          font-weight: bold;
+          font-size: 100px;
+          opacity: 0.8;
+          position: fixed;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
+
+        .code-loader span {
+          display: inline-block;
+          animation: pulse_414 0.4s alternate infinite ease-in-out;
+        }
+
+        .code-loader span:nth-child(odd) {
+          animation-delay: 0.4s;
+        }
+
+        @keyframes pulse_414 {
+          to {
+            transform: scale(0.8);
+            opacity: 0.5;
+          }
+        }
+      </style>
+      <div class="code-loader"><span>{</span><span>}</span></div>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
