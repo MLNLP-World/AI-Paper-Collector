@@ -14,6 +14,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Compile the frontend
+        run: |
+          cd web-vue && npm install && npm run build
       - name: Deploy to aliyun server
         uses: easingthemes/ssh-deploy@v2.0.7
         env:
