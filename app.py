@@ -72,13 +72,10 @@ def load_data():
             )
 
     support_confs.sort()
+    
 
 
-def prepare():
-    load_data()
-
-
-prepare()
+load_data()
 
 
 def search(query, confs, year, sp_year=None, sp_author=None, limit=None):
@@ -224,22 +221,6 @@ def search_api():
         last_query = query
         query = query.strip().lower()
         query = re.sub("-", " ", re.sub("\s+", " ", query))
-
-    # mode = request.form.get('mode') or 'exact'
-    # if mode not in ['fuzzy', 'exact']:
-    #     mode = 'exact'
-
-    # limit = request.form.get('limit') or None
-    # if limit is None or (type(limit) is str and limit.isdigit() is False):
-    #     limit = None
-    # else:
-    #     limit = int(limit)
-
-    # threshold = request.form.get('threshold') or 50
-    # if threshold is None or (type(threshold) is str and threshold.isdigit() is False):
-    #     threshold = 50
-    # else:
-    #     threshold = int(threshold)
 
     if year is not None:
         year = int(year)

@@ -44,6 +44,10 @@ export default defineConfig(({ command, mode }) => {
         //   ws: true,
         // },
       }
+    },
+    build: {
+      outDir: '../static',
+      emptyOutDir: true
     }
   }
 })
