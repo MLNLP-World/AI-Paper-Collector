@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, make_response
+from flask import Flask, render_template, request, make_response, jsonify
 from flask_bootstrap import Bootstrap
 import os
 import pytz
@@ -10,12 +10,8 @@ import asyncio
 from EdgeGPT import Chatbot as ChatbotEdge
 from revChatGPT.Official import Chatbot as ChatbotOfficial
 
-cn = pytz.timezone("Asia/Shanghai")
+app = Flask(__name__, static_folder='static', static_url_path="/")
 
-app = Flask(__name__)
-boo = Bootstrap(app)
-
-template_folder = "templates"
 # Templates Acknowledge: https://github.com/ronaldosvieira/simple-search-template
 # LICENCE: MIT
 
@@ -32,14 +28,13 @@ support_confs = []
 
 
 def add_item(item: dict):
-    # print(item)
     if item["conf"] not in cache_data.keys():
         cache_data[item["conf"]] = {}
     if item["year"] not in cache_data[item["conf"]].keys():
         cache_data[item["conf"]][item["year"]] = []
     cache_data[item["conf"]][item["year"]].append(
         {
-            "title": item["title"], 
+            "title": item["title"],
             "title_format": item["title_format"],
             "url": item["url"],
             "authors": item["authors"],
@@ -86,13 +81,11 @@ def prepare():
 prepare()
 
 
-
 def search(query, confs, year, sp_year=None, sp_author=None, limit=None):
-
     def match_author(authors, sp_author):
         if sp_author is None:
             return True
-        authors = [author.lower().replace("-"," ") for author in authors]
+        authors = [author.lower().replace("-", " ") for author in authors]
         author_format = " ".join(authors)
         if len(sp_author.split(" ")) > 1:
             return sp_author.lower() in authors
@@ -102,6 +95,7 @@ def search(query, confs, year, sp_year=None, sp_author=None, limit=None):
     # search in database
     result_count = 0
     results = {}
+
     for conf in confs:
         conf_results = {}
         if conf not in cache_data.keys():
@@ -117,7 +111,9 @@ def search(query, confs, year, sp_year=None, sp_author=None, limit=None):
                     continue
                 if query.lower() == 'findall' and len(confs) == 1:
                     conf_results[conf_year].append({
-                        "title": paper["title"], 
+                        "year": conf_year,
+                        "conf": conf,
+                        "title": paper["title"],
                         "url": paper["url"],
                         "authors": paper["authors"],
                         "abstract": paper["abstract"],
@@ -129,7 +125,9 @@ def search(query, confs, year, sp_year=None, sp_author=None, limit=None):
                         break
                 elif query in paper["title_format"]:
                     conf_results[conf_year].append({
-                        "title": paper["title"], 
+                        "year": conf_year,
+                        "conf": conf,
+                        "title": paper["title"],
                         "url": paper["url"],
                         "authors": paper["authors"],
                         "abstract": paper["abstract"],
@@ -141,7 +139,9 @@ def search(query, confs, year, sp_year=None, sp_author=None, limit=None):
                         break
                 elif query == "#":
                     conf_results[conf_year].append({
-                        "title": paper["title"], 
+                        "year": conf_year,
+                        "conf": conf,
+                        "title": paper["title"],
                         "url": paper["url"],
                         "authors": paper["authors"],
                         "abstract": paper["abstract"],
@@ -159,34 +159,32 @@ def search(query, confs, year, sp_year=None, sp_author=None, limit=None):
     return results
 
 
-@app.route("/")
-def index():
-    return render_template("index.html", confs=support_confs, year_now=datetime.datetime.now(cn).year)
-    # return "index.html"
-
-
-
-
-@app.route("/getGuessYouLike", methods=["POST", "GET"])
-def guessYouLike():
+@app.route("/api/get_guess_you_like", methods=["POST", "GET"])
+def get_guess_you_like_api():
     query = request.form.get("query") or request.args.get("query") or None
     if query is None:
-        return {"message:":"query is null."}
+        return {"message:": "query is null."}
     st = time.time()
     try:
-        # response  = asyncio.run(askEdgeHelper(query)) 
+        # response  = asyncio.run(askEdgeHelper(query))
         response = askChatHelper(query)
     except:
         response = {"message": "Sorry, the sevice is not available now. Please hold on."}
     ed = time.time()
-    response['timecost'] = str(round(ed-st, 2) * 100) + 'ms'
-    return response
+    response['timecost'] = str(round(ed - st, 2) * 100) + 'ms'
+    # test = {"keywords": ["multimodal", "multimodal learning", "multimodal representation", "multimodal fusion",
+    #                      "multimodal interaction", "multimodal analysis", "multimodal classification",
+    #                      "multimodal data", "multimodal networks", "multimodal retrieval"], "timecost": "540.0ms"}
+    # time.sleep(10)
+    data = {"msg": "success", "data": response}
+    payload = jsonify(data)
+    return payload, 200
+
 
 def askChatHelper(query):
     engine = os.environ.get("OPENAI_ENGINE") or 'text-davinci-003'
     api_key = os.environ.get("OPENAI_API_KEY")
     proxy = os.environ.get("OPENAI_PROXY")
-
     temperature = 0.5
     prompt = f'If I want to search for papers on "{query}", what keywords are recommended to me? Please just return the top-10 related keywords of papers in JSON format with the key named "keywords". The output must start with "```json" and end with "```".'
     chatbot = ChatbotOfficial(api_key=api_key, engine=engine, proxy=proxy)
@@ -194,6 +192,7 @@ def askChatHelper(query):
     keywords = re.search("```json(.*)```", response, flags=re.DOTALL).group(1)
     keywords = json.loads(keywords)
     return keywords
+
 
 async def askEdgeHelper(query):
     bot = ChatbotEdge()
@@ -205,21 +204,19 @@ async def askEdgeHelper(query):
     return keywords
 
 
-@app.route("/r", methods=["POST", "GET"])
-def result():
+@app.route("/api/search", methods=["POST", "GET"])
+def search_api():
     query = request.form.get("query") or request.args.get("query") or None
     year = request.form.get("year") or request.args.get("year") or None
     sp_year = request.form.get("sp_year") or request.args.get("sp_year") or None
     sp_author = request.form.get("sp_author") or request.args.get("sp_author") or None
-    confs = request.form.getlist("confs") or request.args.getlist("confs") or None
+    confs_string = request.form.get("confs") or request.args.get("confs") or None
     searchtype = request.form.get("searchtype") or request.args.get("searchtype") or None
-
-    if query is None and sp_author is None:
-        return render_template("index.html", confs=support_confs, year_now=datetime.datetime.now(cn).year)
-    elif searchtype == 'author':
+    confs = confs_string.split(',')
+    if searchtype == 'author':
         sp_author = query
         last_query = "#"
-        query = "#"      
+        query = "#"
     elif query is None and sp_author is not None:
         last_query = "#"
         query = "#"
@@ -244,7 +241,6 @@ def result():
     # else:
     #     threshold = int(threshold)
 
-
     if year is not None:
         year = int(year)
     else:
@@ -252,25 +248,21 @@ def result():
 
     if sp_year is not None:
         sp_year = int(sp_year)
-    
+
     if sp_author is not None:
         sp_author = sp_author.strip().lower()
         sp_author = re.sub("-", " ", re.sub("\s+", " ", sp_author))
-    
+
     if confs is not None:
         confs = [x.upper() for x in confs]
         confs = [x for x in confs if x in support_confs]
 
     results = search(query, confs, year, sp_year=sp_year, sp_author=sp_author, limit=5000)
+    data = {"msg": "success", "data": results}
 
-    return render_template(
-        "result.html",
-        confs=support_confs,
-        last_query=last_query,
-        year_now=datetime.datetime.now(cn).year,
-        json_data=json.dumps(results),
-    )
+    payload = jsonify(data)
+    return payload, 200
 
 
 if __name__ == "__main__":
-    app.run(debug=True, host="0.0.0.0", port=8000, use_reloader=True)
+    app.run(debug=True, host="0.0.0.0", port=5001, use_reloader=True)
