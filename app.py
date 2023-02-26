@@ -10,7 +10,7 @@ import asyncio
 from EdgeGPT import Chatbot as ChatbotEdge
 from revChatGPT.Official import Chatbot as ChatbotOfficial
 
-app = Flask(__name__, static_folder='static', static_url_path="/")
+app = Flask(__name__, static_folder='static', static_url_path="")
 
 # Templates Acknowledge: https://github.com/ronaldosvieira/simple-search-template
 # LICENCE: MIT
@@ -155,6 +155,9 @@ def search(query, confs, year, sp_year=None, sp_author=None, limit=None):
         results[conf.upper()] = conf_results
     return results
 
+@app.route('/')
+def root():
+    return app.send_static_file('index.html')
 
 @app.route("/api/get_guess_you_like", methods=["POST", "GET"])
 def get_guess_you_like_api():
