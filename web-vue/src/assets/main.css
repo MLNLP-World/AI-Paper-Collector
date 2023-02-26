@@ -1,0 +1,135 @@
+@import './base.css';
+
+#app {
+  width: 100%;
+  height: 100%;
+}
+.full {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.w-100 {
+  width: 100%;
+}
+.h-100 {
+  height: 100%;
+}
+.pointer {
+  cursor:pointer
+}
+.no-select{
+  user-select: none;
+}
+.pos-relative {
+  position: relative !important;
+}
+.pos-absoulte {
+  position: absolute !important;
+}
+.pos-center {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.align-left {
+  text-align: left;
+}
+.align-right {
+  text-align: right;
+}
+.align-center {
+  text-align: center;
+}
+.flex {
+  display: flex;
+}
+.flex-align-center{
+  align-items: center;
+}
+.flex-center {
+  justify-content: center;
+  vertical-align: center;
+}
+.flex-row {
+  flex-direction: row;
+}
+
+.mt-5 {
+  margin-top: 5px;
+}
+.mb-5 {
+  margin-bottom: 5px;
+}
+.mr-5 {
+  margin-right: 5px;
+}
+.ml-5 {
+  margin-left: 5px;
+}
+
+.mt-10 {
+  margin-top: 10px;
+}
+.mb-10 {
+  margin-bottom: 10px;
+}
+.mr-10 {
+  margin-right: 10px;
+}
+.ml-10 {
+  margin-left: 10px;
+}
+
+.mt-15 {
+  margin-top: 15px;
+}
+.mb-15 {
+  margin-bottom: 15px;
+}
+.mr-15 {
+  margin-right: 15px;
+}
+.ml-15 {
+  margin-left: 15px;
+}
+
+.mt-20 {
+  margin-top: 20px;
+}
+.mb-20 {
+  margin-bottom: 20px;
+}
+.mr-20 {
+  margin-right: 20px;
+}
+.ml-20 {
+  margin-left: 20px;
+}
+
+
+.mt-25 {
+  margin-top: 25px;
+}
+.mb-25 {
+  margin-bottom: 25px;
+}
+.mr-25 {
+  margin-right: 25px;
+}
+.ml-25 {
+  margin-left: 25px;
+}
+
+.mt-30 {
+  margin-top: 30px;
+}
+.mb-30 {
+  margin-bottom: 30px;
+}
+.mr-30 {
+  margin-right: 30px;
+}
+.ml-30 {
+  margin-left: 30px;
+}
