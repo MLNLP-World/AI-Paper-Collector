@@ -7,6 +7,7 @@ import json
 import re
 import time
 import asyncio
+import openai
 from EdgeGPT import Chatbot as ChatbotEdge
 from revChatGPT.Official import Chatbot as ChatbotOfficial
 
