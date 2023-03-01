@@ -167,7 +167,8 @@ def get_guess_you_like_api():
     st = time.time()
     try:
         # response  = asyncio.run(askEdgeHelper(query))
-        response = askChatHelper(query)
+        # response = askChatHelper(query)
+        response = askChatGPTAPI(query)
     except:
         response = {"message": "Sorry, the sevice is not available now. Please hold on."}
     ed = time.time()
@@ -180,6 +181,24 @@ def get_guess_you_like_api():
     payload = jsonify(data)
     return payload, 200
 
+
+def askChatGPTAPI(query):
+    engine = "gpt-3.5-turbo"
+    api_key = os.environ.get("OPENAI_API_KEY")
+    temperature = 0.5
+    prompt = f'Please just return the top-10 related keywords of papers on "{query}" in JSON format with the key named "keywords". The output must start with "```json" and end with "```".'
+    response = openai.ChatCompletion.create(
+        model=engine,
+        messages=[
+            {"role": "system", "content": "You are a helpful assistant for search suggestion of paper in the field of artificial intelligence"},
+            {"role": "user", "content": prompt},
+        ],
+        temperature=temperature
+    )
+    response = response['choices'][0]['message']['content']
+    keywords = re.search("```json(.*)```", response, flags=re.DOTALL).group(1)
+    keywords = json.loads(keywords)
+    return keywords
 
 def askChatHelper(query):
     engine = os.environ.get("OPENAI_ENGINE") or 'text-davinci-003'
