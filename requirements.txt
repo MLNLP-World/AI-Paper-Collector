@@ -14,6 +14,9 @@ asyncio~=3.4.3
 Flask
 numpy
 EdgeGPT
+# EdgeGPT==0.0.20
 ChatGPT
+# ChatGPT==2.0.0
 tiktoken
 openai
+# openai==0.26.5
