@@ -184,8 +184,8 @@ def get_guess_you_like_api():
 
 def askChatGPTAPI(query):
     engine = "gpt-3.5-turbo"
-    api_key = os.environ.get("OPENAI_API_KEY")
     temperature = 0.5
+    openai.api_key = os.environ.get("OPENAI_API_KEY")
     prompt = f'Please just return the top-10 related keywords of papers on "{query}" in JSON format with the key named "keywords". The output must start with "```json" and end with "```".'
     response = openai.ChatCompletion.create(
         model=engine,
