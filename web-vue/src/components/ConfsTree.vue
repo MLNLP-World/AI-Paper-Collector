@@ -1,10 +1,10 @@
 <!--
  * @Author: 0x3E5
  * @Date: 2023-02-12 17:29:45
- * @LastEditTime: 2023-02-14 17:40:05
+ * @LastEditTime: 2023-03-06 10:34:09
  * @LastEditors: 0x3E5
  * @Description: 
- * @FilePath: \ai-paper-search-web\src\components\ConfsTree.vue
+ * @FilePath: \web-vue\src\components\ConfsTree.vue
 -->
 <script setup lang="ts">
 import { ref, reactive, watch } from 'vue'
@@ -96,6 +96,7 @@ watch(
         :props="defaultProps"
         :highlight-current="true"
         :expand-on-click-node="false"
+        :default-expand-all="true"
         @node-click="treeNodeClick"
       />
     </el-scrollbar>
