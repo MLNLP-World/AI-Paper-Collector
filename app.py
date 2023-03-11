@@ -187,7 +187,7 @@ def askChatGPTAPI(query):
     engine = "gpt-3.5-turbo"
     temperature = 0.5
     openai.api_key = os.environ.get("OPENAI_API_KEY")
-    openai.api_base = "https://api.aipaper.fun/v1"
+    openai.api_base = os.environ.get("OPENAI_API_BASE")
     prompt = f'Please just return the top-10 related keywords of papers on "{query}" in JSON format with the key named "keywords". The output must start with "```json" and end with "```".'
     response = openai.ChatCompletion.create(
         model=engine,
