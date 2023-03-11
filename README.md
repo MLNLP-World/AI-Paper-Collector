@@ -2,8 +2,8 @@
 <h1 align="center"> <img src="./pics/icon/ai.png" width="30" /> AI-Paper-Collector</h1>
 </p>
 <p align="center">
-  	<a href="https://img.shields.io/badge/version-v1.0.4-blue">
-      <img alt="version" src="https://img.shields.io/badge/version-v1.0.4-blue?color=FF8000?color=009922" />
+  	<a href="https://img.shields.io/badge/version-v1.1.2-blue">
+      <img alt="version" src="https://img.shields.io/badge/version-v1.1.2-blue?color=FF8000?color=009922" />
     </a>
   <a >
        <img alt="Status-building" src="https://img.shields.io/badge/Status-building-blue" />
@@ -20,9 +20,6 @@
     <a href="https://github.com/MLNLP-World/AI-Paper-collector/issues">
       <img alt="Issues" src="https://img.shields.io/github/issues/MLNLP-World/AI-Paper-collector?color=0088ff"/>
     </a>
-    <a href="https://colab.research.google.com/github/Doragd/AI-Paper-collector-Dev/blob/main/colab/AI_Paper_Collector_Colab.ipynb" target="_parent">
-      <img src="pics/icon/colab-badge.svg" alt="Open In Colab"/>
-    </a>
     <br />
 </p>
 
@@ -32,14 +29,14 @@
 
 
 
-## <img src="./pics/icon/motivation.png" width="25" />Motivation
+## :jack_o_lantern: Motivation
 
 Fully-automated scripts for collecting AI-related papers.
 
 **Under Construction...Coming soon**
 
 
-## <img src="./pics/icon/intro.png" width="25" />Search Categories
+## :open_book: Search Categories
 
 <!-- confs-list-start -->
 
@@ -61,7 +58,7 @@ Fully-automated scripts for collecting AI-related papers.
 
 
 
-## <img src="https://cdn.jsdelivr.net/gh/LightChen233/blog-img/folders.png" width="25" /> How to add new conferences from DBLP
+## :books: How to add new conferences from DBLP
 
 ### Automatically Updating via an issue-triggered workflow
 
@@ -70,17 +67,17 @@ We will check and label it, then the workflow will run automatically.
 [issue format](https://github.com/MLNLP-World/AI-Paper-Collector/issues/10)
 
 
-## <img src="https://cdn.jsdelivr.net/gh/LightChen233/blog-img/disclaimer2.png" width="25" /> Disclaimer
+## :warning: Disclaimer
 
 Since the tool is in the development stage, we can not guarantee that the papers found will meet your needs. I hope for your understanding. In addition, all the results come from [DBLP](https://dblp.org/), [ACL](https://aclanthology.org/), [NIPS](https://papers.nips.cc/), [OpenReview](https://openreview.net/), if this violates your copyright, you can contact us at any time, we will delete it as soon as possible, thank you:)
 
 
-## <img src="./pics/icon/heart.png" width="25" />Contributors
+## :cherry_blossom: Contributors
 This project exists thanks to all the people who contribute.
 
  <a href="https://github.com/MLNLP-World/AI-Paper-Collector/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=MLNLP-World/AI-Paper-Collector" />
  </a>
 
-## Star History
+## :star2: Star History
 [![Star History Chart](https://api.star-history.com/svg?repos=MLNLP-World/AI-Paper-Collector&type=Date)](https://star-history.com/#MLNLP-World/AI-Paper-Collector&Date)
