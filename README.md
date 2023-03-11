@@ -76,7 +76,11 @@ Since the tool is in the development stage, we can not guarantee that the papers
 
 
 ## <img src="./pics/icon/heart.png" width="25" />Contributors
-Under Construction...
+This project exists thanks to all the people who contribute.
+
+ <a href="https://github.com/MLNLP-World/AI-Paper-Collector/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=MLNLP-World/AI-Paper-Collector" />
+ </a>
 
 ## Star History
 [![Star History Chart](https://api.star-history.com/svg?repos=MLNLP-World/AI-Paper-Collector&type=Date)](https://star-history.com/#MLNLP-World/AI-Paper-Collector&Date)
