@@ -103,12 +103,12 @@ def search(query, confs, year, sp_year=None, sp_author=None, limit=None):
                 continue
             if sp_year is None and year is not None and int(conf_year) < year:
                 continue
-            conf_results[conf_year] = []
+            conf_results_per_year = []
             for paper in cache_data[conf][conf_year]:
                 if not match_author(paper["authors"], sp_author):
                     continue
                 if query.lower() == 'findall' and len(confs) == 1:
-                    conf_results[conf_year].append({
+                    conf_results_per_year.append({
                         "year": conf_year,
                         "conf": conf,
                         "title": paper["title"],
@@ -122,7 +122,7 @@ def search(query, confs, year, sp_year=None, sp_author=None, limit=None):
                     if limit is not None and result_count >= limit:
                         break
                 elif query in paper["title_format"]:
-                    conf_results[conf_year].append({
+                    conf_results_per_year.append({
                         "year": conf_year,
                         "conf": conf,
                         "title": paper["title"],
@@ -136,7 +136,7 @@ def search(query, confs, year, sp_year=None, sp_author=None, limit=None):
                     if limit is not None and result_count >= limit:
                         break
                 elif query == "#":
-                    conf_results[conf_year].append({
+                    conf_results_per_year.append({
                         "year": conf_year,
                         "conf": conf,
                         "title": paper["title"],
@@ -149,11 +149,19 @@ def search(query, confs, year, sp_year=None, sp_author=None, limit=None):
                     result_count += 1
                     if limit is not None and result_count >= limit:
                         break
+                        
+            if len(conf_results_per_year) != 0:
+                conf_results[conf_year] = conf_results_per_year
+                
             if limit is not None and result_count >= limit:
                 break
+            
         if limit is not None and result_count >= limit:
             break
-        results[conf.upper()] = conf_results
+            
+        if len(conf_results) != 0:    
+            results[conf.upper()] = conf_results
+            
     return results
 
 @app.route('/')
