@@ -58,7 +58,7 @@ def add_list(args):
 
 def main():
     args = set_args()
-    # add_list(args)
+    add_list(args)
     do_crawl(cache_file="cache/cache.json", force=True)
 
 
