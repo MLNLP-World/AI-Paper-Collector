@@ -20,7 +20,7 @@ def search_from_iclr(url, name, res):
         res[name].append(
             {
                 "paper_name": item["content"]["title"], 
-                "paper_url": "https://openreview.net" + item["content"]["pdf"],
+                "paper_url": "https://openreview.net/pdf?id=" + item["id"],
                 "paper_authors": item["content"]["authors"],
                 "paper_abstract": item['content']['abstract'],
                 "paper_code": "#",
