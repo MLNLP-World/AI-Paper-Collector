@@ -766,5 +766,21 @@
     {
         "name": "fast2019",
         "url": "https://dblp.org/db/conf/fast/fast2019.html"
+    },
+    {
+        "name": "SIGMOD2022",
+        "url": "https://dblp.org/db/conf/sigmod/sigmod2022.html"
+    },
+    {
+        "name": "SIGMOD2021",
+        "url": "https://dblp.org/db/conf/sigmod/sigmod2021.html"
+    },
+    {
+        "name": "SIGMOD2020",
+        "url": "https://dblp.org/db/conf/sigmod/sigmod2020.html"
+    },
+    {
+        "name": "SIGMOD2019",
+        "url": "https://dblp.org/db/conf/sigmod/sigmod2019.html"
     }
 ]
