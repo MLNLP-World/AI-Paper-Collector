@@ -51,6 +51,8 @@ def add_list(args):
             if check_duplicate(confs, item):
                 print(f"[-] {item['name']} already exists!")
                 continue
+            # set name to upper case
+            item["name"] = item["name"].upper()
             confs.append(item)
         json.dump(confs, open(path, "w"), indent=4)
     print("[+] Add list Done!")
