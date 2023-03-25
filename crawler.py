@@ -316,8 +316,8 @@ def crawl(cache_file=None, force=False):
     for conf in tqdm(iclr_conf, desc="[+] Crawling ICLR", dynamic_ncols=True):
         assert conf.get("name") and conf.get("url")
         url, name = conf["url"], conf["name"]
-#         if name in cache_conf:
-#             continue
+        if name in cache_conf:
+            continue
         res = search_from_iclr(url, name, res)
         
     for conf in tqdm(thecvf_conf, desc="[+] Crawling openacess.thecvf", dynamic_ncols=True):
