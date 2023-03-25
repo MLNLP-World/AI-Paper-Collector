@@ -746,5 +746,25 @@
     {
         "name": "TNNLS2022",
         "url": "https://dblp.org/db/journals/tnn/tnn33.html"
+    },
+    {
+        "name": "fast2023",
+        "url": "https://dblp.org/db/conf/fast/fast2023.html"
+    },
+    {
+        "name": "fast2022",
+        "url": "https://dblp.org/db/conf/fast/fast2022.html"
+    },
+    {
+        "name": "fast2021",
+        "url": "https://dblp.org/db/conf/fast/fast2021.html"
+    },
+    {
+        "name": "fast2020",
+        "url": "https://dblp.org/db/conf/fast/fast2020.html"
+    },
+    {
+        "name": "fast2019",
+        "url": "https://dblp.org/db/conf/fast/fast2019.html"
     }
 ]
