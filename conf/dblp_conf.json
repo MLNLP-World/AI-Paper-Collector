@@ -782,5 +782,9 @@
     {
         "name": "SIGMOD2019",
         "url": "https://dblp.org/db/conf/sigmod/sigmod2019.html"
+    },
+    {
+        "name": "WSDM2023",
+        "url": "https://dblp.org/db/conf/wsdm/wsdm2023.html"
     }
 ]
