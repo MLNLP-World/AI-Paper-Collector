@@ -88,5 +88,10 @@
         "name": "EMNLP2022",
         "url": "https://aclanthology.org/events/emnlp-2022/",
         "tag": "^/2022.emnlp*"
+    },
+    {
+        "name": "ACL2023",
+        "url": "https://aclanthology.org/events/acl-2023/",
+        "tag": "^/2023.acl*"
     }
 ]
