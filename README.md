@@ -24,8 +24,9 @@
 </p>
 
 **Web demo**: 
-- [https://aipaper.fun/](https://aipaper.fun/) (Recommended)
-- [https://ai-paper-collector.vercel.app/](https://ai-paper-collector.vercel.app/) (No Longer Maintained)
+- [https://ai-paper-collector.vercel.app/](https://ai-paper-collector.vercel.app/) (Recommended)
+- [https://aipaper.fun/](https://aipaper.fun/) (No Longer Maintained)
+
 
 
 
